@@ -12,7 +12,11 @@ public class AircraftController {
     private AircraftRepository aircraftRepository;
 
 
-
+    /**
+     * Crée un avion.
+     * @param registration enregistrement de l'avion
+     * @return l'avion créé
+     */
     @GetMapping("/aircrafto")
     public Aircraft aircraft(@RequestParam(value = "registration") String registration) {
         var aircraft = new Aircraft();
