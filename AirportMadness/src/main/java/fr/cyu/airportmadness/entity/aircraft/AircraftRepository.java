@@ -7,7 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource()
 public interface AircraftRepository extends PagingAndSortingRepository<Aircraft, Long> {
     List<Aircraft> findByRegistration(@Param("registration") String registration);
 }
