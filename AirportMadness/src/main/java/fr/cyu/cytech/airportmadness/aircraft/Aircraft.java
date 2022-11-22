@@ -1,4 +1,4 @@
-package fr.cyu.cytech.airportmadness.airplane;
+package fr.cyu.cytech.airportmadness.aircraft;
 
 import fr.cyu.cytech.airportmadness.airlinecompany.AirlineCompany;
 import org.hibernate.Hibernate;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Airplane {
+public class Aircraft {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -47,8 +47,8 @@ public class Airplane {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Airplane airplane = (Airplane) o;
-        return id != null && Objects.equals(id, airplane.id);
+        Aircraft aircraft = (Aircraft) o;
+        return id != null && Objects.equals(id, aircraft.id);
     }
 
     @Override
