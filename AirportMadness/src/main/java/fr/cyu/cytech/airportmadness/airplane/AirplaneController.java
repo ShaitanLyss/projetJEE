@@ -1,4 +1,4 @@
-package fr.cyu.cytech.airportmadness.aircraft;
+package fr.cyu.cytech.airportmadness.airplane;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AircraftController {
+public class AirplaneController {
     @Autowired
-    private AircraftRepository aircraftRepository;
+    private AirplaneRepository airplaneRepository;
 
 
     /**
@@ -18,10 +18,10 @@ public class AircraftController {
      * @return l'avion créé
      */
     @GetMapping("/aircrafto")
-    public Aircraft aircraft(@RequestParam(value = "registration") String registration) {
-        var aircraft = new Aircraft();
+    public Airplane aircraft(@RequestParam(value = "registration") String registration) {
+        var aircraft = new Airplane();
         aircraft.setRegistration(registration);
-        aircraftRepository.save(aircraft);
+        airplaneRepository.save(aircraft);
         return aircraft;
     }
 }

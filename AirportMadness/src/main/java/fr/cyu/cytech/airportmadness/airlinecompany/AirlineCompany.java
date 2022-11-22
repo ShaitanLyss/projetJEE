@@ -1,6 +1,10 @@
 package fr.cyu.cytech.airportmadness.airlinecompany;
 
+import fr.cyu.cytech.airportmadness.airplane.Airplane;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "airline_company")
@@ -16,5 +20,16 @@ public class AirlineCompany {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @OneToMany(mappedBy = "owningAirlineCompany", orphanRemoval = true)
+    private List<Airplane> airplanes = new ArrayList<>();
+
+    public List<Airplane> getAirplanes() {
+        return airplanes;
+    }
+
+    public void setAirplanes(List<Airplane> airplanes) {
+        this.airplanes = airplanes;
     }
 }
