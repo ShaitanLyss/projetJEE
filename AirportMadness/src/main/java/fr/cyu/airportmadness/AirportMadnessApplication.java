@@ -1,4 +1,4 @@
-package fr.cyu.cytech.airportmadness;
+package fr.cyu.airportmadness;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package fr.cyu.cytech.airportmadness.airlinecompany;
+package fr.cyu.airportmadness.entity.airlinecompany;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

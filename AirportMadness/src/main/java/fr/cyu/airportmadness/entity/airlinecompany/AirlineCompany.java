@@ -1,6 +1,6 @@
-package fr.cyu.cytech.airportmadness.airlinecompany;
+package fr.cyu.airportmadness.entity.airlinecompany;
 
-import fr.cyu.cytech.airportmadness.aircraft.Aircraft;
+import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,13 +23,13 @@ public class AirlineCompany {
     }
 
     @OneToMany(mappedBy = "owningAirlineCompany", orphanRemoval = true)
-    private List<Aircraft> airplanes = new ArrayList<>();
+    private List<Aircraft> aircrafts = new ArrayList<>();
 
-    public List<Aircraft> getAirplanes() {
-        return airplanes;
+    public List<Aircraft> getAircrafts() {
+        return aircrafts;
     }
 
-    public void setAirplanes(List<Aircraft> aircrafts) {
-        this.airplanes = aircrafts;
+    public void setAircrafts(List<Aircraft> aircrafts) {
+        this.aircrafts = aircrafts;
     }
 }

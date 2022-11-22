@@ -1,10 +1,11 @@
-package fr.cyu.cytech.airportmadness.aircraft;
+package fr.cyu.airportmadness.entity.aircraft;
 
-import fr.cyu.cytech.airportmadness.airlinecompany.AirlineCompany;
-import org.hibernate.Hibernate;
+import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
+import fr.cyu.airportmadness.entity.flight.Flight;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Aircraft {
@@ -18,6 +19,18 @@ public class Aircraft {
     @ManyToOne
     @JoinColumn(name = "owning_airline_company_id")
     private AirlineCompany owningAirlineCompany;
+
+    @OneToMany(mappedBy = "aircraft", orphanRemoval = true)
+    @OrderBy("time ASC")
+    private List<Flight> flights = new ArrayList<>();
+
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
+    }
 
     public AirlineCompany getOwningAirlineCompany() {
         return owningAirlineCompany;
@@ -41,18 +54,5 @@ public class Aircraft {
 
     public void setRegistration(String registration) {
         this.registration = registration;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Aircraft aircraft = (Aircraft) o;
-        return id != null && Objects.equals(id, aircraft.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
     }
 }

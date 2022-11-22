@@ -1,4 +1,4 @@
-package fr.cyu.cytech.airportmadness.aircraft;
+package fr.cyu.airportmadness.entity.aircraft;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
