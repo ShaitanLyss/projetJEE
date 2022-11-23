@@ -1,6 +1,10 @@
 package fr.cyu.airportmadness.entity.airport;
 
+import fr.cyu.airportmadness.entity.city.City;
+
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "airport")
@@ -12,6 +16,17 @@ public class Airport {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @ManyToMany(mappedBy = "airports")
+    private Set<City> cities = new LinkedHashSet<>();
+
+    public Set<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
+    }
 
     public String getName() {
         return name;
