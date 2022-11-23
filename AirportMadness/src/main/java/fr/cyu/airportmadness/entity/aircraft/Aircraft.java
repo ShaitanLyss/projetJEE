@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 public class Aircraft {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)

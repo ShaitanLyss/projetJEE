@@ -6,8 +6,7 @@
 
 
 # Configuration
-1) Créer un .env à partir du .env.example avec vos infos.
-
+1) Créer à la racine un fichier nommé `.env` avec vos infos à partir de l'exemple `.env.example`.
 # Utilisation
 Exécuter la classe AirportMadnessApplication pour lancer
 le serveur web.

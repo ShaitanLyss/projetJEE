@@ -22,6 +22,17 @@ public class AirlineCompany {
         this.id = id;
     }
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @OneToMany(mappedBy = "owningAirlineCompany", orphanRemoval = true)
     private List<Aircraft> aircrafts = new ArrayList<>();
 
