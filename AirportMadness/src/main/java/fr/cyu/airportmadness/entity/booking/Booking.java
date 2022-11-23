@@ -1,9 +1,12 @@
 package fr.cyu.airportmadness.entity.booking;
 
 import fr.cyu.airportmadness.entity.person.customer.Customer;
+import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "booking")
@@ -12,6 +15,9 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @ManyToMany(mappedBy = "bookings")
+    private Set<Passenger> passengers = new LinkedHashSet<>();
 
     public Long getId() {
         return id;
@@ -32,6 +38,14 @@ public class Booking {
 
     @Column(name = "price", nullable = false, precision = 19, scale = 2)
     private BigDecimal price;
+
+    public Set<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(Set<Passenger> passengers) {
+        this.passengers = passengers;
+    }
 
     public Customer getCustomer() {
         return customer;
