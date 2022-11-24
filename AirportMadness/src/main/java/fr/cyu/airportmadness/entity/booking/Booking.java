@@ -1,5 +1,6 @@
 package fr.cyu.airportmadness.entity.booking;
 
+import fr.cyu.airportmadness.entity.flight.Flight;
 import fr.cyu.airportmadness.entity.person.customer.Customer;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 
@@ -19,6 +20,14 @@ public class Booking {
     @ManyToMany(mappedBy = "bookings")
     private Set<Passenger> passengers = new LinkedHashSet<>();
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "flight_id", nullable = false)
+    private Flight flight;
+
     public Long getId() {
         return id;
     }
@@ -29,15 +38,19 @@ public class Booking {
 
 
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
-
     @Column(name = "num_luggages", nullable = false)
     private Integer numLuggages;
 
     @Column(name = "price", nullable = false, precision = 19, scale = 2)
     private BigDecimal price;
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 
     public Set<Passenger> getPassengers() {
         return passengers;

@@ -1,5 +1,6 @@
 package fr.cyu.airportmadness.entity.airport;
 
+import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.city.City;
 
 import javax.persistence.*;
@@ -19,6 +20,28 @@ public class Airport {
 
     @ManyToMany(mappedBy = "airports")
     private Set<City> cities = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "departure", orphanRemoval = true)
+    private Set<Airline> departingAirlines = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "departure", orphanRemoval = true)
+    private Set<Airline> arrivingAirlines = new LinkedHashSet<>();
+
+    public Set<Airline> getArrivingAirlines() {
+        return arrivingAirlines;
+    }
+
+    public void setArrivingAirlines(Set<Airline> arrivingAirlines) {
+        this.arrivingAirlines = arrivingAirlines;
+    }
+
+    public Set<Airline> getDepartingAirlines() {
+        return departingAirlines;
+    }
+
+    public void setDepartingAirlines(Set<Airline> departingAirlines) {
+        this.departingAirlines = departingAirlines;
+    }
 
     public Set<City> getCities() {
         return cities;

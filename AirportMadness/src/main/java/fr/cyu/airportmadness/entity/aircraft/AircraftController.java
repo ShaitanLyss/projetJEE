@@ -2,11 +2,12 @@ package fr.cyu.airportmadness.entity.aircraft;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class AircraftController {
     @Autowired
     private AircraftRepository aircraftRepository;
@@ -18,10 +19,10 @@ public class AircraftController {
      * @return l'avion créé
      */
     @GetMapping("/aircrafto")
-    public Aircraft aircraft(@RequestParam(value = "registration") String registration) {
+    public String aircraft(@RequestParam(value = "registration") String registration) {
         var aircraft = new Aircraft();
         aircraft.setRegistration(registration);
         aircraftRepository.save(aircraft);
-        return aircraft;
+        return "index";
     }
 }

@@ -1,6 +1,7 @@
 package fr.cyu.airportmadness.entity.airlinecompany;
 
 import fr.cyu.airportmadness.entity.aircraft.Aircraft;
+import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.person.employee.Employee;
 
 import javax.persistence.*;
@@ -16,6 +17,9 @@ public class AirlineCompany {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @OneToMany(mappedBy = "airlineCompany", orphanRemoval = true)
+    private List<Airline> airlines = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -41,6 +45,14 @@ public class AirlineCompany {
 
     @OneToMany(mappedBy = "owningAirlineCompany", orphanRemoval = true)
     private List<Aircraft> aircrafts = new ArrayList<>();
+
+    public List<Airline> getAirlines() {
+        return airlines;
+    }
+
+    public void setAirlines(List<Airline> airlines) {
+        this.airlines = airlines;
+    }
 
     public Set<Employee> getEmployees() {
         return employees;
