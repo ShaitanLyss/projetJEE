@@ -35,3 +35,4 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/templates/_pgbackup/
+/src/main/resources/templates/screenshots/
