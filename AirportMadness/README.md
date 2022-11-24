@@ -10,3 +10,7 @@
 # Utilisation
 Exécuter la classe AirportMadnessApplication pour lancer
 le serveur web.
+
+# Liens
+- Spring MVC : https://spring.io/guides/gs/serving-web-content/
+- Visual Page Design with Spring Boot : https://www.youtube.com/watch?v=osOMcJ_A7As
