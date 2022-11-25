@@ -1,9 +1,10 @@
 package fr.cyu.airportmadness.entity.person;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "person")
 public class Person {
     @Id
@@ -14,9 +15,8 @@ public class Person {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "birthdate", nullable = false)
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
@@ -28,52 +28,57 @@ public class Person {
     @Column(name = "nationality", nullable = false)
     private String nationality;
 
-    public String getNationality() {
-        return nationality;
+    public Long getId() {
+        return id;
     }
 
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public Person setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public Person setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
-    public Long getId() {
-        return id;
+    public LocalDate getBirthdate() {
+        return birthdate;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Person setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+        return this;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Person setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Person setGender(Gender gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public Person setNationality(String nationality) {
+        this.nationality = nationality;
+        return this;
+    }
 }
