@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "person")
 public class Person {
     @Id
@@ -15,11 +15,11 @@ public class Person {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
 
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
@@ -27,6 +27,17 @@ public class Person {
 
     @Column(name = "nationality", nullable = false)
     private String nationality;
+
+    public Person() {
+    }
+
+    public Person(String firstName, String lastName, LocalDate birthdate, Gender gender, String nationality) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.nationality = nationality;
+    }
 
     public Long getId() {
         return id;

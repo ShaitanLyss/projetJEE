@@ -1,4 +1,4 @@
-package fr.cyu.airportmadness.entity.person.customer;
+package fr.cyu.airportmadness.entity.person.passenger.customer;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

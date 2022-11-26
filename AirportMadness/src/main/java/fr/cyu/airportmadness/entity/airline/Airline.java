@@ -7,6 +7,7 @@ import fr.cyu.airportmadness.entity.flight.Flight;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "airline")
@@ -16,60 +17,60 @@ public class Airline {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "departure_id", nullable = false)
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "departure_id")
     private Airport departure;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "arrival_id", nullable = false)
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "arrival_id")
     private Airport arrival;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "airline_company_id", nullable = false)
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "airline_company_id")
     private AirlineCompany airlineCompany;
 
-    @OneToMany(mappedBy = "airline", orphanRemoval = true)
+    @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("time ASC")
-    private List<Flight> flights = new ArrayList<>();
+    private final Set<Flight> flights = new java.util.LinkedHashSet<>();
 
-    public List<Flight> getFlights() {
+    public Set<Flight> getFlights() {
         return flights;
-    }
-
-    public void setFlights(List<Flight> flights) {
-        this.flights = flights;
-    }
-
-    public AirlineCompany getAirlineCompany() {
-        return airlineCompany;
-    }
-
-    public void setAirlineCompany(AirlineCompany airlineCompany) {
-        this.airlineCompany = airlineCompany;
-    }
-
-    public Airport getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(Airport arrival) {
-        this.arrival = arrival;
-    }
-
-    public Airport getDeparture() {
-        return departure;
-    }
-
-    public void setDeparture(Airport departure) {
-        this.departure = departure;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Airline setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public Airport getDeparture() {
+        return departure;
+    }
+
+    public Airline setDeparture(Airport departure) {
+        this.departure = departure;
+        return this;
+    }
+
+    public Airport getArrival() {
+        return arrival;
+    }
+
+    public Airline setArrival(Airport arrival) {
+        this.arrival = arrival;
+        return this;
+    }
+
+    public AirlineCompany getAirlineCompany() {
+        return airlineCompany;
+    }
+
+    public Airline setAirlineCompany(AirlineCompany airlineCompany) {
+        this.airlineCompany = airlineCompany;
+        return this;
     }
 
 }

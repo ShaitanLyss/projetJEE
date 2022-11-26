@@ -15,56 +15,51 @@ public class Airport {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "airports")
-    private Set<City> cities = new LinkedHashSet<>();
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "city_id")
+    private City city;
 
-    @OneToMany(mappedBy = "departure", orphanRemoval = true)
-    private Set<Airline> departingAirlines = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "departure", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<Airline> departingAirlines = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "departure", orphanRemoval = true)
-    private Set<Airline> arrivingAirlines = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "departure", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<Airline> arrivingAirlines = new LinkedHashSet<>();
 
-    public Set<Airline> getArrivingAirlines() {
-        return arrivingAirlines;
+    public Long getId() {
+        return id;
     }
 
-    public void setArrivingAirlines(Set<Airline> arrivingAirlines) {
-        this.arrivingAirlines = arrivingAirlines;
-    }
-
-    public Set<Airline> getDepartingAirlines() {
-        return departingAirlines;
-    }
-
-    public void setDepartingAirlines(Set<Airline> departingAirlines) {
-        this.departingAirlines = departingAirlines;
-    }
-
-    public Set<City> getCities() {
-        return cities;
-    }
-
-    public void setCities(Set<City> cities) {
-        this.cities = cities;
+    public Airport setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Airport setName(String name) {
         this.name = name;
+        return this;
     }
 
-    public Long getId() {
-        return id;
+    public City getCity() {
+        return city;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Airport setCity(City city) {
+        this.city = city;
+        return this;
     }
 
+    public Set<Airline> getDepartingAirlines() {
+        return departingAirlines;
+    }
+
+    public Set<Airline> getArrivingAirlines() {
+        return arrivingAirlines;
+    }
 }

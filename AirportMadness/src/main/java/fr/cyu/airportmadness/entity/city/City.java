@@ -17,40 +17,20 @@ public class City {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @ManyToMany
-    @JoinTable(name = "city_airports",
-            joinColumns = @JoinColumn(name = "city_id"),
-            inverseJoinColumns = @JoinColumn(name = "airports_id"))
-    private Set<Airport> airports = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<Airport> airports = new LinkedHashSet<>();
 
-    public Set<Airport> getAirports() {
-        return airports;
+    public City() {
     }
 
-    public void setAirports(Set<Airport> airports) {
-        this.airports = airports;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public City(String name) {
         this.name = name;
     }
 
@@ -58,8 +38,31 @@ public class City {
         return id;
     }
 
-    public void setId(Long id) {
+    public City setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public City setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public City setCountry(Country country) {
+        this.country = country;
+        return this;
+    }
+
+    public Set<Airport> getAirports() {
+        return airports;
     }
 
     @Override

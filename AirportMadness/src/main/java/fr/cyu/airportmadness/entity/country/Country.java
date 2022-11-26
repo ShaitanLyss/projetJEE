@@ -17,31 +17,37 @@ public class Country {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "country")
-    private Set<City> cities = new LinkedHashSet<>();
+    public Country() {
+    }
+
+    public Country(String name) {
+        this.name = name;
+    }
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    private final Set<City> cities = new LinkedHashSet<>();
 
     public Set<City> getCities() {
         return cities;
     }
 
-    public void setCities(Set<City> cities) {
-        this.cities = cities;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Country setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Country setId(Long id) {
         this.id = id;
+        return this;
     }
 
 }

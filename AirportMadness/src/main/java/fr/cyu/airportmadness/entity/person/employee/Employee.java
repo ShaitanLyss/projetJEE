@@ -6,13 +6,11 @@ import fr.cyu.airportmadness.entity.person.Person;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table()
 public class Employee extends Person {
 
-    @ManyToOne
+    @ManyToOne(cascade = {javax.persistence.CascadeType.ALL})
     @JoinColumn(name = "airline_company_id")
     private AirlineCompany airlineCompany;
 
@@ -20,7 +18,8 @@ public class Employee extends Person {
         return airlineCompany;
     }
 
-    public void setAirlineCompany(AirlineCompany airlineCompany) {
+    public Employee setAirlineCompany(AirlineCompany airlineCompany) {
         this.airlineCompany = airlineCompany;
+        return this;
     }
 }

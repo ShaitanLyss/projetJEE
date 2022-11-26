@@ -18,55 +18,64 @@ public class AirlineCompany {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "airlineCompany", orphanRemoval = true)
-    private List<Airline> airlines = new ArrayList<>();
+    @OneToMany(mappedBy = "airlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<Airline> airlines = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "airlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<Employee> employees = new LinkedHashSet<>();
+
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy = "owningAirlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<Aircraft> aircrafts = new LinkedHashSet<>();
+
+    public Set<Airline> getAirlines() {
+        return airlines;
+    }
+
+    public AirlineCompany addAirlines(Airline... airlines) {
+        this.airlines.addAll(List.of(airlines));
+        this.airlines.forEach(airline -> airline.setAirlineCompany(this));
+        return this;
+    }
+
+    public Set<Aircraft> getAircrafts() {
+        return aircrafts;
+    }
+
+    public AirlineCompany addAircrafts(Aircraft... aircrafts) {
+        this.aircrafts.addAll(List.of(aircrafts));
+        this.aircrafts.forEach(aircraft -> aircraft.setOwningAirlineCompany(this));
+        return this;
+    }
 
     public Long getId() {
         return id;
     }
 
-    @OneToMany(mappedBy = "airlineCompany", orphanRemoval = true)
-    private Set<Employee> employees = new LinkedHashSet<>();
-
-    public void setId(Long id) {
+    public AirlineCompany setId(Long id) {
         this.id = id;
-    }
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @OneToMany(mappedBy = "owningAirlineCompany", orphanRemoval = true)
-    private List<Aircraft> aircrafts = new ArrayList<>();
-
-    public List<Airline> getAirlines() {
-        return airlines;
-    }
-
-    public void setAirlines(List<Airline> airlines) {
-        this.airlines = airlines;
+        return this;
     }
 
     public Set<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public  AirlineCompany addEmployees(Employee... employees) {
+        this.employees.addAll(List.of(employees));
+        this.employees.forEach(employee -> employee.setAirlineCompany(this));
+        return this;
     }
 
-    public List<Aircraft> getAircrafts() {
-        return aircrafts;
+    public String getName() {
+        return name;
     }
 
-    public void setAircrafts(List<Aircraft> aircrafts) {
-        this.aircrafts = aircrafts;
+    public AirlineCompany setName(String name) {
+        this.name = name;
+        return this;
     }
+
 }

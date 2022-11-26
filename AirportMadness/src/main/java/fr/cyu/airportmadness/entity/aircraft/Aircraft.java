@@ -6,6 +6,7 @@ import fr.cyu.airportmadness.entity.flight.Flight;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Aircraft {
@@ -18,43 +19,44 @@ public class Aircraft {
     @Column(unique = true)
     private String registration;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "owning_airline_company_id")
     private AirlineCompany owningAirlineCompany;
 
-    @OneToMany(mappedBy = "aircraft", orphanRemoval = true)
+    @OneToMany(mappedBy = "aircraft", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("time ASC")
-    private List<Flight> flights = new ArrayList<>();
+    private final Set<Flight> flights = new java.util.LinkedHashSet<>();
 
-    public List<Flight> getFlights() {
+    public Set<Flight> getFlights() {
         return flights;
     }
 
-    public void setFlights(List<Flight> flights) {
-        this.flights = flights;
-    }
-
-    public AirlineCompany getOwningAirlineCompany() {
-        return owningAirlineCompany;
-    }
-
-    public void setOwningAirlineCompany(AirlineCompany owningAirlineCompany) {
-        this.owningAirlineCompany = owningAirlineCompany;
-    }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Aircraft setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getRegistration() {
         return registration;
     }
 
-    public void setRegistration(String registration) {
+    public Aircraft setRegistration(String registration) {
         this.registration = registration;
+        return this;
     }
+
+    public AirlineCompany getOwningAirlineCompany() {
+        return owningAirlineCompany;
+    }
+
+    public Aircraft setOwningAirlineCompany(AirlineCompany owningAirlineCompany) {
+        this.owningAirlineCompany = owningAirlineCompany;
+        return this;
+    }
+
 }
