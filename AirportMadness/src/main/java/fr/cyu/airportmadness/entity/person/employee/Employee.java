@@ -3,13 +3,13 @@ package fr.cyu.airportmadness.entity.person.employee;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.person.Person;
 
-<<<<<<< Updated upstream
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-=======
+
 import javax.persistence.*;
->>>>>>> Stashed changes
+
 
 @Entity
 public class Employee extends Person {

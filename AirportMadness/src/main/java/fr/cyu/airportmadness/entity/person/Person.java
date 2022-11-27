@@ -35,7 +35,7 @@ public class Person {
     @Column(name = "nationality", nullable = false)
     private String nationality;
 
-<<<<<<< Updated upstream
+
     public Person() {
     }
 
@@ -45,15 +45,15 @@ public class Person {
         this.birthdate = birthdate;
         this.gender = gender;
         this.nationality = nationality;
-=======
+    }
     public Set<User> getUsers() {
-        return users;
+        return this.users;
     }
 
     public Person setUsers(Set<User> users) {
         this.users = users;
         return this;
->>>>>>> Stashed changes
+
     }
 
     public Long getId() {
