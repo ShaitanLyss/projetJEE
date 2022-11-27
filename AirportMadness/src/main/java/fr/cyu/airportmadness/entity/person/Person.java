@@ -1,7 +1,11 @@
 package fr.cyu.airportmadness.entity.person;
 
+import fr.cyu.airportmadness.security.User;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -11,6 +15,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @OneToMany(mappedBy = "person", orphanRemoval = true)
+    private Set<User> users = new LinkedHashSet<>();
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -28,6 +35,7 @@ public class Person {
     @Column(name = "nationality", nullable = false)
     private String nationality;
 
+<<<<<<< Updated upstream
     public Person() {
     }
 
@@ -37,6 +45,15 @@ public class Person {
         this.birthdate = birthdate;
         this.gender = gender;
         this.nationality = nationality;
+=======
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public Person setUsers(Set<User> users) {
+        this.users = users;
+        return this;
+>>>>>>> Stashed changes
     }
 
     public Long getId() {
