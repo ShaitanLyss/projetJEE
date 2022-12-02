@@ -83,29 +83,19 @@ public class SecurityController {
                 userInfo.append(getOauth2LoginInfo(user));
                 }
             }
-            //affiche = userInfo.toString();
+
             String pageUrl = "index";
-            String   templatePath = "/templates/";
             ClasspathLoader loader = new ClasspathLoader();
-            loader.setPrefix("templates/");
-            loader.setSuffix(".html");
-            //PebbleEngine engine = new PebbleEngine(loader);
-            PebbleEngine engine = new PebbleEngine.Builder().loader(loader).build();
-            PebbleTemplate compiledTemplate = engine.getTemplate(pageUrl);
-
-            //PebbleEngine engine = new PebbleEngine.Builder().build();
-            //PebbleTemplate compiledTemplate = engine.getTemplate(pageUrl);
+            PebbleEngine engine = PebbleEngineFactory.buildPebbleEngine();
+            PebbleTemplate Template = engine.getTemplate(pageUrl);
             Writer writer = new StringWriter();
-
             Map<String, Object> context = new HashMap<>();
             context.put("name", this.getName());
-            context.put("authenticated", 1);
-            compiledTemplate.evaluate(writer, context);
-            String output = writer.toString();
+            context.put("user", user);
+            context.put("connection", "Login/Sign Up");
+            Template.evaluate(writer, context);
 
-            //model.addObject("name", this.getName());
-            //model.setViewName("index");
-            return output;
+            return writer.toString();
         }
         private StringBuffer getUsernamePasswordLoginInfo(Principal user){
             StringBuffer usernameInfo = new StringBuffer();

@@ -9,7 +9,7 @@
         <meta name="description" content="Pinegrow Web Editor - Directory TailwindCSS Template" data-pgc-field="page_descr"/>
     </head>
     <body class="text-gray-500">
-        <header class="bg-opacity-60 bg-white border-b fixed inset-x-0 top-0 w-full z-50"> 
+        <header class="bg-opacity-60 bg-white border-b fixed inset-x-0 top-0 w-full z-50">
             <nav class="container flex flex-wrap items-center mx-auto px-4 py-2 lg:py-0"> <a href="#" class="font-bold hover:text-gray-700 mr-3 text-gray-900 text-xl" th:text="${name}">Company</a>
                 <div class="flex flex-row items-center ml-auto px-2 space-x-2 lg:order-2"><a href="#" class="bg-gray-700 hidden hover:bg-gray-900 px-6 py-2 rounded-full text-center text-white sm:inline-flex sm:items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="mr-2">
                             <g>
@@ -23,10 +23,10 @@
                             </g>
                         </svg></a>
                 </div>
-                <button class="bg-gray-700 hover:bg-gray-900 hover:text-white px-3 py-2 rounded text-white lg:hidden" data-name="nav-toggler" data-pg-ia='{"l":[{"name":"NabMenuToggler","trg":"click","a":{"l":[{"t":"^nav|[data-name=nav-menu]","l":[{"t":"set","p":0,"d":0,"l":{"class.remove":"hidden"}}]},{"t":"#gt# span:nth-of-type(1)","l":[{"t":"tween","p":0,"d":0.2,"l":{"rotationZ":45,"yPercent":300}}]},{"t":"#gt# span:nth-of-type(2)","l":[{"t":"tween","p":0,"d":0.2,"l":{"autoAlpha":0}}]},{"t":"#gt# span:nth-of-type(3)","l":[{"t":"tween","p":0,"d":0.2,"l":{"rotationZ":-45,"yPercent":-300}}]}]},"pdef":"true","trev":"true"}]}'> <span class="block border-b-2 border-current my-1 w-6"></span> <span class="block border-b-2 border-current my-1 w-6"></span> <span class="block border-b-2 border-current my-1 w-6"></span> 
+                <button class="bg-gray-700 hover:bg-gray-900 hover:text-white px-3 py-2 rounded text-white lg:hidden" data-name="nav-toggler" data-pg-ia='{"l":[{"name":"NabMenuToggler","trg":"click","a":{"l":[{"t":"^nav|[data-name=nav-menu]","l":[{"t":"set","p":0,"d":0,"l":{"class.remove":"hidden"}}]},{"t":"#gt# span:nth-of-type(1)","l":[{"t":"tween","p":0,"d":0.2,"l":{"rotationZ":45,"yPercent":300}}]},{"t":"#gt# span:nth-of-type(2)","l":[{"t":"tween","p":0,"d":0.2,"l":{"autoAlpha":0}}]},{"t":"#gt# span:nth-of-type(3)","l":[{"t":"tween","p":0,"d":0.2,"l":{"rotationZ":-45,"yPercent":-300}}]}]},"pdef":"true","trev":"true"}]}'> <span class="block border-b-2 border-current my-1 w-6"></span> <span class="block border-b-2 border-current my-1 w-6"></span> <span class="block border-b-2 border-current my-1 w-6"></span>
                 </button>
-                <div data-name="nav-menu" class="flex-grow hidden lg:flex lg:items-center lg:w-auto w-full"> 
-                    <div class="flex flex-col lg:flex-row"> <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Explorer</a> 
+                <div data-name="nav-menu" class="flex-grow hidden lg:flex lg:items-center lg:w-auto w-full">
+                    <div class="flex flex-col lg:flex-row"> <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Explorer</a>
                         <div class="relative">
                             <a href="#" class="block hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6" role="button" data-name="nav-dropdown-trigger" data-pg-ia='{"l":[{"trg":"click","a":{"l":[{"t":"^div|div","l":[{"t":"set","p":0,"d":0,"l":{"display":"block"}}]}]},"pdef":"true","trev":"true","name":"NavDropdownTrigger"}]}'> <span>Pages</span> <svg class="h-4 inline-block ml-1 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" fill="currentColor">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -34,7 +34,7 @@
                             <div class="bg-white border hidden left-0 min-w-max py-2 rounded-bl rounded-br shadow top-full z-20 lg:absolute"><a href="#" class="block hover:bg-gray-100 hover:text-gray-700 px-4 py-1 text-gray-900">Listing 1: Grid Listing</a><a class="block hover:bg-gray-100 hover:text-gray-700 px-4 py-1 text-gray-900" href="#">Listing 2: Vertical Listing</a><a class="block hover:bg-gray-100 hover:text-gray-700 px-4 py-1 text-gray-900" href="#">Listing 3: Full width + Map on the side</a>
                                 <hr class="my-2"/><a class="block hover:bg-gray-100 hover:text-gray-700 px-4 py-1 text-gray-900" href="#">Details 1: Reponsive Style 1</a><a class="block hover:bg-gray-100 hover:text-gray-700 px-4 py-1 text-gray-900" href="#">Details 2: Reponsive Style 2</a>
                             </div>
-                        </div>                         <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Blog</a> <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Help</a><a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Contact</a> 
+                        </div>                         <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Blog</a> <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Help</a><a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6">Contact</a>
                     </div>
                     <div class="flex flex-col ml-auto lg:flex-row"> <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="inline-block mr-2">
                                 <g>
@@ -42,18 +42,18 @@
                                     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-4.987-3.744A7.966 7.966 0 0 0 12 20c1.97 0 3.773-.712 5.167-1.892A6.979 6.979 0 0 0 12.16 16a6.981 6.981 0 0 0-5.147 2.256zM5.616 16.82A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634 8 8 0 1 0-12.906.187zM12 13a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
                                 </g>
                             </svg>{% if user != null  %} {{user.name}} {% else %}{{connection}}{% endif %}</a>
-                    </div>                     
-                </div>                 
-            </nav>             
+                    </div>
+                </div>
+            </nav>
         </header>
-        <section class="bg-gray-800 pt-12 relative text-white" id="hero-section" data-pg-ia-scene='{"dbg":"true","s":"custom","s_t":"end","s_s":"start","l":[{"a":{"l":[{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"--tw-bg-opacity":0.95}}]}]},"p":"scroll"}]}'> 
+        <section class="bg-gray-800 pt-12 relative text-white" id="hero-section" data-pg-ia-scene='{"dbg":"true","s":"custom","s_t":"end","s_s":"start","l":[{"a":{"l":[{"t":"$header","l":[{"t":"tween","p":0,"d":0.5,"l":{"--tw-bg-opacity":0.95}}]}]},"p":"scroll"}]}'>
             <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDkyMnwwfDF8c2VhcmNofDY2fHxtdXN0YW5nJTIwbmVwYWx8ZW58MHx8fA&ixlib=rb-1.2.1&q=80&w=1080" class="absolute h-full inset-0 object-center object-cover w-full" alt="Hero image" width="1080" height="720"/>
-            <div class="container mx-auto px-4 py-48 relative"> 
-                <div class="flex flex-wrap -mx-4"> 
-                    <div class="px-4 w-full lg:w-6/12 xl:w-5/12"> 
-                        <h1 class="font-normal leading-tight mb-2 text-7xl">Discover Great Places Always</h1> 
-                        <p class="mb-12 text-xl">Find out the perfect places that your are looking for.</p> 
-                        <form> 
+            <div class="container mx-auto px-4 py-48 relative">
+                <div class="flex flex-wrap -mx-4">
+                    <div class="px-4 w-full lg:w-6/12 xl:w-5/12">
+                        <h1 class="font-normal leading-tight mb-2 text-7xl">Discover Great Places Always</h1>
+                        <p class="mb-12 text-xl">Find out the perfect places that your are looking for.</p>
+                        <form>
                             <div class="-mx-1 flex flex-wrap items-center space-y-4 sm:space-y-0">
                                 <div class="px-1 w-full sm:flex-1">
                                     <input class="appearance-none leading-tight px-5 py-3 rounded-full text-gray-600 text-xl w-full" type="email" required placeholder="What are you looking for?"/>
@@ -67,74 +67,74 @@
                                             </g>
                                         </svg><span>Search</span>
                                     </button>
-                                </div>                                 
-                            </div>                             
-                        </form>                         
-                    </div>                     
-                </div>                 
-            </div>             
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="-mt-20 pb-4 relative text-center"> 
-            <div class="container mx-auto px-4"> 
+        <section class="-mt-20 pb-4 relative text-center">
+            <div class="container mx-auto px-4">
                 <div class="bg-white p-4 rounded shadow">
-                    <div class="flex flex-wrap"> 
+                    <div class="flex flex-wrap">
                         <div class="w-4/12 lg:w-2/12"><a href="#" class="block hover:bg-gray-50 hover:underline px-4 py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="2.5rem" height="2.5rem" class="inline-block mb-4 text-red-600">
                                     <g>
                                         <path fill="none" d="M0 0h24v24H0z"/>
                                         <path d="M14.268 12.146l-.854.854 7.071 7.071-1.414 1.414L12 14.415l-7.071 7.07-1.414-1.414 9.339-9.339c-.588-1.457.02-3.555 1.62-5.157 1.953-1.952 4.644-2.427 6.011-1.06s.892 4.058-1.06 6.01c-1.602 1.602-3.7 2.21-5.157 1.621zM4.222 3.808l6.717 6.717-2.828 2.829-3.89-3.89a4 4 0 0 1 0-5.656zM18.01 9.11c1.258-1.257 1.517-2.726 1.061-3.182-.456-.456-1.925-.197-3.182 1.06-1.257 1.258-1.516 2.727-1.06 3.183.455.455 1.924.196 3.181-1.061z"/>
                                     </g>
-                                </svg><h2>Restaurants</h2></a> 
+                                </svg><h2>Restaurants</h2></a>
                         </div>
                         <div class="w-4/12 lg:w-2/12"><a href="#" class="block hover:bg-gray-50 hover:underline px-4 py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="2.5rem" height="2.5rem" class="inline-block mb-4 text-red-600">
                                     <g>
                                         <path fill="none" d="M0 0h24v24H0z"/>
                                         <path d="M22 11v9h-2v-3H4v3H2V4h2v10h8V7h6a4 4 0 0 1 4 4zm-2 3v-3a2 2 0 0 0-2-2h-4v5h6zM8 11a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 2a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                                     </g>
-                                </svg><h2>Hotels</h2></a> 
+                                </svg><h2>Hotels</h2></a>
                         </div>
                         <div class="w-4/12 lg:w-2/12"><a href="#" class="block hover:bg-gray-50 hover:underline px-4 py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="2.5rem" height="2.5rem" class="inline-block mb-4 text-red-600">
                                     <g>
                                         <path fill="none" d="M0 0h24v24H0z"/>
                                         <path fill-rule="nonzero" d="M21 3a1 1 0 0 1 1 1v5.5a2.5 2.5 0 1 0 0 5V20a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-5.5a2.5 2.5 0 1 0 0-5V4a1 1 0 0 1 1-1h18zm-1 2H4v2.968l.156.081a4.5 4.5 0 0 1 2.34 3.74L6.5 12a4.499 4.499 0 0 1-2.344 3.95L4 16.032V19h16v-2.969l-.156-.08a4.5 4.5 0 0 1-2.34-3.74L17.5 12c0-1.704.947-3.187 2.344-3.95L20 7.967V5z"/>
                                     </g>
-                                </svg><h2>Art &amp; Culture</h2></a> 
+                                </svg><h2>Art &amp; Culture</h2></a>
                         </div>
                         <div class="w-4/12 lg:w-2/12"><a href="#" class="block hover:bg-gray-50 hover:underline px-4 py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="2.5rem" height="2.5rem" class="inline-block mb-4 text-red-600">
                                     <g>
                                         <path fill="none" d="M0 0h24v24H0z"/>
                                         <path d="M21 13.242V20h1v2H2v-2h1v-6.758A4.496 4.496 0 0 1 1 9.5c0-.827.224-1.624.633-2.303L4.345 2.5a1 1 0 0 1 .866-.5H18.79a1 1 0 0 1 .866.5l2.702 4.682A4.496 4.496 0 0 1 21 13.242zm-2 .73a4.496 4.496 0 0 1-3.75-1.36A4.496 4.496 0 0 1 12 14.001a4.496 4.496 0 0 1-3.25-1.387A4.496 4.496 0 0 1 5 13.973V20h14v-6.027zM5.789 4L3.356 8.213a2.5 2.5 0 0 0 4.466 2.216c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 0 0 4.644 0c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 1 0 4.457-2.232L18.21 4H5.79z"/>
                                     </g>
-                                </svg><h2>Shopping</h2></a> 
+                                </svg><h2>Shopping</h2></a>
                         </div>
                         <div class="w-4/12 lg:w-2/12"><a href="#" class="block hover:bg-gray-50 hover:underline px-4 py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="2.5rem" height="2.5rem" class="inline-block mb-4 text-red-600">
                                     <g>
                                         <path fill="none" d="M0 0H24V24H0z"/>
                                         <path d="M16 1c.552 0 1 .448 1 1v3h4c.552 0 1 .448 1 1v14c0 .552-.448 1-1 1H3c-.552 0-1-.448-1-1V6c0-.552.448-1 1-1h4V2c0-.552.448-1 1-1h8zm4 6H4v12h16V7zm-7 2v3h3v2h-3.001L13 17h-2l-.001-3H8v-2h3V9h2zm2-6H9v2h6V3z"/>
                                     </g>
-                                </svg><h2>Medical</h2></a> 
+                                </svg><h2>Medical</h2></a>
                         </div>
                         <div class="w-4/12 lg:w-2/12"><a href="#" class="block hover:bg-gray-50 hover:underline px-4 py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="2.5rem" height="2.5rem" class="inline-block mb-4 text-red-600">
                                     <g>
                                         <path fill="none" d="M0 0h24v24H0z"/>
                                         <path fill-rule="nonzero" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm1.67 14h-3.34l-1.38 1.897.554 1.706A7.993 7.993 0 0 0 12 20c.871 0 1.71-.14 2.496-.397l.553-1.706L13.669 16zm-8.376-5.128l-1.292.937L4 12c0 1.73.549 3.331 1.482 4.64h1.91l1.323-1.82-1.028-3.17-2.393-.778zm13.412 0l-2.393.778-1.028 3.17 1.322 1.82h1.91A7.964 7.964 0 0 0 20 12l-.003-.19-1.291-.938zM12 9.536l-2.344 1.702.896 2.762h2.895l.896-2.762L12 9.536zm2.291-5.203L13 5.273V7.79l2.694 1.957 2.239-.727.554-1.703a8.014 8.014 0 0 0-4.196-2.984zm-4.583 0a8.014 8.014 0 0 0-4.195 2.985l.554 1.702 2.239.727L11 7.79V5.273l-1.292-.94z"/>
                                     </g>
-                                </svg><h2>Sports</h2></a> 
-                        </div>                         
+                                </svg><h2>Sports</h2></a>
+                        </div>
                     </div>
-                </div>                 
-            </div>             
+                </div>
+            </div>
         </section>
-        <section class="py-12"> 
-            <div class="container mx-auto px-4"> 
+        <section class="py-12">
+            <div class="container mx-auto px-4">
                 <div class="mb-6 text-center">
                     <h2 class="font-medium mb-2 text-4xl text-gray-700">Trending Places</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p>
                 </div>
-                <div class="flex flex-wrap -mx-4  justify-center"> 
-                    <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
-                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDY5fHxhbyUyMG5hbmd8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a> 
-                            <div class="pb-4 pt-6 px-6"> 
-                                <div class="flex items-center justify-between py-1"> 
+                <div class="flex flex-wrap -mx-4  justify-center">
+                    <div class="p-4 w-full md:w-6/12 lg:w-4/12">
+                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDY5fHxhbyUyMG5hbmd8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a>
+                            <div class="pb-4 pt-6 px-6">
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1">
                                         <a href="#" class="block hover:text-gray-900 mb-1 text-gray-700"><h3 class="font-medium text-xl">Panan Krabi Resort</h3></a>
                                         <div>
@@ -150,10 +150,10 @@
                                                 <path fill="none" d="M0 0H24V24H0z"/>
                                                 <path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236C5.515 3 8.093 2.56 10.261 3.44L6.343 7.358l1.414 1.415L12 4.53l-.013-.014.014.013c2.349-2.109 5.979-2.039 8.242.228z"/>
                                             </g>
-                                        </svg></a> 
+                                        </svg></a>
                                 </div>
                                 <hr class="my-4"/>
-                                <div class="flex items-center justify-between py-1"> 
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1"><span class="mr-1 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.125em" height="1.125em" class="inline-block">
                                                 <g>
                                                     <path fill="none" d="M0 0h24v24H0z"/>
@@ -181,15 +181,15 @@
                                                 </g>
                                             </svg></span><span class="align-middle">432 reviews</span>
                                     </div>
-                                    <span class="font-bold py-1"><span>$</span><span>$</span><span>$</span></span> 
-                                </div>                                 
-                            </div>                             
-                        </div>                         
+                                    <span class="font-bold py-1"><span>$</span><span>$</span><span>$</span></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
-                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDkxfHxjaGljYWdvJTIwaG90ZWx8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a> 
-                            <div class="pb-4 pt-6 px-6"> 
-                                <div class="flex items-center justify-between py-1"> 
+                    <div class="p-4 w-full md:w-6/12 lg:w-4/12">
+                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDkxfHxjaGljYWdvJTIwaG90ZWx8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a>
+                            <div class="pb-4 pt-6 px-6">
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1">
                                         <a href="#" class="block hover:text-gray-900 mb-1 text-gray-700"><h3 class="font-medium text-xl">Holiday Inn Rotorua</h3></a>
                                         <div>
@@ -205,10 +205,10 @@
                                                 <path fill="none" d="M0 0H24V24H0z"/>
                                                 <path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236C5.515 3 8.093 2.56 10.261 3.44L6.343 7.358l1.414 1.415L12 4.53l-.013-.014.014.013c2.349-2.109 5.979-2.039 8.242.228z"/>
                                             </g>
-                                        </svg></a> 
+                                        </svg></a>
                                 </div>
                                 <hr class="my-4"/>
-                                <div class="flex items-center justify-between py-1"> 
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1"><span class="mr-1 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.125em" height="1.125em" class="inline-block">
                                                 <g>
                                                     <path fill="none" d="M0 0h24v24H0z"/>
@@ -236,15 +236,15 @@
                                                 </g>
                                             </svg></span><span class="align-middle">432 reviews</span>
                                     </div>
-                                    <span class="font-bold py-1"><span>$</span><span>$</span><span class="opacity-50">$</span></span> 
-                                </div>                                 
-                            </div>                             
-                        </div>                         
+                                    <span class="font-bold py-1"><span>$</span><span>$</span><span class="opacity-50">$</span></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
-                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1548588627-f978862b85e1?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDY5fHxhbm5hcHVybmElMjBiYXNlJTIwY2FtcHxlbnwwfHx8&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a> 
-                            <div class="pb-4 pt-6 px-6"> 
-                                <div class="flex items-center justify-between py-1"> 
+                    <div class="p-4 w-full md:w-6/12 lg:w-4/12">
+                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1548588627-f978862b85e1?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDY5fHxhbm5hcHVybmElMjBiYXNlJTIwY2FtcHxlbnwwfHx8&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a>
+                            <div class="pb-4 pt-6 px-6">
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1">
                                         <a href="#" class="block hover:text-gray-900 mb-1 text-gray-700"><h3 class="font-medium text-xl">Annapurna Base Camp</h3></a>
                                         <div>
@@ -260,10 +260,10 @@
                                                 <path fill="none" d="M0 0H24V24H0z"/>
                                                 <path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236C5.515 3 8.093 2.56 10.261 3.44L6.343 7.358l1.414 1.415L12 4.53l-.013-.014.014.013c2.349-2.109 5.979-2.039 8.242.228z"/>
                                             </g>
-                                        </svg></a> 
+                                        </svg></a>
                                 </div>
                                 <hr class="my-4"/>
-                                <div class="flex items-center justify-between py-1"> 
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1"><span class="mr-1 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.125em" height="1.125em" class="inline-block">
                                                 <g>
                                                     <path fill="none" d="M0 0h24v24H0z"/>
@@ -291,15 +291,15 @@
                                                 </g>
                                             </svg></span><span class="align-middle">432 reviews</span>
                                     </div>
-                                    <span class="font-bold py-1"><span>$</span><span class="opacity-50">$</span><span class="opacity-50">$</span></span> 
-                                </div>                                 
-                            </div>                             
-                        </div>                         
+                                    <span class="font-bold py-1"><span>$</span><span class="opacity-50">$</span><span class="opacity-50">$</span></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
-                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1569369926169-9ee7fb80adeb?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDMwfHxldmVyZXN0JTIwaG90ZWx8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a> 
-                            <div class="pb-4 pt-6 px-6"> 
-                                <div class="flex items-center justify-between py-1"> 
+                    <div class="p-4 w-full md:w-6/12 lg:w-4/12">
+                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1569369926169-9ee7fb80adeb?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDMwfHxldmVyZXN0JTIwaG90ZWx8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a>
+                            <div class="pb-4 pt-6 px-6">
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1">
                                         <a href="#" class="block hover:text-gray-900 mb-1 text-gray-700"><h3 class="font-medium text-xl">The Whitehall Hotel</h3></a>
                                         <div>
@@ -315,10 +315,10 @@
                                                 <path fill="none" d="M0 0H24V24H0z"/>
                                                 <path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236C5.515 3 8.093 2.56 10.261 3.44L6.343 7.358l1.414 1.415L12 4.53l-.013-.014.014.013c2.349-2.109 5.979-2.039 8.242.228z"/>
                                             </g>
-                                        </svg></a> 
+                                        </svg></a>
                                 </div>
                                 <hr class="my-4"/>
-                                <div class="flex items-center justify-between py-1"> 
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1"><span class="mr-1 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.125em" height="1.125em" class="inline-block">
                                                 <g>
                                                     <path fill="none" d="M0 0h24v24H0z"/>
@@ -346,15 +346,15 @@
                                                 </g>
                                             </svg></span><span class="align-middle">432 reviews</span>
                                     </div>
-                                    <span class="font-bold py-1"><span>$</span><span>$</span><span>$</span></span> 
-                                </div>                                 
-                            </div>                             
-                        </div>                         
+                                    <span class="font-bold py-1"><span>$</span><span>$</span><span>$</span></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
-                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1590401939533-2e990cbce326?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDQ3fHxUYW5haCUyMExvdCUyMFRlbXBsZSwlMjBiYWxpfGVufDB8fHw&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a> 
-                            <div class="pb-4 pt-6 px-6"> 
-                                <div class="flex items-center justify-between py-1"> 
+                    <div class="p-4 w-full md:w-6/12 lg:w-4/12">
+                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1590401939533-2e990cbce326?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDQ3fHxUYW5haCUyMExvdCUyMFRlbXBsZSwlMjBiYWxpfGVufDB8fHw&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a>
+                            <div class="pb-4 pt-6 px-6">
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1">
                                         <a href="#" class="block hover:text-gray-900 mb-1 text-gray-700"><h3 class="font-medium text-xl">Tanah Lot Temple</h3></a>
                                         <div>
@@ -370,10 +370,10 @@
                                                 <path fill="none" d="M0 0H24V24H0z"/>
                                                 <path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236C5.515 3 8.093 2.56 10.261 3.44L6.343 7.358l1.414 1.415L12 4.53l-.013-.014.014.013c2.349-2.109 5.979-2.039 8.242.228z"/>
                                             </g>
-                                        </svg></a> 
+                                        </svg></a>
                                 </div>
                                 <hr class="my-4"/>
-                                <div class="flex items-center justify-between py-1"> 
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1"><span class="mr-1 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.125em" height="1.125em" class="inline-block">
                                                 <g>
                                                     <path fill="none" d="M0 0h24v24H0z"/>
@@ -401,15 +401,15 @@
                                                 </g>
                                             </svg></span><span class="align-middle">432 reviews</span>
                                     </div>
-                                    <span class="font-bold py-1"><span>$</span><span>$</span><span class="opacity-50">$</span></span> 
-                                </div>                                 
-                            </div>                             
-                        </div>                         
+                                    <span class="font-bold py-1"><span>$</span><span>$</span><span class="opacity-50">$</span></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
-                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1605825831039-8b6b4199b04a?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDI3fHxldmVyZXN0JTIwaG90ZWx8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a> 
-                            <div class="pb-4 pt-6 px-6"> 
-                                <div class="flex items-center justify-between py-1"> 
+                    <div class="p-4 w-full md:w-6/12 lg:w-4/12">
+                        <div class="bg-white border"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1605825831039-8b6b4199b04a?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDI3fHxldmVyZXN0JTIwaG90ZWx8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Location image" width="350" height="240"/></a>
+                            <div class="pb-4 pt-6 px-6">
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1">
                                         <a href="#" class="block hover:text-gray-900 mb-1 text-gray-700"><h3 class="font-medium text-xl">Hotel Abbazia</h3></a>
                                         <div>
@@ -425,10 +425,10 @@
                                                 <path fill="none" d="M0 0H24V24H0z"/>
                                                 <path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236C5.515 3 8.093 2.56 10.261 3.44L6.343 7.358l1.414 1.415L12 4.53l-.013-.014.014.013c2.349-2.109 5.979-2.039 8.242.228z"/>
                                             </g>
-                                        </svg></a> 
+                                        </svg></a>
                                 </div>
                                 <hr class="my-4"/>
-                                <div class="flex items-center justify-between py-1"> 
+                                <div class="flex items-center justify-between py-1">
                                     <div class="py-1"><span class="mr-1 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.125em" height="1.125em" class="inline-block">
                                                 <g>
                                                     <path fill="none" d="M0 0h24v24H0z"/>
@@ -456,26 +456,26 @@
                                                 </g>
                                             </svg></span><span class="align-middle">432 reviews</span>
                                     </div>
-                                    <span class="font-bold py-1"><span>$</span><span>$</span><span class="opacity-50">$</span></span> 
-                                </div>                                 
-                            </div>                             
-                        </div>                         
-                    </div>                     
+                                    <span class="font-bold py-1"><span>$</span><span>$</span><span class="opacity-50">$</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="py-4 text-center"><a href="#" class="bg-red-600 hover:bg-red-700 inline-block px-6 py-2 rounded-full text-center text-white">View More</a>
-                </div>                 
-            </div>             
+                </div>
+            </div>
         </section>
         <div class="container mx-auto px-4 py-6">
             <hr/>
         </div>
-        <section class="py-12 text-center"> 
-            <div class="container mx-auto px-4"> 
+        <section class="py-12 text-center">
+            <div class="container mx-auto px-4">
                 <div class="mb-6">
                     <h2 class="font-medium mb-2 text-4xl text-gray-700">How it works</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p>
                 </div>
-                <div class="-mx-4 flex flex-wrap justify-center"> 
+                <div class="-mx-4 flex flex-wrap justify-center">
                     <div class="p-4 w-full sm:w-6/12 lg:w-4/12">
                         <div class="border px-6 py-12 xl:px-16">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="3rem" height="3rem" class="inline-block mb-6 text-red-600">
@@ -486,8 +486,8 @@
                             </svg>
                             <h3 class="font-medium mb-4 text-gray-800 text-xl">Find Business</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p>
-                        </div>                         
-                    </div>                     
+                        </div>
+                    </div>
                     <div class="p-4 w-full sm:w-6/12 lg:w-4/12">
                         <div class="border px-6 py-12 xl:px-16">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="3rem" height="3rem" class="inline-block mb-6 text-red-600">
@@ -498,8 +498,8 @@
                             </svg>
                             <h3 class="font-medium mb-4 text-gray-800 text-xl">Review Listings</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p>
-                        </div>                         
-                    </div>                     
+                        </div>
+                    </div>
                     <div class="p-4 w-full sm:w-6/12 lg:w-4/12">
                         <div class="border px-6 py-12 xl:px-16">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="3rem" height="3rem" class="inline-block mb-6 text-red-600">
@@ -510,31 +510,31 @@
                             </svg>
                             <h3 class="font-medium mb-4 text-gray-800 text-xl">Claim Listings</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p>
-                        </div>                         
-                    </div>                     
-                </div>                 
-            </div>             
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="bg-red-600 py-16 text-white"> 
-            <div class="container mx-auto px-4"> 
-                <div class="flex flex-wrap -mx-4  items-center"> 
-                    <div class="px-4 py-2 w-full lg:w-7/12"> 
+        <section class="bg-red-600 py-16 text-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap -mx-4  items-center">
+                    <div class="px-4 py-2 w-full lg:w-7/12">
                         <h2 class="font-medium mb-4 text-4xl">Join Our Amazing Community</h2>
-                        <p>                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p> 
-                    </div>                     
-                    <div class="px-4 py-2 w-full lg:ml-auto lg:w-auto"> <a href="#" class="border hover:bg-white hover:text-red-600 inline-block px-6 py-2 rounded-full text-center text-white">Register Now</a> 
-                    </div>                     
-                </div>                 
-            </div>             
+                        <p>                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                    </div>
+                    <div class="px-4 py-2 w-full lg:ml-auto lg:w-auto"> <a href="#" class="border hover:bg-white hover:text-red-600 inline-block px-6 py-2 rounded-full text-center text-white">Register Now</a>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="py-12"> 
-            <div class="container mx-auto px-4"> 
+        <section class="py-12">
+            <div class="container mx-auto px-4">
                 <div class="mb-6 text-center">
                     <h2 class="font-medium mb-2 text-4xl text-gray-700">Most Popular Cities</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p>
                 </div>
-                <div class="container mx-auto px-4"> 
-                    <div class="-mx-4 flex flex-wrap justify-center"> 
+                <div class="container mx-auto px-4">
+                    <div class="-mx-4 flex flex-wrap justify-center">
                         <div class="p-4 w-full md:w-6/12 lg:w-4/12"> <a href="#" class="block group pb-6 pt-72 px-6 relative text-white"> <img src="https://images.unsplash.com/photo-1549861833-c5932fd19229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDkyMnwwfDF8c2VhcmNofDV8fGxhcyUyMHZlZ2FzfGVufDB8fHw&ixlib=rb-1.2.1&q=80&w=1080" class="absolute group-hover:opacity-90 h-full left-0 object-center object-cover top-0 w-full" alt="Location image" width="320" height="400"/><div class="relative">
                                     <h3 class="font-medium mb-1 text-xl">Chicago, US</h3>
                                     <p class="mb-4">645+ listing</p>
@@ -546,7 +546,7 @@
                                             </g>
                                         </svg><span class="align-middle">Explore</span>
                                     </div>
-                                </div> </a> 
+                                </div> </a>
                         </div>
                         <div class="p-4 w-full md:w-6/12 lg:w-4/12"> <a href="#" class="block group pb-6 pt-72 px-6 relative text-white"> <img src="https://images.unsplash.com/photo-1545209743-87a2a2a6fdad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDkyMnwwfDF8c2VhcmNofDQ5OXx8cGFyaXN8ZW58MHx8fA&ixlib=rb-1.2.1&q=80&w=1080" class="absolute group-hover:opacity-90 h-full left-0 object-center object-cover top-0 w-full" alt="Location image" width="320" height="400"/><div class="relative">
                                     <h3 class="font-medium mb-1 text-xl">Paris, France</h3>
@@ -559,7 +559,7 @@
                                             </g>
                                         </svg><span class="align-middle">Explore</span>
                                     </div>
-                                </div> </a> 
+                                </div> </a>
                         </div>
                         <div class="p-4 w-full md:w-6/12 lg:w-4/12"> <a href="#" class="block group pb-6 pt-72 px-6 relative text-white"> <img src="https://images.unsplash.com/photo-1589088428702-3ea38a574498?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDkyMnwwfDF8c2VhcmNofDI0fHxrYXRobWFuZHUlMjB0ZW1wbGV8ZW58MHx8fA&ixlib=rb-1.2.1&q=80&w=1080" class="absolute group-hover:opacity-90 h-full left-0 object-center object-cover top-0 w-full" alt="Location image" width="320" height="400"/><div class="relative">
                                     <h3 class="font-medium mb-1 text-xl">Kathmandu, Nepal</h3>
@@ -572,84 +572,84 @@
                                             </g>
                                         </svg><span class="align-middle">Explore</span>
                                     </div>
-                                </div> </a> 
-                        </div>                         
-                    </div>                     
+                                </div> </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="py-4 text-center"><a href="#" class="bg-red-600 hover:bg-red-700 inline-block px-6 py-2 rounded-full text-center text-white">View More</a>
-                </div>                 
-            </div>             
+                </div>
+            </div>
         </section>
         <div class="container mx-auto px-4 py-6">
             <hr/>
         </div>
-        <section class="py-12"> 
-            <div class="container mx-auto px-4"> 
+        <section class="py-12">
+            <div class="container mx-auto px-4">
                 <div class="mb-6 text-center">
                     <h2 class="font-medium mb-2 text-4xl text-gray-700">Most Popular Cities</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit eiusmod</p>
                 </div>
-                <div class="container mx-auto px-4"> 
-                    <div class="flex flex-wrap -mx-4  justify-center"> 
-                        <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-wrap -mx-4  justify-center">
+                        <div class="p-4 w-full md:w-6/12 lg:w-4/12">
                             <div class="bg-white border flex flex-col h-full"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDI4fHx0cmF2ZWx8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Blog image" width="350" height="240"/></a>
                                 <div class="p-4">
                                     <div class="font-bold mb-2 text-red-600"><a href="#" class="hover:text-red-800 hover:underline">Travel</a>, <a href="#" class="hover:text-red-800 hover:underline">Lifestyle</a>
                                     </div>
                                     <a href="#" class="block hover:text-gray-900 text-gray-700"><h3 class="font-medium leading-tight text-xl">Travelling as a way of self-discovery and progress</h3></a>
-                                </div>                                 
+                                </div>
                                 <div class="border-t flex items-center justify-between mt-auto p-4 text-gray-600 text-xs"><a href="#" class="hover:text-gray-900 inline-flex items-center space-x-2"> <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDE5fHxkb2d8ZW58MHx8fA&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=400&h=400&fit=crop" class="h-12 rounded-full w-12" alt="Author image" width="48" height="48"/><div>
                                             <h4 class="font-semibold text-base">Dianne Russell</h4>
                                             <p>10 August 2020</p>
                                         </div></a><span>6 min read</span>
-                                </div>                                 
-                            </div>                             
-                        </div>                         
-                        <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 w-full md:w-6/12 lg:w-4/12">
                             <div class="bg-white border flex flex-col h-full"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1577327966244-999949c7e884?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDEyfHxidXNpbmVzcyUyMHBob3RvZ3JhcGhlcnxlbnwwfHx8&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Blog image" width="350" height="240"/></a>
                                 <div class="p-4">
                                     <div class="font-bold mb-2 text-red-600"><a href="#" class="hover:text-red-800 hover:underline">Travel</a>, <a href="#" class="hover:text-red-800 hover:underline">Lifestyle</a>
                                     </div>
                                     <a href="#" class="block hover:text-gray-900 text-gray-700"><h3 class="font-medium leading-tight text-xl">Where to grow your business as a photographer: site or social media?</h3></a>
-                                </div>                                 
+                                </div>
                                 <div class="border-t flex items-center justify-between mt-auto p-4 text-gray-600 text-xs"><a href="#" class="hover:text-gray-900 inline-flex items-center space-x-2"> <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDd8fGNhdHxlbnwwfHx8&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=400&h=400&fit=crop" class="h-12 rounded-full w-12" alt="Author image" width="48" height="48"/><div>
                                             <h4 class="font-semibold text-base">Kathryn Murphy</h4>
                                             <p>10 August 2020</p>
                                         </div></a><span>6 min read</span>
-                                </div>                                 
-                            </div>                             
-                        </div>                         
-                        <div class="p-4 w-full md:w-6/12 lg:w-4/12"> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 w-full md:w-6/12 lg:w-4/12">
                             <div class="bg-white border flex flex-col h-full"> <a href="" class="block hover:opacity-75"><img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDE0MHx8Y29sb3JzJTIwd2Vic2l0ZXxlbnwwfHx8&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=350&h=240&fit=crop" class="w-full" alt="Blog image" width="350" height="240"/></a>
                                 <div class="p-4">
                                     <div class="font-bold mb-2 text-red-600"><a href="#" class="hover:text-red-800 hover:underline">Travel</a>, <a href="#" class="hover:text-red-800 hover:underline">Lifestyle</a>
                                     </div>
                                     <a href="#" class="block hover:text-gray-900 text-gray-700"><h3 class="font-medium leading-tight text-xl">How to choose the right colors when creating a website?</h3></a>
-                                </div>                                 
+                                </div>
                                 <div class="border-t flex items-center justify-between mt-auto p-4 text-gray-600 text-xs"><a href="#" class="hover:text-gray-900 inline-flex items-center space-x-2"> <img src="https://images.unsplash.com/photo-1517101724602-c257fe568157?ixid=MXwyMDkyMnwwfDF8c2VhcmNofDZ8fHBhcnJvdHxlbnwwfHx8&ixlib=rb-1.2.1q=85&fm=jpg&crop=faces&cs=srgb&w=400&h=400&fit=crop" class="h-12 rounded-full w-12" alt="Author image" width="48" height="48"/><div>
                                             <h4 class="font-semibold text-base">Darrell Steward</h4>
                                             <p>10 August 2020</p>
                                         </div></a><span>6 min read</span>
-                                </div>                                 
-                            </div>                             
-                        </div>                         
-                    </div>                     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="py-4 text-center"><a href="#" class="bg-red-600 hover:bg-red-700 inline-block px-6 py-2 rounded-full text-center text-white">View More</a>
-                </div>                 
-            </div>             
+                </div>
+            </div>
         </section>
-        <section class="bg-gray-50 py-24 text-center"> 
-            <div class="container mx-auto px-4"> 
-                <div class="flex flex-wrap -mx-4  items-center"> 
-                    <div class="mx-auto px-4 w-full lg:w-7/12"> 
+        <section class="bg-gray-50 py-24 text-center">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap -mx-4  items-center">
+                    <div class="mx-auto px-4 w-full lg:w-7/12">
                         <h2 class="font-medium mb-2 text-4xl text-gray-700">Reach Millions of People</h2>
-                        <p class="mb-6">                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p> <a href="#" class="bg-red-600 hover:bg-red-700 inline-block px-6 py-2 rounded-full text-center text-white">Add your listing</a> 
-                    </div>                     
-                </div>                 
-            </div>             
+                        <p class="mb-6">                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p> <a href="#" class="bg-red-600 hover:bg-red-700 inline-block px-6 py-2 rounded-full text-center text-white">Add your listing</a>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="bg-gray-900 py-12 relative text-gray-400"> 
+        <section class="bg-gray-900 py-12 relative text-gray-400">
             <img src="https://images.unsplash.com/photo-1543691379-f2f5b144d593?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwyMDkyMnwwfDF8c2VhcmNofDl8fG5pZ2h0JTIwbGlmZXxlbnwwfHx8&ixlib=rb-1.2.1&q=80&w=1080" class="absolute group-hover:opacity-75 h-full left-0 object-cover object-top opacity-50 top-0 w-full" alt="CTA image" width="1080" height="720"/>
             <div class="container mx-auto px-4 relative">
                 <div class="flex flex-wrap -mx-4">
@@ -710,86 +710,86 @@
                         </div>
                     </div>
                 </div>
-            </div>             
+            </div>
         </section>
-        <footer class="bg-gray-700 pt-12 text-gray-400"> 
-            <div class="container mx-auto px-4"> 
-                <div class="flex flex-wrap -mx-4"> 
-                    <div class="p-4 w-full lg:w-4/12"> <a href="#" class="font-medium hover:text-gray-300 inline-block mb-6 mr-auto text-3xl text-white uppercase">                 Company </a> 
-                        <p class="mb-4 text-sm">                             Duis pharetra venenatis felis, ut tincidunt ipsum consequat nec. Fusce et porttitor libero, eu aliquam nisi. Nam finibus ullamcorper semper. </p> 
-                        <div class="mb-6"> <a href="#" class="hover:text-red-400">+1 234 567-890</a> <br/> <a href="#" class="hover:text-red-400">hello@company.com</a> 
-                        </div>                         
-                    </div>
-                    <div class="p-4 w-full lg:w-4/12"> 
-                        <h2 class="font-medium mb-8 text-white text-xl">Popular Interest</h2> 
-                        <div class="flex flex-wrap -mx-4"> 
-                            <div class="px-4 w-full sm:w-6/12"> 
-                                <ul> 
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Fitness</a> 
-                                    </li>                                     
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Events</a> 
-                                    </li>
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Trekking</a> 
-                                    </li>                                     
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Auto Parts</a> 
-                                    </li>
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Co-working Spaces</a> 
-                                    </li>                                     
-                                </ul>                                 
-                            </div>                             
-                            <div class="px-4 w-full sm:w-6/12"> 
-                                <ul> 
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Banks</a> 
-                                    </li>                                     
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">ATMs</a> 
-                                    </li>                                     
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Services</a> 
-                                    </li>
-                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Shopping Centers</a> 
-                                    </li>                                     
-                                </ul>                                 
-                            </div>                             
-                        </div>                         
-                    </div>
-                    <div class="p-4 w-full md:w-1/2 lg:w-4/12"> 
-                        <h2 class="font-medium mb-8 text-white text-xl">Subscribe</h2> 
-                        <p class="mb-4">                             Subscribe to our newsletter and get exclusive updates directly in your inbox. </p> 
-                        <form> 
-                            <div class="bg-white flex items-center mb-6 overflow-hidden p-1 rounded-full"> 
-                                <input class="flex-1 font-light px-4 py-2 text-gray-600 w-full" placeholder="Enter email..." type="email"/> 
-                                <button type="submit" class="bg-red-600 font-medium hover:bg-red-700 inline-block px-6 py-2 rounded-full text-center text-white uppercase" aria-label="submit">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 inline-block w-4"> 
-                                        <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"/> 
-                                    </svg>
-                                </button>                                 
-                            </div>                             
-                        </form>                         
-                        <h2 class="font-medium mb-4 text-white text-xl">Get Social</h2> 
-                        <div class="flex-wrap inline-flex space-x-3"> <a href="#" class="hover:text-red-400" aria-label="facebook link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"> 
-                                    <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/> 
-                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="twitter link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"> 
-                                    <path d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z"/> 
-                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="instagram link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"> 
-                                    <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/> 
-                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="linkedin link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"> 
-                                    <path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/> 
-                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="youtube link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"> 
-                                    <path d="M21.543 6.498C22 8.28 22 12 22 12s0 3.72-.457 5.502c-.254.985-.997 1.76-1.938 2.022C17.896 20 12 20 12 20s-5.893 0-7.605-.476c-.945-.266-1.687-1.04-1.938-2.022C2 15.72 2 12 2 12s0-3.72.457-5.502c.254-.985.997-1.76 1.938-2.022C6.107 4 12 4 12 4s5.896 0 7.605.476c.945.266 1.687 1.04 1.938 2.022zM10 15.5l6-3.5-6-3.5v7z"/> 
-                                </svg></a> 
-                        </div>                         
-                    </div>                     
-                </div>                 
-                <div class="py-4 text-sm"> 
-                    <hr class="border-gray-400 mb-4"/> 
-                    <div class="flex flex-wrap -mx-4  items-center"> 
-                        <div class="px-4 py-2 w-full md:flex-1"> 
-                            <p>&copy; 2002 - 2021. All Rights Reserved - Company Name</p> 
+        <footer class="bg-gray-700 pt-12 text-gray-400">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap -mx-4">
+                    <div class="p-4 w-full lg:w-4/12"> <a href="#" class="font-medium hover:text-gray-300 inline-block mb-6 mr-auto text-3xl text-white uppercase">                 Company </a>
+                        <p class="mb-4 text-sm">                             Duis pharetra venenatis felis, ut tincidunt ipsum consequat nec. Fusce et porttitor libero, eu aliquam nisi. Nam finibus ullamcorper semper. </p>
+                        <div class="mb-6"> <a href="#" class="hover:text-red-400">+1 234 567-890</a> <br/> <a href="#" class="hover:text-red-400">hello@company.com</a>
                         </div>
-                        <div class="px-4 py-2 w-full sm:w-auto"> <a href="#" class="hover:text-red-400">Privacy Policy</a> |                      <a href="#" class="hover:text-red-400">Terms of Use</a> 
-                        </div>                         
-                    </div>                     
-                </div>                 
-            </div>             
+                    </div>
+                    <div class="p-4 w-full lg:w-4/12">
+                        <h2 class="font-medium mb-8 text-white text-xl">Popular Interest</h2>
+                        <div class="flex flex-wrap -mx-4">
+                            <div class="px-4 w-full sm:w-6/12">
+                                <ul>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Fitness</a>
+                                    </li>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Events</a>
+                                    </li>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Trekking</a>
+                                    </li>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Auto Parts</a>
+                                    </li>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Co-working Spaces</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="px-4 w-full sm:w-6/12">
+                                <ul>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Banks</a>
+                                    </li>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">ATMs</a>
+                                    </li>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Services</a>
+                                    </li>
+                                    <li class="mb-4"> <a href="#" class="hover:text-red-400">Shopping Centers</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 w-full md:w-1/2 lg:w-4/12">
+                        <h2 class="font-medium mb-8 text-white text-xl">Subscribe</h2>
+                        <p class="mb-4">                             Subscribe to our newsletter and get exclusive updates directly in your inbox. </p>
+                        <form>
+                            <div class="bg-white flex items-center mb-6 overflow-hidden p-1 rounded-full">
+                                <input class="flex-1 font-light px-4 py-2 text-gray-600 w-full" placeholder="Enter email..." type="email"/>
+                                <button type="submit" class="bg-red-600 font-medium hover:bg-red-700 inline-block px-6 py-2 rounded-full text-center text-white uppercase" aria-label="submit">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" class="h-4 inline-block w-4">
+                                        <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                        <h2 class="font-medium mb-4 text-white text-xl">Get Social</h2>
+                        <div class="flex-wrap inline-flex space-x-3"> <a href="#" class="hover:text-red-400" aria-label="facebook link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                    <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/>
+                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="twitter link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                    <path d="M22.162 5.656a8.384 8.384 0 0 1-2.402.658A4.196 4.196 0 0 0 21.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 0 0-7.126 3.814 11.874 11.874 0 0 1-8.62-4.37 4.168 4.168 0 0 0-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 0 1-1.894-.523v.052a4.185 4.185 0 0 0 3.355 4.101 4.21 4.21 0 0 1-1.89.072A4.185 4.185 0 0 0 7.97 16.65a8.394 8.394 0 0 1-6.191 1.732 11.83 11.83 0 0 0 6.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 0 0 2.087-2.165z"/>
+                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="instagram link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                    <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="linkedin link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                    <path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/>
+                                </svg></a> <a href="#" class="hover:text-red-400" aria-label="youtube link"> <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                    <path d="M21.543 6.498C22 8.28 22 12 22 12s0 3.72-.457 5.502c-.254.985-.997 1.76-1.938 2.022C17.896 20 12 20 12 20s-5.893 0-7.605-.476c-.945-.266-1.687-1.04-1.938-2.022C2 15.72 2 12 2 12s0-3.72.457-5.502c.254-.985.997-1.76 1.938-2.022C6.107 4 12 4 12 4s5.896 0 7.605.476c.945.266 1.687 1.04 1.938 2.022zM10 15.5l6-3.5-6-3.5v7z"/>
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-4 text-sm">
+                    <hr class="border-gray-400 mb-4"/>
+                    <div class="flex flex-wrap -mx-4  items-center">
+                        <div class="px-4 py-2 w-full md:flex-1">
+                            <p>&copy; 2002 - 2021. All Rights Reserved - Company Name</p>
+                        </div>
+                        <div class="px-4 py-2 w-full sm:w-auto"> <a href="#" class="hover:text-red-400">Privacy Policy</a> |                      <a href="#" class="hover:text-red-400">Terms of Use</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
         <script src="pgia/lib/pgia.js"></script>
     </body>
