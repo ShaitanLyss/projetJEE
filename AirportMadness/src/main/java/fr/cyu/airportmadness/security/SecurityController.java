@@ -1,5 +1,8 @@
 package fr.cyu.airportmadness.security;
 
+import io.pebbletemplates.pebble.PebbleEngine;
+import io.pebbletemplates.pebble.loader.ClasspathLoader;
+import io.pebbletemplates.pebble.template.PebbleTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -14,14 +17,19 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 public class SecurityController {
 
     private final  OAuth2AuthorizedClientService  authorizedClientService;
-    private static String affiche;
+    //private String affiche;
+    private String name;
     @Autowired
     UserRepository userRepository;
 
@@ -53,18 +61,20 @@ public class SecurityController {
         }
         @RequestMapping("/admin")
         @RolesAllowed("ADMIN")
-        public String getAdmin(){
-                return affiche;
+        public String getAdminPage(Model model){
+            model.addAttribute("name", this.getName());
+            return "index";
             }
 
         @RequestMapping("/**")
         @RolesAllowed("USER")
-        public String getUser(){
-            return affiche;
+        public String getUserPage(Model model){
+            model.addAttribute("name", this.getName());
+            return "index";
         }
 
         @RequestMapping("/*")
-        public String getUserInfo(Principal user){
+        public String getUserInfo(Principal user) throws IOException {
             StringBuffer userInfo = new StringBuffer();
             if(user instanceof UsernamePasswordAuthenticationToken){
                 userInfo.append(getUsernamePasswordLoginInfo(user));
@@ -73,8 +83,29 @@ public class SecurityController {
                 userInfo.append(getOauth2LoginInfo(user));
                 }
             }
-            affiche = userInfo.toString();
-            return userInfo.toString();
+            //affiche = userInfo.toString();
+            String pageUrl = "index";
+            String   templatePath = "/templates/";
+            ClasspathLoader loader = new ClasspathLoader();
+            loader.setPrefix("templates/");
+            loader.setSuffix(".html");
+            //PebbleEngine engine = new PebbleEngine(loader);
+            PebbleEngine engine = new PebbleEngine.Builder().loader(loader).build();
+            PebbleTemplate compiledTemplate = engine.getTemplate(pageUrl);
+
+            //PebbleEngine engine = new PebbleEngine.Builder().build();
+            //PebbleTemplate compiledTemplate = engine.getTemplate(pageUrl);
+            Writer writer = new StringWriter();
+
+            Map<String, Object> context = new HashMap<>();
+            context.put("name", this.getName());
+            context.put("authenticated", 1);
+            compiledTemplate.evaluate(writer, context);
+            String output = writer.toString();
+
+            //model.addObject("name", this.getName());
+            //model.setViewName("index");
+            return output;
         }
         private StringBuffer getUsernamePasswordLoginInfo(Principal user){
             StringBuffer usernameInfo = new StringBuffer();
@@ -82,6 +113,7 @@ public class SecurityController {
             if(token.isAuthenticated()){
                 org.springframework.security.core.userdetails.User u =  (org.springframework.security.core.userdetails.User)token.getPrincipal();
                 usernameInfo.append("Welcome" + u.getUsername());
+                this.setName(u.getUsername());
             }else{
                 usernameInfo.append("NA");
             }
@@ -101,6 +133,12 @@ public class SecurityController {
 
             String userToken = authClient.getAccessToken().getTokenValue();
             //if(authClient != null) return  (protectedInfo.append("les attributs sont : "+ userAttributes.toString()));
+
+            if ((userAttributes.get("login") != null)) {
+                this.setName((String) userAttributes.get("login"));
+            } else {
+                this.setName((String) userAttributes.get("name"));
+            }
             protectedInfo.append("Welcome, " + ((userAttributes.get("login")!=null)?userAttributes.get("login"):userAttributes.get("name"))+"<br><br>");
             protectedInfo.append("e-mail: " + userAttributes.get("email")+"<br><br>");
             protectedInfo.append("Access Token: " + userToken+"<br><br>");
@@ -133,4 +171,11 @@ public class SecurityController {
     }
 
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
