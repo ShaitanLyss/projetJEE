@@ -1,12 +1,11 @@
 package fr.cyu.airportmadness.entity.booking;
 
 import fr.cyu.airportmadness.entity.flight.Flight;
-import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
+import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;

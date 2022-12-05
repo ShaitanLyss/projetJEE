@@ -11,24 +11,25 @@ import fr.cyu.airportmadness.entity.city.City;
 import fr.cyu.airportmadness.entity.country.Country;
 import fr.cyu.airportmadness.entity.flight.Flight;
 import fr.cyu.airportmadness.entity.person.Gender;
+import fr.cyu.airportmadness.entity.person.employee.Employee;
 import fr.cyu.airportmadness.entity.person.passenger.PaperType;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
-import fr.cyu.airportmadness.entity.person.employee.Employee;
+import jakarta.persistence.*;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
@@ -46,7 +47,7 @@ public class TestController {
     @GetMapping("/test")
     public String test(@RequestParam(name = "name", defaultValue = "Company") String name, Model model) {
         model.addAttribute("name", name);
-        return "index";
+        return "lml";
     }
 
     @GetMapping("/test/db")

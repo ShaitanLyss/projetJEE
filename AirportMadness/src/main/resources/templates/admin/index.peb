@@ -1,0 +1,14 @@
+{% extends "layout" %}
+
+{% block page_title %}
+    Admin Dashboard
+{% endblock %}
+
+{% block heading_title %}
+    Admin Dashboard
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+

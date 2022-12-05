@@ -4,8 +4,7 @@ import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.person.employee.Employee;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;

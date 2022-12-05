@@ -1,6 +1,6 @@
 package fr.cyu.airportmadness.entity.airlinecompany;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface AirlineCompanyRepository extends PagingAndSortingRepository<AirlineCompany, Long> {
+public interface AirlineCompanyRepository extends CrudRepository<AirlineCompany, Long> {
 }

@@ -1,6 +1,6 @@
 package fr.cyu.airportmadness.entity.city;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface CityRepository extends PagingAndSortingRepository<City, Long> {
+public interface CityRepository extends CrudRepository<City, Long> {
 }

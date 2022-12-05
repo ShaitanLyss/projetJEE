@@ -1,7 +1,7 @@
 package fr.cyu.airportmadness.entity.booking;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
 
-public interface BookingRepository extends PagingAndSortingRepository<Booking, Long> {
+public interface BookingRepository extends CrudRepository<Booking, Long> {
 }

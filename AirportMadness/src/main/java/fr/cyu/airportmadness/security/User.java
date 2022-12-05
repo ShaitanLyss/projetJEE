@@ -3,7 +3,7 @@ package fr.cyu.airportmadness.security;
 import fr.cyu.airportmadness.entity.person.Person;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity

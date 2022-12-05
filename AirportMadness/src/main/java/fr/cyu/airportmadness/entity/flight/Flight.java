@@ -4,7 +4,7 @@ import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.booking.Booking;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
