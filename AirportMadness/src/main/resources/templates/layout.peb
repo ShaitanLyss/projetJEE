@@ -1,4 +1,9 @@
 {% extends "base" %}
+{#    <head>#}
+
+{#        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css"/>#}
+{#        <title></title>#}
+{#    </head>#}
 {% block body %}
 <header>
 

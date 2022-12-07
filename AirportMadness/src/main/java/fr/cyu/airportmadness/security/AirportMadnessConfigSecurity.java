@@ -1,4 +1,11 @@
 package fr.cyu.airportmadness.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
 //
 //import com.mysql.cj.jdbc.MysqlDataSource;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +27,8 @@ package fr.cyu.airportmadness.security;
 //
 //@Configuration
 //@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class AirportMadnessConfigSecurity {
 //
 //    //@Autowired
@@ -66,19 +75,20 @@ public class AirportMadnessConfigSecurity {
 //    }
 //
 //
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests()
-//                .requestMatchers("/admin").hasRole("ADMIN")
-//                .requestMatchers("/user").hasRole("USER")
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests()
+                .requestMatchers("/admin").hasRole("ADMIN")
+                .requestMatchers("/user").hasRole("USER")
+                .requestMatchers("/").permitAll()
+//                .anyRequest().permitAll()
+                .and()
+                .formLogin()
 //                .and()
 //                .oauth2Login()
-//        ;
-//        re
-//    }
+        ;
+        return http.build();
+    }
 //
 //
 }

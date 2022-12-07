@@ -1,0 +1,6 @@
+{% extends "layout" %}
+
+    {% block heading_title %} Index dashboard {% endblock %}
+{% block content %}
+    Hello, welcome to this site.
+{% endblock %}

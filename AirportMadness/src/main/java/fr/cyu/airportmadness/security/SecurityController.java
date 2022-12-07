@@ -4,12 +4,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-//import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 //import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 //import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 //import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 //import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 //import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+//import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +29,15 @@ import java.util.Map;
 @Controller
 public class SecurityController {
 
-//    private final OAuth2AuthorizedClientService authorizedClientService;
+    private final OAuth2AuthorizedClientService authorizedClientService;
     private static String affiche;
     @Autowired
     UserRepository userRepository;
 
 
-//    public SecurityController(OAuth2AuthorizedClientService authorizedClientService) {
-//        this.authorizedClientService = authorizedClientService;
-//    }
+    public SecurityController(OAuth2AuthorizedClientService authorizedClientService) {
+        this.authorizedClientService = authorizedClientService;
+    }
 
 //    @ResponseBody
 //    @GetMapping("/login")
@@ -128,7 +135,7 @@ public class SecurityController {
 //
 //        return protectedInfo;
 //    }
-
+//
 //    private OidcIdToken getIdToken(OAuth2User principal) {
 //        if (principal instanceof DefaultOidcUser oidcUser) {
 //            return oidcUser.getIdToken();
