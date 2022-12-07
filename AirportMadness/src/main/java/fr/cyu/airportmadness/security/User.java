@@ -35,9 +35,9 @@ public class User {
     }
 
     public User(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
+        setUsername(username);
+        setPassword(password);
+        setRole(role);
     }
 
     public String getRole() {
@@ -45,7 +45,7 @@ public class User {
     }
 
     public User setRole(String role) {
-        this.role = role.toUpperCase();
+        this.role = "ROLE_" + role.toUpperCase();
         return this;
     }
 
