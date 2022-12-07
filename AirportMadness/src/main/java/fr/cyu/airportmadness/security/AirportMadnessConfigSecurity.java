@@ -2,8 +2,12 @@ package fr.cyu.airportmadness.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 //
@@ -30,49 +34,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class AirportMadnessConfigSecurity {
-//
-//    //@Autowired
-//    //PasswordEncoder passwordEncoder;
-//    @Autowired
-//    UserRepository userRepository;
-//
-//    /**
-//     * @Autowired private DataSource dataSource;
-//     * @Autowired UserRepository userRepository;
-//     * @Override public void configure(AuthenticationManagerBuilder auth)
-//     * throws Exception {
-//     * userRepository.findAll().forEach(user ->
-//     * {
-//     * try {
-//     * auth.jdbcAuthentication()
-//     * .dataSource(dataSource)
-//     * .usersByUsernameQuery(user.getUsername())
-//     * .authoritiesByUsernameQuery(user.getUsername());
-//     * } catch (Exception e) {
-//     * throw new RuntimeException(e);
-//     * }
-//     * }
-//     * <p>
-//     * )
-//     * ;
-//     * <p>
-//     * }
-//     **/
-//
-//    @Bean
-//    public DataSource dataSource() {
-//        return new MysqlDataSource();
-//    }
-//
-//    /*@Bean
-//    public UserDetailsManager userDetailsService()  {
-//        return new JdbcUserDetailsManager()
-//    }*/
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider  authenticationProvider() {
+        DaoAuthenticationProvider authProvider  = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
+    }
+
 //
 //
     @Bean
@@ -80,7 +60,8 @@ public class AirportMadnessConfigSecurity {
         http.authorizeHttpRequests()
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasRole("USER")
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/", "/saveUser", "/save-user").permitAll()
+                .requestMatchers("/test/**").permitAll()
 //                .anyRequest().permitAll()
                 .and()
                 .formLogin()

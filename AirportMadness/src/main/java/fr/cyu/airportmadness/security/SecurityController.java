@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 //import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 //import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -34,22 +35,13 @@ public class SecurityController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
 
     public SecurityController(OAuth2AuthorizedClientService authorizedClientService) {
         this.authorizedClientService = authorizedClientService;
     }
-
-//    @ResponseBody
-//    @GetMapping("/login")
-//    public String Login(HttpServletResponse res, Model model,
-//                        @RequestParam(value = "login") String name, @RequestParam(value = "password") String psswd) {
-//        res.setContentType("text/plain");
-//        User user = userRepository.findByUsernameLike(name);
-//
-//        return (user == null) ? "login inexistant" : (
-//                user.getPassword().equals(psswd) ? name +
-//                        " connecté " : " forgotten password");
-//    }
 
     @GetMapping("/saveUser")
     @ResponseBody
@@ -57,10 +49,23 @@ public class SecurityController {
                            @RequestParam(value = "password") String psswd,
                            @RequestParam(value = "role") String role) {
         User user = new User();
-        user.setUsername(name).setPassword(psswd).setRole(role);
+        user.setUsername(name).setPassword(passwordEncoder.encode(psswd)).setRole(role);
         userRepository.save(user);
         return "User bien créé";
     }
+
+    @GetMapping("/save-user")
+    @ResponseBody
+    public String saveUserBis(@RequestParam(value = "username") String name,
+                           @RequestParam(value = "password") String psswrd,
+                           @RequestParam(value = "role") String role) {
+        User user = new User();
+        user.setUsername(name).setPassword(passwordEncoder.encode(psswrd)).setRole(role);
+        userRepository.save(user);
+        return "User bien créé";
+    }
+
+
 
 //    @RequestMapping("/admin")
 //    @RolesAllowed("ADMIN")

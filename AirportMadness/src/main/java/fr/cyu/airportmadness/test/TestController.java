@@ -47,7 +47,7 @@ public class TestController {
     @GetMapping("/test")
     public String test(@RequestParam(name = "name", defaultValue = "Company") String name, Model model) {
         model.addAttribute("name", name);
-        return "lml";
+        return "index";
     }
 
     @GetMapping("/test/db")
