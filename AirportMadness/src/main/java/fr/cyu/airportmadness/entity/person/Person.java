@@ -2,7 +2,7 @@ package fr.cyu.airportmadness.entity.person;
 
 import fr.cyu.airportmadness.security.User;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;

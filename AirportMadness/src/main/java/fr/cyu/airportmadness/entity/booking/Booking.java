@@ -1,12 +1,16 @@
 package fr.cyu.airportmadness.entity.booking;
 
 import fr.cyu.airportmadness.entity.flight.Flight;
-import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
+import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,15 +24,26 @@ public class Booking {
     private Long id;
 
     @ManyToMany(mappedBy = "bookings", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @Size(min = 1, message = "Au moins un passager doit être sélectionné")
     private final Set<Passenger> passengers = new LinkedHashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "flight_id")
+    @NotNull(message = "Un vol doit être sélectionné")
     private Flight flight;
+
+    @Column(name = "num_luggages")
+    @PositiveOrZero(message = "Un nombre positif de bagage doit être sélectionné")
+    private Integer numLuggages;
+
+    @Column(name = "price", precision = 19, scale = 2)
+    private BigDecimal price;
+
 
     public Long getId() {
         return id;
@@ -40,12 +55,6 @@ public class Booking {
     }
 
 
-
-    @Column(name = "num_luggages", nullable = false)
-    private Integer numLuggages;
-
-    @Column(name = "price", nullable = false, precision = 19, scale = 2)
-    private BigDecimal price;
 
     public Set<Passenger> getPassengers() {
         return passengers;

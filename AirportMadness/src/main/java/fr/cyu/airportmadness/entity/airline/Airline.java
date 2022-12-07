@@ -4,9 +4,7 @@ import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.airport.Airport;
 import fr.cyu.airportmadness.entity.flight.Flight;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity

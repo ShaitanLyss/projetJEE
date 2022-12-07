@@ -1,65 +1,42 @@
 package fr.cyu.airportmadness.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-import javax.sql.DataSource;
-
+//
+//import com.mysql.cj.jdbc.MysqlDataSource;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+//import org.springframework.security.provisioning.JdbcUserDetailsManager;
+//import org.springframework.security.provisioning.UserDetailsManager;
+//import org.springframework.security.web.SecurityFilterChain;
+//
+//import javax.sql.DataSource;
+//
+//@Configuration
+//@EnableWebSecurity
 @Configuration
 @EnableWebSecurity
-public class AirportMadnessConfigSecurity extends WebSecurityConfigurerAdapter {
-
-    //@Autowired
-    //PasswordEncoder passwordEncoder;
-    @Autowired
-    UserRepository userRepository;
-/**
-     @Autowired
-    private DataSource dataSource;
-    @Autowired
-    UserRepository userRepository;
-
-    @Override
-    public void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-                userRepository.findAll().forEach(user ->
-                        {
-                            try {
-                                auth.jdbcAuthentication()
-                                .dataSource(dataSource)
-                                        .usersByUsernameQuery(user.getUsername())
-                                        .authoritiesByUsernameQuery(user.getUsername());
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-
-                )
-                ;
-
-    }
-**/
-
-    @Override
-    protected  void configure(AuthenticationManagerBuilder auth) throws Exception{
-        userRepository.findAll().forEach(user ->
-            {
-                try {
-                    auth.inMemoryAuthentication()
-                            .withUser(user.getUsername()).password(passwordEncoder().encode(user.getPassword())).roles(user.getRole())
-                            ;
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-         });
+public class AirportMadnessConfigSecurity {
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
     }
 
     @Bean
@@ -67,19 +44,32 @@ public class AirportMadnessConfigSecurity extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public DaoAuthenticationProvider  authenticationProvider() {
+        DaoAuthenticationProvider authProvider  = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasRole("USER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .oauth2Login()
-                ;
+        return authProvider;
     }
 
-
+//
+//
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests()
+                .requestMatchers("/admin").hasRole("ADMIN")
+                .requestMatchers("/user").hasRole("USER")
+                .requestMatchers("/", "/saveUser", "/save-user").permitAll()
+                .requestMatchers("/test/**").permitAll()
+//                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+//                .and()
+//                .oauth2Login()
+        ;
+        return http.build();
+    }
+//
+//
 }

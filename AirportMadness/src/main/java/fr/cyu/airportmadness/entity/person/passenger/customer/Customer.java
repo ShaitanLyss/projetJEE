@@ -5,12 +5,10 @@ import fr.cyu.airportmadness.entity.person.Gender;
 import fr.cyu.airportmadness.entity.person.passenger.PaperType;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,7 +22,7 @@ public class Customer extends Passenger {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "customer", cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
     private final Set<Booking> createdBookings = new java.util.LinkedHashSet<>();
 
     public Set<Booking> getCreatedBookings() {

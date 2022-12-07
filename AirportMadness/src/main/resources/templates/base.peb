@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" data-pgc-master="master.html">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title data-pgc-field="page_title">{% block page_title %} Voyages, réservations {% endblock %} | Air Nomads</title>
+        <meta name="description" content="{% block page_descr %}{% endblock %}"/>
+        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css"/>
+    </head>
+<body>
+{% block body %}
+{% endblock %}
+</body>
+</html>

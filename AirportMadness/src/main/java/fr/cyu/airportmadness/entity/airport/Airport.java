@@ -3,7 +3,7 @@ package fr.cyu.airportmadness.entity.airport;
 import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.city.City;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

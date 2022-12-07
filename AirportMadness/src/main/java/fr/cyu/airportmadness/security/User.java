@@ -3,7 +3,7 @@ package fr.cyu.airportmadness.security;
 import fr.cyu.airportmadness.entity.person.Person;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -14,7 +14,7 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "role", nullable = false)
@@ -32,7 +32,7 @@ public class User {
     }
 
     public User setRole(String role) {
-        this.role = role;
+        this.role = role.toUpperCase();
         return this;
     }
 

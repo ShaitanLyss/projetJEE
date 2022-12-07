@@ -1,6 +1,6 @@
 package fr.cyu.airportmadness.entity.person.passenger.customer;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 }

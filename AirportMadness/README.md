@@ -14,3 +14,7 @@ le serveur web.
 # Liens
 - Spring MVC : https://spring.io/guides/gs/serving-web-content/
 - Visual Page Design with Spring Boot : https://www.youtube.com/watch?v=osOMcJ_A7As
+- Gérer les formulaires : https://spring.io/guides/gs/handling-form-submission/
+- Validation de formulaire :
+  - https://www.baeldung.com/javax-validation
+- Spring Security sans WebSecurityConfigurerAdapter : https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
