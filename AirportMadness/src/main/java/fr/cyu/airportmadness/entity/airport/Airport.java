@@ -4,6 +4,8 @@ import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.city.City;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,10 +18,12 @@ public class Airport {
     private Long id;
 
     @Column(name = "name")
+    @NotNull(message = "Votre aéroport doit avoir un nom")
     private String name;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "city_id")
+    @NotNull(message = "Selectionner la ville")
     private City city;
 
     @OneToMany(mappedBy = "departure", cascade = CascadeType.ALL, orphanRemoval = true)

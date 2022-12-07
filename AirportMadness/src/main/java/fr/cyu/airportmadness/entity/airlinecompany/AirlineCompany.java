@@ -5,6 +5,8 @@ import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.person.employee.Employee;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,15 +20,18 @@ public class AirlineCompany {
     private Long id;
 
     @OneToMany(mappedBy = "airlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
+    @NotNull(message = "Selectionner au moins une ligne de vol pour cette compagnie")
     private final Set<Airline> airlines = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "airlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
     private final Set<Employee> employees = new LinkedHashSet<>();
 
     @Column(name = "name")
+    @NotNull(message = "Votre compagnie doit avoir un nom")
     private String name;
 
     @OneToMany(mappedBy = "owningAirlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
+    @NotNull(message = "Au moins un avion doit être selectionné")
     private final Set<Aircraft> aircrafts = new LinkedHashSet<>();
 
     public Set<Airline> getAirlines() {

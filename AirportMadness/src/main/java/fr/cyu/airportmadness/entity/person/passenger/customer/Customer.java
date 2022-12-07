@@ -8,15 +8,19 @@ import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 public class Customer extends Passenger {
     @Column(name = "phone_number")
+    @NotNull(message = "Entrer un numéro de téléphone")
     private String phoneNumber;
 
     @Column(name = "email")
+    @NotNull(message = "Entrer une adresse mail")
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)

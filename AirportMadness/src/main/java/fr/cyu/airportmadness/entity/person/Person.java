@@ -3,6 +3,8 @@ package fr.cyu.airportmadness.entity.person;
 import fr.cyu.airportmadness.security.User;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -20,19 +22,24 @@ public class Person {
     private Set<User> users = new LinkedHashSet<>();
 
     @Column(name = "first_name", nullable = false)
+    @NotNull(message = "Entrer son nom")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
+    @NotNull(message = "Entrer son prénom")
     private String lastName;
     @Column(name = "birthdate", nullable = false)
+    @NotNull(message = "Entrer sa date de naissance")
     private LocalDate birthdate;
 
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
+    @NotNull(message = "Entrer son genre")
     private Gender gender;
 
     @Column(name = "nationality", nullable = false)
+    @NotNull(message = "Entrer sa nationalité")
     private String nationality;
 
 
