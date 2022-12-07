@@ -62,6 +62,7 @@ public class AirportMadnessConfigSecurity {
         http.authorizeHttpRequests()
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasRole("USER")
+                .requestMatchers("/api").permitAll()
                 .requestMatchers("/", "/saveUser", "/save-user", "/error").permitAll()
                 .requestMatchers("/test/**").permitAll()
 //                .anyRequest().permitAll()
