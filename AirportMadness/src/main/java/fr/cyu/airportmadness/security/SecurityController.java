@@ -36,7 +36,7 @@ public class SecurityController {
     UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    PasswordEncoder  passwordEncoder;
 
 
     public SecurityController(OAuth2AuthorizedClientService authorizedClientService) {

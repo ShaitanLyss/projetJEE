@@ -4,11 +4,15 @@ import fr.cyu.airportmadness.entity.person.Person;
 import org.hibernate.Hibernate;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.Objects;
 
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -26,6 +30,15 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
+
+    public User()  {
+    }
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public String getRole() {
         return role;

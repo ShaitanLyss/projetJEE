@@ -15,8 +15,15 @@ import fr.cyu.airportmadness.entity.person.employee.Employee;
 import fr.cyu.airportmadness.entity.person.passenger.PaperType;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
+import fr.cyu.airportmadness.security.MyUserDetails;
+import fr.cyu.airportmadness.security.SecurityController;
+import fr.cyu.airportmadness.security.User;
+import fr.cyu.airportmadness.security.UserRepository;
 import jakarta.persistence.*;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -25,11 +32,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
@@ -38,6 +47,12 @@ public class TestController {
     private final BookingRepository bookingRepository;
     @PersistenceContext
     private EntityManager em;
+
+    @Autowired
+    private UserRepository  userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public TestController(AircraftRepository aircraftRepository, BookingRepository bookingRepository) {
         this.aircraftRepository = aircraftRepository;
@@ -66,6 +81,14 @@ public class TestController {
         response.setCharacterEncoding("UTF-8");
         
         List<Object> toPersist = new ArrayList<>(10);
+
+        // User
+        if (userRepository.findByUsername("user") == null)
+            userRepository.save(new User("user", passwordEncoder.encode("1234"), "USER"));
+
+        if (userRepository.findByUsername("admin") == null)
+            userRepository.save(new User("admin", passwordEncoder.encode("1234"),  "ADMIN"));
+
 
         // Aircrafts
         var numAircrafts = aircraftRepository.count();
@@ -207,5 +230,28 @@ public class TestController {
         toPersist.forEach((o) -> em.persist(o));
 
         return "Yay.";
+    }
+
+
+
+    @GetMapping("/test/user-status")
+    @ResponseBody
+    public String userStatus(Authentication  authentication) {
+        String res = "";
+
+        if (authentication !=  null) {
+            MyUserDetails  userDetails = (MyUserDetails) authentication.getPrincipal();
+            res += "Nom : " + userDetails.getUsername() + "\n";
+            res += "Rôles : " + userDetails.getAuthorities();
+        } else {
+            res += "L'utilisateur n'est pas connecté !";
+        }
+
+        return res;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(aircraftRepository, bookingRepository, em, userRepository, passwordEncoder);
     }
 }

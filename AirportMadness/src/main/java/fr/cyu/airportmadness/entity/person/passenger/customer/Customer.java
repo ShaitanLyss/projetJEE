@@ -19,9 +19,6 @@ public class Customer extends Passenger {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
-
     @OneToMany(mappedBy = "customer", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
     private final Set<Booking> createdBookings = new java.util.LinkedHashSet<>();
 
@@ -38,14 +35,6 @@ public class Customer extends Passenger {
         this.email = email;
     }
 
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getEmail() {
         return email;
