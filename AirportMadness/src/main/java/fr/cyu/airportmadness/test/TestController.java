@@ -241,7 +241,7 @@ public class TestController {
 
         if (authentication !=  null) {
             MyUserDetails  userDetails = (MyUserDetails) authentication.getPrincipal();
-            res += "Nom : " + userDetails.getUsername() + "\n";
+            res += "Nom : " + userDetails.getUsername() + "<br>";
             res += "Rôles : " + userDetails.getAuthorities();
         } else {
             res += "L'utilisateur n'est pas connecté !";

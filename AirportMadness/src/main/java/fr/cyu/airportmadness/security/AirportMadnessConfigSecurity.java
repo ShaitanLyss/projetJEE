@@ -1,5 +1,6 @@
 package fr.cyu.airportmadness.security;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -57,6 +58,7 @@ public class AirportMadnessConfigSecurity {
 //
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        Dotenv env  = Dotenv.load();
         http.authorizeHttpRequests()
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .requestMatchers("/user").hasRole("USER")
@@ -65,6 +67,9 @@ public class AirportMadnessConfigSecurity {
 //                .anyRequest().permitAll()
                 .and()
                 .formLogin()
+                .and()
+                .rememberMe()
+                .key(env.get("SECURITY_KEY"))
 //                .and()
 //                .oauth2Login()
         ;
