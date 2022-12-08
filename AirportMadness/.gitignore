@@ -36,3 +36,7 @@ build/
 .vscode/
 /src/main/resources/templates/_pgbackup/
 /src/main/resources/templates/screenshots/
+/node_modules/
+/yarn-error.log
+/src/main/resources/build/
+/src/main/resources/static/build/

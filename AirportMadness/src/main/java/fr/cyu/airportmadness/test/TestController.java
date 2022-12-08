@@ -1,5 +1,6 @@
 package fr.cyu.airportmadness.test;
 
+import com.github.javafaker.Faker;
 import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 import fr.cyu.airportmadness.entity.aircraft.AircraftRepository;
 import fr.cyu.airportmadness.entity.airline.Airline;
@@ -16,7 +17,6 @@ import fr.cyu.airportmadness.entity.person.passenger.PaperType;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
 import fr.cyu.airportmadness.security.MyUserDetails;
-import fr.cyu.airportmadness.security.SecurityController;
 import fr.cyu.airportmadness.security.User;
 import fr.cyu.airportmadness.security.UserRepository;
 import jakarta.persistence.*;
@@ -32,9 +32,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
-import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -77,6 +77,8 @@ public class TestController {
     @ResponseBody
     @Transactional
     public String loadTestSample(HttpServletResponse response) {
+        Faker faker = new Faker();
+        var name  = faker.name();
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         
@@ -102,26 +104,7 @@ public class TestController {
         toPersist.add(ac1);
         toPersist.add(ac2);
         
-        // Employees
-        Employee employee1 = new Employee();
-        employee1
-                .setGender(Gender.Male)
-                .setFirstName("Bob")
-                .setLastName("Marley")
-                .setBirthdate(LocalDate.parse("2000-09-30"))
-                .setNationality("French");
 
-
-        Employee employee2 = new Employee();
-        employee2
-                .setGender(Gender.female)
-                .setFirstName("Alice")
-                .setLastName("Windmill")
-                .setBirthdate(LocalDate.parse("1997-05-23"))
-                .setNationality("Cameroonian");
-
-        toPersist.add(employee1);
-        toPersist.add(employee2);
 
         // Country
         Country france = new Country("france");
@@ -188,7 +171,7 @@ public class TestController {
         // Customer
         Customer sylvie = new Customer(
                 "Sylvie", "Delprat", LocalDate.of(1980, 7, 3),
-                Gender.female, "française", "FR12456987", PaperType.IdentityCard,
+                Gender.Female, "française", "FR12456987", PaperType.IdentityCard,
                 "0611223344", "sylvie@sylvie.fr"
                 );
 
@@ -200,7 +183,7 @@ public class TestController {
                 Gender.Male, "française", "FR987654321", PaperType.Passport);
         Passenger marine = new Passenger(
                 "Marine", "Delprat", LocalDate.of(2004,8,17),
-                Gender.female, "française", "FR987654321", PaperType.ResidenceDocument);
+                Gender.Female, "française", "FR987654321", PaperType.ResidenceDocument);
 
         toPersist.add(florian);
         toPersist.add(marine);
@@ -221,10 +204,37 @@ public class TestController {
                 .addAircrafts(ac1, ac2)
                 .addAirlines(nsimalenParisRoissy, parisRoissyNsimalen)
                 .setName("Air Cameroun")
-                .addEmployees(employee1, employee2);
-
+                ;
+//                .addEmployees(employee2);
 
         toPersist.add(comp);
+
+        // Employees
+        for (int  i = 0; i < 100; i++) {
+            Employee employee1 = new Employee();
+            employee1
+                    .setAirlineCompany(comp)
+                    .setGender(Math.random() > 0.5 ? Gender.Male : Gender.Female)
+                    .setFirstName(name.firstName())
+                    .setLastName(name.lastName())
+                    .setBirthdate(faker.date().birthday(10, 90).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                    .setNationality(faker.nation().nationality())
+
+            ;
+            toPersist.add(employee1);
+        }
+
+
+//        Employee employee2 = new Employee();
+//        employee2
+//                .setGender(Gender.female)
+//                .setFirstName("Alice")
+//                .setLastName("Windmill")
+//                .setBirthdate(LocalDate.parse("1997-05-23"))
+//                .setNationality("Cameroonian");
+//
+//
+//        toPersist.add(employee2);
 
 
         toPersist.forEach((o) -> em.persist(o));

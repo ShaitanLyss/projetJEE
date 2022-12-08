@@ -33,10 +33,10 @@ public class SecurityController {
     private final OAuth2AuthorizedClientService authorizedClientService;
     private static String affiche;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    PasswordEncoder  passwordEncoder;
+    private PasswordEncoder  passwordEncoder;
 
 
     public SecurityController(OAuth2AuthorizedClientService authorizedClientService) {

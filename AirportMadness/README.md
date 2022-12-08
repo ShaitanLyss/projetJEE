@@ -3,6 +3,9 @@
 
 # Installation
 1) Utiliser maven pour installer les dépendances.
+2) Utiliser yarn ou npm pour exécuter le script build
+   - `npm run build`
+   - `yarn build`
 
 
 # Configuration
