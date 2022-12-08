@@ -40,3 +40,6 @@ build/
 /yarn-error.log
 /src/main/resources/build/
 /src/main/resources/static/build/
+/.yarn/
+/.mvn/
+/.mvn/
