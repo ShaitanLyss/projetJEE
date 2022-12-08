@@ -2,6 +2,9 @@ package fr.cyu.airportmadness.entity.city;
 
 import fr.cyu.airportmadness.entity.airport.Airport;
 import fr.cyu.airportmadness.entity.country.Country;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.Hibernate;
 
 import jakarta.persistence.*;
@@ -18,10 +21,12 @@ public class City {
     private Long id;
 
     @Column(name = "name")
+    @NotBlank
     private String name;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "country_id")
+    @NotNull
     private Country country;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)

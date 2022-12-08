@@ -3,6 +3,8 @@ package fr.cyu.airportmadness.entity.country;
 import fr.cyu.airportmadness.entity.city.City;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ public class Country {
     private Long id;
 
     @Column(name = "name", nullable = false)
+    @NotBlank
     private String name;
 
     public Country() {
