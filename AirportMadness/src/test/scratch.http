@@ -1,0 +1,35 @@
+POST http://localhost:8080/api/cities
+Content-Type: application/json
+
+{
+  "name": "Londre",
+  "country": "/api/country/103"
+}
+
+###
+PUT http://localhost:8080/api/countries/103
+Content-Type: application/json
+
+{"name" :  "Tea"}
+
+
+###
+POST http://localhost:8080/api/countries
+Content-Type: application/json
+
+{
+  "name": "Angleterre"
+}
+
+
+###
+POST http://localhost:8080/api/persons
+Content-Type: application/json
+
+{
+  "firstName": "Bob",
+  "lastName": "Dylan",
+  "birthdate": "2022-12-08",
+  "nationality": "French",
+  "gender": "Male"
+}
