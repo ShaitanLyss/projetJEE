@@ -10,28 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-//
-//import com.mysql.cj.jdbc.MysqlDataSource;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.core.userdetails.User;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-//import org.springframework.security.provisioning.JdbcUserDetailsManager;
-//import org.springframework.security.provisioning.UserDetailsManager;
-//import org.springframework.security.web.SecurityFilterChain;
-//
-//import javax.sql.DataSource;
-//
-//@Configuration
-//@EnableWebSecurity
+
 @Configuration
 @EnableWebSecurity
 public class AirportMadnessConfigSecurity {
@@ -70,10 +51,18 @@ public class AirportMadnessConfigSecurity {
                 .formLogin()
                 .and()
                 .rememberMe()
-                .key(env.get("SECURITY_KEY"))
-//                .and()
+                .key(env.get("SECURITY_KEY", "SET_IN_ENV"))
+
+                // Add CSRF token to http response
+                .and().csrf().disable()
+//        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+
+                // Oauth2
+ //                .and()
 //                .oauth2Login()
         ;
+
+
         return http.build();
     }
 //
