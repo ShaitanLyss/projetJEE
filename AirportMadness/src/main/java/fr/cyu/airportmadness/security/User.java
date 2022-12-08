@@ -1,6 +1,7 @@
 package fr.cyu.airportmadness.security;
 
 import fr.cyu.airportmadness.entity.person.Person;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.Hibernate;
 
 import jakarta.persistence.*;
@@ -19,12 +20,14 @@ public class User {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
+    @NotNull(message = "Entrer un login")
     private String username;
 
     @Column(name = "role", nullable = false)
     private String role;
 
     @Column(name = "password")
+    @NotNull(message = "Entrer votre mot de passe")
     private String password;
 
     @ManyToOne

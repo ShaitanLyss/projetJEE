@@ -5,6 +5,8 @@ import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.booking.Booking;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -19,6 +21,7 @@ public class Flight {
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "airline_id", nullable = false)
+    @NotNull(message = "Selectionner la ligne de vol")
     private Airline airline;
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)

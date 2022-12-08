@@ -3,6 +3,8 @@ package fr.cyu.airportmadness.entity.aircraft;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.flight.Flight;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Set;
 
 @Entity
@@ -14,10 +16,12 @@ public class Aircraft {
     private Long id;
 
     @Column(unique = true)
+    @NotNull(message = "Entrez son immatriculation")
     private String registration;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "owning_airline_company_id")
+    @NotNull(message = "l'aéroport d'appartenance doit être selectionné")
     private AirlineCompany owningAirlineCompany;
 
     @OneToMany(mappedBy = "aircraft", cascade = CascadeType.ALL, orphanRemoval = true)

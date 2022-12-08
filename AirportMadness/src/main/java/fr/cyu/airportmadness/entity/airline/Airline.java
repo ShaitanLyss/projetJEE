@@ -5,6 +5,8 @@ import fr.cyu.airportmadness.entity.airport.Airport;
 import fr.cyu.airportmadness.entity.flight.Flight;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Set;
 
 @Entity
@@ -17,18 +19,22 @@ public class Airline {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "departure_id")
+    @NotNull(message = "l'aéroport de départ doit être selectionné")
     private Airport departure;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "arrival_id")
+    @NotNull(message = "l'aéroport d'arrivée doit être selectionné")
     private Airport arrival;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "airline_company_id")
+    @NotNull(message = "la compagnie doit être selectionnée")
     private AirlineCompany airlineCompany;
 
     @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("time ASC")
+    @NotNull(message = "Cette ligne doit avoir au moins un vol")
     private final Set<Flight> flights = new java.util.LinkedHashSet<>();
 
     public Set<Flight> getFlights() {
