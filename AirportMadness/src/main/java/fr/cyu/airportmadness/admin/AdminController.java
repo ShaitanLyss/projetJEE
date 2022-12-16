@@ -1,6 +1,5 @@
 package fr.cyu.airportmadness.admin;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

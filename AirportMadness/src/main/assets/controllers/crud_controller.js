@@ -1,14 +1,30 @@
 import { Controller } from '@hotwired/stimulus';
 import $ from  'jquery';
-import 'datatables.net';
+
+// console.log($.fn.dataTable)
+var dt = require("datatables.net")
+var dt_extras = [
+
+    require("datatables.net-dt")(window, $),
+    // require("datatables.net-buttons-dt"),
+    // require("datatables.net-responsive"),
+    // require("datatables.net-responsive-bs"),
+    require("datatables.net-select-dt"),
+    // require("datatables.net-datetime")
+];
+
+// dt_extras.forEach(function(e) {e(window, $);});
+
 
 
 export default class extends Controller {
+    static targets = ["table"]
+
     b = false
     connect() {
         const e = this.element
         if (!this.b) {
-            $(e).DataTable({
+            const table = $(e).DataTable({
                 processing: true,
                 serverSide: false,
 
@@ -23,7 +39,14 @@ export default class extends Controller {
                     url : "/api/employees",
                     dataSrc: '_embedded.employees'
                 },
-                deferRender: true
+                // dom: '',
+                buttons: [{
+                    text: 'Reload'
+                }
+                ],
+                // deferRender: true,
+                select: true
+
             });
 
             this.b = true
