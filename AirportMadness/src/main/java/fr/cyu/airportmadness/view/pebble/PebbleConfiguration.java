@@ -1,6 +1,6 @@
-package fr.cyu.airportmadness.vie.pebble;
+package fr.cyu.airportmadness.view.pebble;
 
-import io.pebbletemplates.pebble.extension.Extension;
+//import io.pebbletemplates.pebble.extension.Extension;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

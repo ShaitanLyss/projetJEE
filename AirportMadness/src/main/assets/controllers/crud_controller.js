@@ -1,19 +1,14 @@
 import { Controller } from '@hotwired/stimulus';
-import $ from  'jquery';
-
-// console.log($.fn.dataTable)
-var dt = require("datatables.net")
-var dt_extras = [
-
-    require("datatables.net-dt")(window, $),
-    // require("datatables.net-buttons-dt"),
-    // require("datatables.net-responsive"),
-    // require("datatables.net-responsive-bs"),
-    require("datatables.net-select-dt"),
-    // require("datatables.net-datetime")
-];
-
-// dt_extras.forEach(function(e) {e(window, $);});
+import $ from 'jquery';
+import 'jszip';
+import 'datatables.net-dt';
+import 'datatables.net-buttons-dt';
+import 'datatables.net-responsive-dt';
+import 'datatables.net-select-dt';
+import 'datatables.net-dt/css/jquery.dataTables.css';
+import 'datatables.net-buttons-dt/css/buttons.dataTables.css';
+import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
+import 'datatables.net-select-dt/css/select.dataTables.css';
 
 
 
@@ -22,6 +17,8 @@ export default class extends Controller {
 
     b = false
     connect() {
+        console.log(this)
+
         const e = this.element
         if (!this.b) {
             const table = $(e).DataTable({
@@ -39,7 +36,7 @@ export default class extends Controller {
                     url : "/api/employees",
                     dataSrc: '_embedded.employees'
                 },
-                // dom: '',
+                dom: 'Blfrtip',
                 buttons: [{
                     text: 'Reload'
                 }

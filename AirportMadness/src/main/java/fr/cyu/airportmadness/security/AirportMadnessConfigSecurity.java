@@ -46,6 +46,7 @@ public class AirportMadnessConfigSecurity {
                 .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/", "/saveUser", "/save-user", "/error").permitAll()
                 .requestMatchers("/test/**").permitAll()
+//                .requestMatchers("/assets/**").permitAll()
                 .requestMatchers("/build/**", "/error/**").permitAll()
                 .and()
                 .formLogin()

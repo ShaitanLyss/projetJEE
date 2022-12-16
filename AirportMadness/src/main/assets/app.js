@@ -6,7 +6,10 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
+// require('datatables.net-responsive')(window);
+// require('datatables.net-buttons')(window);
+
 // import './styles/app.css';
 
 // start the Stimulus application
-import './bootstrap';
+import './bootstrap.js';

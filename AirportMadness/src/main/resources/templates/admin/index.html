@@ -4,13 +4,18 @@
         <meta charset="utf-8"/> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/> 
         <title>New page</title>         
-        <script src="https://cdn.tailwindcss.com/"></script>
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
-        <script src="build/app.js" defer></script>
-        <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" rel="stylesheet">
+<!--        <script src="https://cdn.tailwindcss.com/"></script>-->
+<!--        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>-->
+<!--        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>-->
+<!--        <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>-->
+        <!--/*@thymesVar id="encore" type="fr.cyu.airportmadness.view.thymeleaf.EncoreHelpers"*/-->
+<!--        <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>-->
+<!--        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>-->
+<!--        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>-->
+        <script th:each="url : ${encore.entryScriptUrls()}" th:src="${url}" defer></script>
+        <link th:each="url :${encore.entryLinkUrls()}" th:href="${url}" rel="stylesheet">
+<!--        <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">-->
+<!--        <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" rel="stylesheet">-->
 <!--        <script src="cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"  defer></script>-->
     </head>     
     <body>
