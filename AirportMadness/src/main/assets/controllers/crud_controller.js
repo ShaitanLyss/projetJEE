@@ -27,7 +27,6 @@ export default class extends Controller {
 
             for (const e of this.entitySelectionTargets) {
                 links.forEach(([k, v]) => {
-                    console.log(v)
                     $(e).append($(
                         "<li><button class='dt-button' data-action='click->crud#selectEntity' value='" + v.href + "' >" + capitalize(k) + "</button></li>"
                     ))
@@ -88,7 +87,7 @@ export default class extends Controller {
                                 }
                                 return e
                             })
-                            console.log(res)
+
                             return res
                         }
                     },
