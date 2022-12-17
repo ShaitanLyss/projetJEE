@@ -42,6 +42,7 @@ public class AirportMadnessConfigSecurity {
         Dotenv env  = Dotenv.load();
         http.authorizeHttpRequests()
                 .requestMatchers("/admin").hasRole("ADMIN")
+                .requestMatchers("/airline").permitAll()
                 .requestMatchers("/user").hasRole("USER")
                 .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/", "/saveUser", "/save-user", "/error").permitAll()

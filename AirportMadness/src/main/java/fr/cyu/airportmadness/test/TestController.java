@@ -65,6 +65,7 @@ public class TestController {
         return "index";
     }
 
+
     @GetMapping("/test/db")
     @ResponseBody
     public String testDb() {
