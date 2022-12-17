@@ -2,10 +2,13 @@
 module.exports = {
   content: [
       "./src/main/resources/templates/**/*.{html,js}",
+    './node_modules/tw-elements/dist/js/**/*.js'
       // "./src/main/assets/styles"
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('tw-elements/dist/plugin')
+  ],
 }

@@ -19,21 +19,21 @@ export default class extends Controller {
 
     select2TargetConnected(element) {
 
-        $(element).select2(
-        //     {
-        //     ajax: {
-        //         url : 'api/airports',
-        //         dataType: 'json',
-        //         processResults: function (data){
-        //             console.log("coucou je suis un select 1")
-        //             const airports = data["_embedded"]['airports']
-        //             console.log(airports)
-        //             return {
-        //                 results: airports
-        //             };
-        //         }
-        //     }
-        // }
-        )
+        // $(element).select2(
+        // //     {
+        // //     ajax: {
+        // //         url : 'api/airports',
+        // //         dataType: 'json',
+        // //         processResults: function (data){
+        // //             console.log("coucou je suis un select 1")
+        // //             const airports = data["_embedded"]['airports']
+        // //             console.log(airports)
+        // //             return {
+        // //                 results: airports
+        // //             };
+        // //         }
+        // //     }
+        // // }
+        // )
     }
 }
