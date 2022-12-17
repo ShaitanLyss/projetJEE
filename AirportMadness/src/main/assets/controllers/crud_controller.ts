@@ -91,7 +91,6 @@ export default class CrudController extends Controller {
                             // merge all groups of entities into one array (needed in case of inheritance)
                             let res = Object.entries(data._embedded).reduce(
                                 (accu, [k, v]) => {
-                                    console.log(v)
                                     return accu.concat(v)
                                 },
                                 []
@@ -112,6 +111,17 @@ export default class CrudController extends Controller {
                     buttons: [
                         {
                             text: 'Retour',
+                            action: (e, dt, node, config) => {
+                                if (this.invoker.canGoBack())
+                                    this.invoker.goBack()
+                            }
+                        },
+                        {
+                            text: 'Avancer',
+                            action: (e, dt, node, config) => {
+                                if (this.invoker.canGoForth())
+                                    this.invoker.goForth()
+                            }
                         },
                         {
                             text: 'Supprimer',
