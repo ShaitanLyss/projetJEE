@@ -79,7 +79,13 @@ export default class extends Controller {
                     ajax: {
                         url: url,
                         dataSrc: function (data) {
-                            let res = data._embedded[entitiesName]
+                            let res = Object.entries(data._embedded).reduce(
+                                (accu, [k, v]) => {
+                                    console.log(v)
+                                    return accu.concat(v)
+                                },
+                                []
+                            )
 
                             res = res.map((e) => {
                                 for (const linkName of linkNames) {
