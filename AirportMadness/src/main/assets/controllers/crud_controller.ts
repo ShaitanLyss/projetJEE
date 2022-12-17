@@ -11,15 +11,18 @@ import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
 import 'datatables.net-select-dt/css/select.dataTables.css';
 
 import capitalize from 'underscore.string/capitalize';
+import UpdateDatatablesCommand from "../classes/command/UpdateDatatablesCommand";
+import Invoker from "../classes/command/invoker";
 
 
-export default class extends Controller {
+export default class CrudController extends Controller {
     static targets = ["datatable", "entitySelection"]
 
-    initialize() {
-        super.initialize();
+    declare readonly entitySelectionTargets
+    declare readonly datatableTargets
 
-    }
+    invoker = new Invoker()
+
 
     connect() {
         $.get("/api/", null, response => {
@@ -28,7 +31,7 @@ export default class extends Controller {
             for (const e of this.entitySelectionTargets) {
                 links.forEach(([k, v]) => {
                     $(e).append($(
-                        "<li><button class='dt-button' data-action='click->crud#selectEntity' value='" + v.href + "' >" + capitalize(k) + "</button></li>"
+                        "<li><button class='dt-button' data-action='click->crud#selectEntity' value='" + v["href"] + "' >" + capitalize(k) + "</button></li>"
                     ))
                 })
             }
@@ -38,36 +41,42 @@ export default class extends Controller {
 
     selectEntity(event) {
         const url = event.currentTarget.value
+        const re = new RegExp('.*/([A-Za-z]+)$')
+        const entitiesName = url.match(re)[1]
 
+        this.invoker.storeCommand(new UpdateDatatablesCommand(url, "/api/profile/" + entitiesName, this))
+    }
+
+    updateDatatables(url, profile) {
         for (const datatableTarget of this.datatableTargets) {
             if ($.fn.DataTable.isDataTable(datatableTarget)) {
                 $(datatableTarget).DataTable().destroy();
                 $(datatableTarget).empty()
             }
 
-            this.initializeDatatable(datatableTarget, url)
+            this.initializeDatatable(datatableTarget, url, profile)
 
         }
     }
 
-
-    // datatableTargetConnected(target) {
+// datatableTargetConnected(target) {
     //     console.log(this.datatableTarget)
     //     this.initializeDatatable(target);
     // }
+    selectLinkedEntity(e) {
+        const btn = $(e.currentTarget)
+        this.updateDatatables(btn.val(), btn.data().profile)
+    }
 
-    initializeDatatable(target, url) {
-        const re = new RegExp('.*/([A-Za-z]+)$')
-        const entitiesName = url.match(re)[1]
-
-        $.get("/api/profile/" + entitiesName, null, (response) => {
+    initializeDatatable(target, url, profile) {
+        $.get(profile, null, (response) => {
             const entityDescription = response.alps.descriptor[0].descriptor
             const columns = entityDescription.map(e => {
                 return {data: e.name, title: capitalize(e.name)}
             })
 
-            const linkNames = entityDescription.filter(e => e.type === 'SAFE').map(e => {
-                return e.name
+            const linkNamesAndProfile = entityDescription.filter(e => e.type === 'SAFE').map(e => {
+                return [e.name, e.rt]
             })
 
             if (columns.length) {
@@ -79,6 +88,7 @@ export default class extends Controller {
                     ajax: {
                         url: url,
                         dataSrc: function (data) {
+                            // merge all groups of entities into one array (needed in case of inheritance)
                             let res = Object.entries(data._embedded).reduce(
                                 (accu, [k, v]) => {
                                     console.log(v)
@@ -87,9 +97,10 @@ export default class extends Controller {
                                 []
                             )
 
+                            // add linked entities columns
                             res = res.map((e) => {
-                                for (const linkName of linkNames) {
-                                    e[linkName] = `<button class="dt-button" value="${e._links[linkName].href}">Voir</button>`
+                                for (const [linkName, profile] of linkNamesAndProfile) {
+                                    e[linkName] = `<button class="dt-button" data-profile="${profile}" data-action="click->crud#selectLinkedEntity" value="${e._links[linkName].href}">Voir</button>`
                                 }
                                 return e
                             })
@@ -99,6 +110,9 @@ export default class extends Controller {
                     },
                     dom: 'B<"clear">lfrtip',
                     buttons: [
+                        {
+                            text: 'Retour',
+                        },
                         {
                             text: 'Supprimer',
                             action: (e, dt, node, config) =>
