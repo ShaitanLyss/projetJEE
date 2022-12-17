@@ -64,8 +64,9 @@ export default class CrudController extends Controller {
     //     this.initializeDatatable(target);
     // }
     selectLinkedEntity(e) {
+
         const btn = $(e.currentTarget)
-        this.updateDatatables(btn.val(), btn.data().profile)
+        this.invoker.storeCommand(new UpdateDatatablesCommand(btn.val(), btn.data().profile,this))
     }
 
     initializeDatatable(target, url, profile) {
