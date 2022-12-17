@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+import {Controller} from '@hotwired/stimulus';
 import $ from 'jquery';
 import 'jszip';
 import 'datatables.net-dt';
@@ -10,44 +10,110 @@ import 'datatables.net-buttons-dt/css/buttons.dataTables.css';
 import 'datatables.net-responsive-dt/css/responsive.dataTables.css';
 import 'datatables.net-select-dt/css/select.dataTables.css';
 
+import capitalize from 'underscore.string/capitalize';
 
 
 export default class extends Controller {
-    static targets = ["table"]
+    static targets = ["datatable", "entitySelection"]
 
-    b = false
+    initialize() {
+        super.initialize();
+
+    }
+
     connect() {
-        console.log(this)
+        $.get("/api/", null, response => {
+            const links = Object.entries(response['_links']).filter(([k, v]) => k !== "profile")
 
-        const e = this.element
-        if (!this.b) {
-            const table = $(e).DataTable({
-                processing: true,
-                serverSide: false,
+            for (const e of this.entitySelectionTargets) {
+                links.forEach(([k, v]) => {
+                    console.log(v)
+                    $(e).append($(
+                        "<li><button class='dt-button' data-action='click->crud#selectEntity' value='" + v.href + "' >" + capitalize(k) + "</button></li>"
+                    ))
+                })
+            }
+        })
+    }
 
-                columns: [
-                    {data: "firstName", title: "Prénom"},
-                    {data:  "lastName", title: "Nom de famille"},
-                    {data: "birthdate", title: "Naissance"},
-                    {data: "gender", title: "Sexe" },
-                    {data: "nationality", title: "Nationalité"}
-                ],
-                ajax: {
-                    url : "/api/employees",
-                    dataSrc: '_embedded.employees'
-                },
-                dom: 'Blfrtip',
-                buttons: [{
-                    text: 'Reload'
-                }
-                ],
-                // deferRender: true,
-                select: true
 
-            });
+    selectEntity(event) {
+        const url = event.currentTarget.value
 
-            this.b = true
+        for (const datatableTarget of this.datatableTargets) {
+            if ($.fn.DataTable.isDataTable(datatableTarget)) {
+                $(datatableTarget).DataTable().destroy();
+                $(datatableTarget).empty()
+            }
+
+            this.initializeDatatable(datatableTarget, url)
+
         }
+    }
+
+
+    // datatableTargetConnected(target) {
+    //     console.log(this.datatableTarget)
+    //     this.initializeDatatable(target);
+    // }
+
+    initializeDatatable(target, url) {
+        const re = new RegExp('.*/([A-Za-z]+)$')
+        const entitiesName = url.match(re)[1]
+
+        $.get("/api/profile/" + entitiesName, null, (response) => {
+            const entityDescription = response.alps.descriptor[0].descriptor
+            const columns = entityDescription.map(e => {
+                return {data: e.name, title: capitalize(e.name)}
+            })
+
+            const linkNames = entityDescription.filter(e => e.type === 'SAFE').map(e => {
+                return e.name
+            })
+
+            if (columns.length) {
+                $(target).DataTable({
+                    processing: true,
+                    serverSide: false,
+
+                    columns: columns,
+                    ajax: {
+                        url: url,
+                        dataSrc: function (data) {
+                            let res = data._embedded[entitiesName]
+
+                            res = res.map((e) => {
+                                for (const linkName of linkNames) {
+                                    e[linkName] = `<button class="dt-button" value="${e._links[linkName].href}">Voir</button>`
+                                }
+                                return e
+                            })
+                            console.log(res)
+                            return res
+                        }
+                    },
+                    dom: 'B<"clear">lfrtip',
+                    buttons: [
+                        {
+                            text: 'Supprimer',
+                            action: (e, dt, node, config) =>
+                                $.ajax({
+                                    url: '/api',
+                                    type: 'GET',
+                                    success: function (result) {
+                                        console.log(result)
+                                        // Do something with the result
+                                    }
+                                })
+                        }
+                    ],
+                    deferRender: true,
+                    select: true
+
+                });
+            }
+        })
+
 
     }
 }

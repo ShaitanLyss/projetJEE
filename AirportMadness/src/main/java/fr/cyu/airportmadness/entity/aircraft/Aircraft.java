@@ -5,6 +5,8 @@ import fr.cyu.airportmadness.entity.flight.Flight;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 @Entity

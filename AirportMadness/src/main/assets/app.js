@@ -9,7 +9,7 @@
 // require('datatables.net-responsive')(window);
 // require('datatables.net-buttons')(window);
 
-// import './styles/app.css';
+import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap.js';
