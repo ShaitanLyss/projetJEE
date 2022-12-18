@@ -41,35 +41,38 @@
             </button>
             <div class="collapse navbar-collapse " id="navbarNavDropdown-3">
                 <ul class="navbar-nav ">
-                        <!--                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link pb-lg-4 pe-lg-3 ps-lg-3 pt-lg-4 text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                    <li><a class="dropdown-item" href="#">Listing 1: Grid Listing</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="#">Listing 2: Vertical Listing</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="#">Listing 3: Full width + Map on the side</a>
-                                                    </li>
-                                                    <li>
-                                                        <hr class="dropdown-divider"/>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="#">Details 1: Reponsive Style 1</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="#">Details 2: Reponsive Style 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <hr class="dropdown-divider"/>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="#">Sample Page</a>
-                                                    </li>
-                                                </ul>
-                                            </li>-->
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark" th:href="${#mvc.url('welcome-page').build()}" href="#">
+                    <!--                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link pb-lg-4 pe-lg-3 ps-lg-3 pt-lg-4 text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item" href="#">Listing 1: Grid Listing</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Listing 2: Vertical Listing</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Listing 3: Full width + Map on the side</a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider"/>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Details 1: Reponsive Style 1</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Details 2: Reponsive Style 2</a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider"/>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Sample Page</a>
+                                                </li>
+                                            </ul>
+                                        </li>-->
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                                            th:href="${#mvc.url('welcome-page').build()}" href="#">
                         Voyager
                     </a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark" th:href="${#mvc.url('airline-dashboard').build()}" href="#">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                                            th:href="${#mvc.url('airline-dashboard').build()}" href="#">
                         Compagnie aérienne
                     </a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark" th:href="${#mvc.url('admin-dashboard').build()}" href="#">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                                            th:href="${#mvc.url('admin-dashboard').build()}" href="#">
                         Administrateur
                     </a></li>
                 </ul>
@@ -89,8 +92,24 @@
         </div>
     </nav>
 </header>
-<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
-<main data-controller="airline" class="container tw-mt-28">
+<div class="container fixed-top tw-pt-4">
+    <div th:if="${message}" th:class="${'mx-auto toast alert show ' + alertClass}" class="toast" role="alert" aria-live="assertive"
+         aria-atomic="true">
+        <div class="toast-header">
+            <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <rect width="100%" height="100%" fill="#ff7a00"></rect>
+            </svg>
+            <strong class="me-auto">AIR Nomads</strong>
+            <!--        <small>11 mins ago</small>-->
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" th:text="${message}">
+            Success
+        </div>
+    </div>
+</div>
+<main data-controller="airline" class="container tw-mt-32">
     <div class="row">
         <!-- Création de ligne aérienne -->
         <div class="col-xl col-12 col-sm-6 text-center mb-4">

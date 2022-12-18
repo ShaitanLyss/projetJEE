@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import 'select2'
+
 
 /*
  * This is an example Stimulus controller!
@@ -14,11 +14,11 @@ export default class extends Controller {
     static targets = ["select2"]
 
     connect() {
-
+        // this.select2Targets.forEach((e) => $(e).select2())
     }
 
-    select2TargetConnected(element) {
 
+    select2TargetConnected(element) {
         // $(element).select2(
         // //     {
         // //     ajax: {

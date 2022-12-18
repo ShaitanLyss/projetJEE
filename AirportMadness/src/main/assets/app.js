@@ -13,7 +13,9 @@ import './styles/app.css';
 // import  'tw-elements';
 import './styles/global.scss'
 
-// import 'bootstrap'
+import 'select2'
+import 'select2/dist/css/select2.css'
+import 'bootstrap'
 
 // start the Stimulus application
 import './bootstrap.js';
