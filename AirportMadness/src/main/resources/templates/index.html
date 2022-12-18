@@ -4,7 +4,8 @@
         <meta charset="utf-8"/> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/> 
         <title data-pgc-field="page_title">Voyages, réservations | Air Nomads</title>         
-        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css"/> 
+        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css"/>
+        <script src="build/pgia.js" defer></script>
         <script>/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute('data-pg-ia-disabled')) { window.pgia_small_mq=typeof pgia_small_mq=='string'?pgia_small_mq:'(max-width:767px)';window.pgia_large_mq=typeof pgia_large_mq=='string'?pgia_large_mq:'(min-width:768px)';var style = document.createElement('style');var pgcss='html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}';if(document.documentElement.hasAttribute('data-pg-id') && document.documentElement.hasAttribute('data-pg-mobile')) {pgia_small_mq='(min-width:0)';pgia_large_mq='(min-width:99999px)'} pgcss+='@media ' + pgia_small_mq + '{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}';pgcss+='@media ' + pgia_large_mq + '{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}';style.innerHTML=pgcss;document.querySelector('head').appendChild(style);}}catch(e){console&&console.log(e);}})()</script>         
         <meta name="description" content="Pinegrow Web Editor - Directory TailwindCSS Template" data-pgc-field="page_descr"/> 
     </head>     
@@ -33,13 +34,16 @@
                             </div>                             
                         </div>                         
                     </div>                     
-                    <div class="flex flex-col ml-auto lg:flex-row"> <a href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="inline-block mr-2"> 
+                    <div class="flex flex-col ml-auto lg:flex-row"> <a th:href="${user != null ? '/logout' : '/login'}" href="#" class="hover:text-gray-700 px-0 py-2 text-gray-900 lg:px-4 lg:py-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="inline-block mr-2">
                                 <g> 
                                     <path fill="none" d="M0 0h24v24H0z"></path>                                     
                                     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-4.987-3.744A7.966 7.966 0 0 0 12 20c1.97 0 3.773-.712 5.167-1.892A6.979 6.979 0 0 0 12.16 16a6.981 6.981 0 0 0-5.147 2.256zM5.616 16.82A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634 8 8 0 1 0-12.906.187zM12 13a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>                                     
                                 </g>                                 
-                    </svg><span th:if="${ user != null}"><span th:text="${user.username}">login /Sign up</span></span> </a>
-                    </div>                     
+                    </svg>
+                        <span th:if="${ user}"><span th:text="${user.username}"></span></span>
+                        <span th:unless="${ user }" > Se connecter </span>
+                    </a>
+                    </div>
                 </div>                 
             </nav>             
         </header>         
@@ -788,6 +792,5 @@
                 </div>                 
             </div>             
         </footer>         
-        <script src="pgia/lib/pgia.js"></script>         
-    </body>     
+    </body>
 </html>

@@ -10,7 +10,7 @@
     <link th:each="url :${encore.entryLinkUrls()}" th:href="${url}" rel="stylesheet">
 </head>
 <body>
-<header style="background-color: rgba(255, 255, 255, 0.6);" class="fixed-top">
+<header th:replace="~{fragments/_header}" style="background-color: rgba(255, 255, 255, 0.6);" class="fixed-top">
     <nav class="border-bottom navbar navbar-expand-lg navbar-light pb-lg-0 pt-lg-0">
         <div class="container"><a class="fw-bold navbar-brand" href=".">AIR Nomads</a>
             <ul class="align-items-lg-center flex-row ms-auto me-2 me-lg-0 navbar-nav order-lg-2">

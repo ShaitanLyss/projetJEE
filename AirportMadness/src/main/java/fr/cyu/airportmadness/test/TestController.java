@@ -49,7 +49,7 @@ public class TestController {
     private EntityManager em;
 
     @Autowired
-    private UserRepository  userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -79,10 +79,10 @@ public class TestController {
     @Transactional
     public String loadTestSample(HttpServletResponse response) {
         Faker faker = new Faker();
-        var name  = faker.name();
+        var name = faker.name();
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
-        
+
         List<Object> toPersist = new ArrayList<>(10);
 
         // User
@@ -90,7 +90,14 @@ public class TestController {
             userRepository.save(new User("user", passwordEncoder.encode("1234"), "USER"));
 
         if (userRepository.findByUsername("admin") == null)
-            userRepository.save(new User("admin", passwordEncoder.encode("1234"),  "ADMIN"));
+            userRepository.save(new User("admin", passwordEncoder.encode("1234"), "ADMIN"));
+
+        User airlineUser = userRepository.findByUsername("airline");
+
+        if (airlineUser == null)
+            airlineUser = userRepository.save(new User("airline", passwordEncoder.encode("1234"), "AIRLINE"));
+
+        toPersist.add(airlineUser);
 
 
         // Aircrafts
@@ -104,7 +111,6 @@ public class TestController {
 
         toPersist.add(ac1);
         toPersist.add(ac2);
-        
 
 
         // Country
@@ -154,17 +160,17 @@ public class TestController {
         // Flights
         Flight flight1 = new Flight()
                 .setAircraft(ac1)
-                .setTime(LocalDateTime.of(2022,11,28,17,30))
+                .setTime(LocalDateTime.of(2022, 11, 28, 17, 30))
                 .setAirline(parisRoissyNsimalen);
 
         Flight flight2 = new Flight()
                 .setAircraft(ac1)
-                .setTime(LocalDateTime.of(2022,11,30,17,30))
+                .setTime(LocalDateTime.of(2022, 11, 30, 17, 30))
                 .setAirline(parisRoissyNsimalen);
 
         Flight flight3 = new Flight()
                 .setAircraft(ac2)
-                .setTime(LocalDateTime.of(2022,11,30,10,0))
+                .setTime(LocalDateTime.of(2022, 11, 30, 10, 0))
                 .setAirline(nsimalenParisRoissy);
 
         toPersist.addAll(Arrays.asList(flight1, flight2, flight3));
@@ -174,16 +180,16 @@ public class TestController {
                 "Sylvie", "Delprat", LocalDate.of(1980, 7, 3),
                 Gender.Female, "française", "FR12456987", PaperType.IdentityCard,
                 "0611223344", "sylvie@sylvie.fr"
-                );
+        );
 
         toPersist.add(sylvie);
 
         // Passenger
         Passenger florian = new Passenger(
-                "Florian", "Delprat", LocalDate.of(2000,9,30),
+                "Florian", "Delprat", LocalDate.of(2000, 9, 30),
                 Gender.Male, "française", "FR987654321", PaperType.Passport);
         Passenger marine = new Passenger(
-                "Marine", "Delprat", LocalDate.of(2004,8,17),
+                "Marine", "Delprat", LocalDate.of(2004, 8, 17),
                 Gender.Female, "française", "FR987654321", PaperType.ResidenceDocument);
 
         toPersist.add(florian);
@@ -205,13 +211,14 @@ public class TestController {
                 .addAircrafts(ac1, ac2)
                 .addAirlines(nsimalenParisRoissy, parisRoissyNsimalen)
                 .setName("Air Cameroun")
-                ;
+                .setUser(airlineUser)
+        ;
 //                .addEmployees(employee2);
 
         toPersist.add(comp);
 
         // Employees
-        for (int  i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             Employee employee1 = new Employee();
             employee1
                     .setAirlineCompany(comp)
@@ -244,14 +251,13 @@ public class TestController {
     }
 
 
-
     @GetMapping("/test/user-status")
     @ResponseBody
-    public String userStatus(Authentication  authentication) {
+    public String userStatus(Authentication authentication) {
         String res = "";
 
-        if (authentication !=  null) {
-            MyUserDetails  userDetails = (MyUserDetails) authentication.getPrincipal();
+        if (authentication != null) {
+            MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
             res += "Nom : " + userDetails.getUsername() + "<br>";
             res += "Rôles : " + userDetails.getAuthorities();
         } else {

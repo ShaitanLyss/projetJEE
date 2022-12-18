@@ -22,15 +22,14 @@ public class CustomerController {
     }
     @GetMapping(name = "welcome-page", value = "/")
     public String welcomePage(Authentication authentication, Model model) {
-        System.out.println(authentication);
+
         if(authentication != null){
             MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
             model.addAttribute("user", userDetails);
-
         }
-        else {
 
-        }
+
+
         return "index";
     }
 

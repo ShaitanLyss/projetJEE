@@ -1,5 +1,6 @@
 package fr.cyu.airportmadness.security;
 
+import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.person.Person;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.Hibernate;
@@ -33,6 +34,18 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "airline_company_id")
+    private AirlineCompany airlineCompany;
+
+    public AirlineCompany getAirlineCompany() {
+        return airlineCompany;
+    }
+
+    public void setAirlineCompany(AirlineCompany airlineCompany) {
+        this.airlineCompany = airlineCompany;
+    }
 
     public User()  {
     }

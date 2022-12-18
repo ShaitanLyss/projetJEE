@@ -11,9 +11,6 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
-    .setOutputPath("src/main/resources/static/build")
-    .setPublicPath('/build')
-Encore
     // directory where compiled assets will be stored
     .setOutputPath('src/main/resources/static/build/')
     // public path used by the web server to access the output path
@@ -28,6 +25,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './src/main/assets/app.js')
+    .addEntry('pgia', './src/main/resources/templates/pgia/lib/pgia.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./src/main/assets/controllers.json')

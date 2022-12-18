@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header style="background-color: rgba(255, 255, 255, 0.6);" class="fixed-top">
+  <nav class="border-bottom navbar navbar-expand-lg navbar-light pb-lg-0 pt-lg-0">
+    <div class="container"><a class="fw-bold navbar-brand" href=".">AIR Nomads</a>
+      <ul class="align-items-lg-center flex-row ms-auto me-2 me-lg-0 navbar-nav order-lg-2">
+        <li class="d-none d-sm-block nav-item"><a class="btn btn-dark ps-4 pe-4 rounded-pill" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em"
+               height="1.25em" class="me-2">
+            <g>
+              <path fill="none" d="M0 0h24v24H0z"/>
+              <path d="M11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4zm1 11C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
+            </g>
+          </svg>
+          <span class="align-middle">Add Lisitng</span></a>
+        </li>
+        <li class="ms-2 nav-item"><a class="btn btn-dark  p-2 rounded-pill" href="#" aria-label="Search button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em"
+               height="1.25em" class="d-block">
+            <g>
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"></path>
+            </g>
+          </svg>
+        </a>
+        </li>
+      </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown-3"
+              aria-controls="navbarNavDropdown-3" aria-expanded="false" aria-label="Toggle navigation"><span
+              class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarNavDropdown-3">
+        <ul class="navbar-nav ">
+          <!--                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link pb-lg-4 pe-lg-3 ps-lg-3 pt-lg-4 text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <li><a class="dropdown-item" href="#">Listing 1: Grid Listing</a>
+                                      </li>
+                                      <li><a class="dropdown-item" href="#">Listing 2: Vertical Listing</a>
+                                      </li>
+                                      <li><a class="dropdown-item" href="#">Listing 3: Full width + Map on the side</a>
+                                      </li>
+                                      <li>
+                                          <hr class="dropdown-divider"/>
+                                      </li>
+                                      <li><a class="dropdown-item" href="#">Details 1: Reponsive Style 1</a>
+                                      </li>
+                                      <li><a class="dropdown-item" href="#">Details 2: Reponsive Style 2</a>
+                                      </li>
+                                      <li>
+                                          <hr class="dropdown-divider"/>
+                                      </li>
+                                      <li><a class="dropdown-item" href="#">Sample Page</a>
+                                      </li>
+                                  </ul>
+                              </li>-->
+          <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                                  th:href="${#mvc.url('welcome-page').build()}" href="#">
+            Voyager
+          </a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                                  th:href="${#mvc.url('airline-dashboard').build()}" href="#">
+            Compagnie aérienne
+          </a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                                  th:href="${#mvc.url('admin-dashboard').build()}" href="#">
+            Administrateur
+          </a></li>
+        </ul>
+        <ul class="align-items-lg-center ms-auto navbar-nav">
+          <!--/*@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"*/-->
+          <li th:if="${#authentication.principal}" class="nav-item px-lg-3 py-lg-4 me-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em"
+                 height="1.25em" class="me-2">
+              <g>
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-4.987-3.744A7.966 7.966 0 0 0 12 20c1.97 0 3.773-.712 5.167-1.892A6.979 6.979 0 0 0 12.16 16a6.981 6.981 0 0 0-5.147 2.256zM5.616 16.82A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634 8 8 0 1 0-12.906.187zM12 13a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+              </g>
+            </svg>
+            <a th:text="${#authentication.principal.username}" th:href="@{/logout}" href="#">
+              Jean Paul
+            </a>
+          </li>
+          <li th:unless="${#authentication.principal}" class="nav-item"><a
+                  class="nav-link px-lg-3 py-lg-4 text-dark" th:href="@{/login}" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em"
+                 height="1.25em" class="me-2">
+              <g>
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-4.987-3.744A7.966 7.966 0 0 0 12 20c1.97 0 3.773-.712 5.167-1.892A6.979 6.979 0 0 0 12.16 16a6.981 6.981 0 0 0-5.147 2.256zM5.616 16.82A8.975 8.975 0 0 1 12.16 14a8.972 8.972 0 0 1 6.362 2.634 8 8 0 1 0-12.906.187zM12 13a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+              </g>
+            </svg>
+            Login/Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+</body>
+</html>

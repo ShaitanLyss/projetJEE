@@ -4,8 +4,11 @@ import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.person.employee.Employee;
 
+import fr.cyu.airportmadness.security.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -27,12 +30,26 @@ public class AirlineCompany {
     private final Set<Employee> employees = new LinkedHashSet<>();
 
     @Column(name = "name")
-    @NotNull(message = "Votre compagnie doit avoir un nom")
+    @NotBlank(message = "Votre compagnie doit avoir un nom")
     private String name;
 
     @OneToMany(mappedBy = "owningAirlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
-    @NotNull(message = "Au moins un avion doit être selectionné")
+    @NotNull
     private final Set<Aircraft> aircrafts = new LinkedHashSet<>();
+
+    @OneToOne(mappedBy = "airlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public AirlineCompany setUser(User user) {
+        this.user = user;
+        user.setAirlineCompany(this);
+        this.user.setRole("AIRLINE");
+        return this;
+    }
 
     public Set<Airline> getAirlines() {
         return airlines;
