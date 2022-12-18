@@ -5,9 +5,11 @@ module.exports = {
     './node_modules/tw-elements/dist/js/**/*.js'
       // "./src/main/assets/styles"
   ],
+  prefix: 'tw-',
   theme: {
     extend: {},
   },
+  important: true,
   plugins: [
     require('tw-elements/dist/plugin')
   ],

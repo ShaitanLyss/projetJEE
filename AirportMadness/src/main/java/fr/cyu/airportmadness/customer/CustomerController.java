@@ -20,7 +20,7 @@ public class CustomerController {
         );
         return "customer/booking";
     }
-    @GetMapping("/")
+    @GetMapping(name = "welcome-page", value = "/")
     public String welcomePage(Authentication authentication, Model model) {
         System.out.println(authentication);
         if(authentication != null){

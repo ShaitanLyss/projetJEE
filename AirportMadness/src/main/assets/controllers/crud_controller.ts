@@ -31,7 +31,7 @@ export default class CrudController extends Controller {
             for (const e of this.entitySelectionTargets) {
                 links.forEach(([k, v]) => {
                     $(e).append($(
-                        "<li><button class='dt-button' data-action='click->crud#selectEntity' value='" + v["href"] + "' >" + capitalize(k) + "</button></li>"
+                        "<li class='nav-item col-auto'><button class='dt-button' data-action='click->crud#selectEntity' value='" + v["href"] + "' >" + capitalize(k) + "</button></li>"
                     ))
                 })
             }

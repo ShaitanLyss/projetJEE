@@ -10,7 +10,10 @@
 // require('datatables.net-buttons')(window);
 
 import './styles/app.css';
-import  'tw-elements';
+// import  'tw-elements';
+import './styles/global.scss'
+
+// import 'bootstrap'
 
 // start the Stimulus application
 import './bootstrap.js';
