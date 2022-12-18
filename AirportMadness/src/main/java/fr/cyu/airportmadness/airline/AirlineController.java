@@ -6,13 +6,19 @@ import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompanyRepository;
 import fr.cyu.airportmadness.entity.flight.Flight;
 import fr.cyu.airportmadness.entity.flight.FlightRepository;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Arrays;
+import java.util.Objects;
 
 @Controller
 public class AirlineController {
@@ -41,8 +47,13 @@ public class AirlineController {
         AirlineCompany airlineCompany = airlineCompanyRepository.findAll().iterator().next();
         aircraft.setOwningAirlineCompany(airlineCompany);
 
-        aircraftRepository.save(aircraft);
-        redirectAttributes.addFlashAttribute("message", "Success");
+        String msg = "Succès !";
+        try {
+            aircraftRepository.save(aircraft);
+        } catch (DataIntegrityViolationException e) {
+            msg = "Échec. " + Objects.requireNonNull(e.getRootCause()).getLocalizedMessage();
+        }
+        redirectAttributes.addFlashAttribute("message", msg);
 
 
         return "redirect:/airline";
