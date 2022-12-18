@@ -129,7 +129,7 @@
                         <select id="flight-select-airline" class="form-select" data-airline-target="select2">
                             <!--/*@thymesVar id="airline" type="fr.cyu.airportmadness.entity.airline.Airline"*/-->
                             <option th:each="airline : ${airlineCompany.airlines}" th:value="${airline.getId()}"
-                                    th:text="${airline.getDeparture().getName() + ' - ' + airline.getArrival().getName()}"></option>
+                                    th:text="${#strings.capitalizeWords(airline.getDeparture().getName()) + ' - ' + #strings.capitalizeWords(airline.getArrival().getName())}"></option>
                         </select>
                         <label for="flight-select-airline">
                             Ligne aérienne
