@@ -16,6 +16,8 @@ import './styles/global.scss'
 import 'select2'
 import 'select2/dist/css/select2.css'
 import 'bootstrap'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all'
 
 // start the Stimulus application
 import './bootstrap.js';
