@@ -1,5 +1,6 @@
 package fr.cyu.airportmadness.entity.country;
 
+import fr.cyu.airportmadness.entity.airport.Airport;
 import fr.cyu.airportmadness.entity.city.City;
 
 import jakarta.persistence.*;
@@ -20,6 +21,9 @@ public class Country {
     @NotBlank
     private String name;
 
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Airport> airports = new LinkedHashSet<>();
+
     public Country() {
     }
 
@@ -29,6 +33,14 @@ public class Country {
 
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private final Set<City> cities = new LinkedHashSet<>();
+
+    public Set<Airport> getAirports() {
+        return airports;
+    }
+
+    public void setAirports(Set<Airport> airports) {
+        this.airports = airports;
+    }
 
     public Set<City> getCities() {
         return cities;
@@ -53,4 +65,10 @@ public class Country {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Country{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

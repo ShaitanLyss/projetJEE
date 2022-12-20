@@ -113,6 +113,36 @@
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+            <version>6.1.6.Final</version>
+        </dependency>
+
+        <!--        <dependency>-->
+<!--            <groupId>org.geolatte</groupId>-->
+<!--            <artifactId>geolatte-geom</artifactId>-->
+<!--            <version>1.9.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.thorntail</groupId>-->
+<!--            <artifactId>jpa-spatial</artifactId>-->
+<!--            <version>2.7.0.Final</version>-->
+<!--        </dependency>-->
+
+
+        <!--        &lt;!&ndash; Countries and cities &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.geonames</groupId>-->
+<!--            <artifactId>geonames</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
+
 
 
     </dependencies>

@@ -19,5 +19,14 @@ import 'bootstrap'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all'
 
+
+window.initAutocomplete = function () {
+    const event = new Event('google-maps-callback', {
+        bubbles: true,
+        cancelable: true,
+    })
+    window.dispatchEvent(event)
+}
+
 // start the Stimulus application
 import './bootstrap.js';

@@ -43,6 +43,7 @@
     "sass": "^1.57.0",
     "sass-loader": "^13.0.0",
     "select2": "^4.1.0-rc.0",
+    "stimulus-places-autocomplete": "^0.5.0",
     "tailwindcss": "^3.2.4",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.4",

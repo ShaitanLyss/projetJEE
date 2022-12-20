@@ -1,11 +1,15 @@
 package fr.cyu.airportmadness.test;
 
 import com.github.javafaker.Faker;
+import fr.cyu.airportmadness.datasets.CsvAirport;
+import fr.cyu.airportmadness.datasets.CsvCountry;
+import fr.cyu.airportmadness.datasets.CsvUtils;
 import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 import fr.cyu.airportmadness.entity.aircraft.AircraftRepository;
 import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.airport.Airport;
+import fr.cyu.airportmadness.entity.airport.AirportRepository;
 import fr.cyu.airportmadness.entity.booking.Booking;
 import fr.cyu.airportmadness.entity.booking.BookingRepository;
 import fr.cyu.airportmadness.entity.city.City;
@@ -21,12 +25,15 @@ import fr.cyu.airportmadness.security.User;
 import fr.cyu.airportmadness.security.UserRepository;
 import jakarta.persistence.*;
 import jakarta.servlet.http.HttpServletResponse;
+import org.locationtech.jts.geom.*;
+import org.locationtech.jts.util.GeometricShapeFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,16 +42,21 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
 public class TestController {
     private final AircraftRepository aircraftRepository;
+
+    private final GeometricShapeFactory geometricShapeFactory = new GeometricShapeFactory();
+
+    @Autowired
+    private AirportRepository airportRepository;
     private final BookingRepository bookingRepository;
+
+    private final Logger logger = LoggerFactory.getLogger(TestController.class);
     @PersistenceContext
     private EntityManager em;
 
@@ -60,9 +72,24 @@ public class TestController {
     }
 
     @GetMapping("/test")
-    public String test(@RequestParam(name = "name", defaultValue = "Company") String name, Model model) {
-        model.addAttribute("name", name);
-        return "index";
+    @ResponseBody
+    public String test(@RequestParam(name = "lat") double lat, @RequestParam(name = "lon") double lon) {
+//        return Arrays.toString(airportRepository.findAirportWithin(createCircle(lat, lon, radius)).toArray());
+        var it = airportRepository.findNearestAirports(lat, lon).iterator();
+        List<Airport> airports = new ArrayList<>(10);
+        for (int i = 0; i < 10 && it.hasNext(); i++) {
+            airports.add(it.next());
+        }
+
+        return Arrays.toString(airports.toArray());
+//        return "";
+    }
+
+    private Geometry createCircle(Double latitude, Double longitude, Integer radius) {
+        geometricShapeFactory.setNumPoints(32);
+        geometricShapeFactory.setCentre(new Coordinate(latitude, longitude));
+        geometricShapeFactory.setSize(radius * 2);
+        return geometricShapeFactory.createCircle();
     }
 
 
@@ -74,10 +101,68 @@ public class TestController {
         return res.get();
     }
 
+
+     private Iterable<Airport> loadAirportsAndCities() {
+        logger.info("Loading airports, cities and countries...");
+        if (airportRepository.count() > 0) {
+            logger.warn("Airports are already loaded. Skipping");
+            return airportRepository.findAll();
+         }
+
+        GeometryFactory geometryFactory = new GeometryFactory();
+
+        // Load countries
+        List<CsvCountry> csvCountries = CsvUtils.getCsvBeans("datasets/countries.csv", CsvCountry.class);
+        Map<String, Country> codeToCountry = new HashMap<>(csvCountries.size());
+
+        csvCountries.forEach((csvCountry -> {
+            Country country = new Country().setName(csvCountry.getName());
+            codeToCountry.put(csvCountry.getCode(), country);
+            em.persist(country);
+        }));
+
+        AtomicInteger numAirports = new AtomicInteger();
+        List<CsvAirport> csvAirports = CsvUtils.getCsvBeans("datasets/airports.csv", CsvAirport.class);
+        csvAirports.stream().filter(
+                (CsvAirport a) -> (Objects.equals(a.getType(), "large_airport") || Objects.equals(a.getType(), "medium_airport") && !a.getName().toLowerCase().contains(" base") && a.getMunicipality() != null && !Objects.equals(a.getMunicipality(), ""))
+        ).forEach(csvAirport -> {
+            Airport airport = new Airport();
+            Country country = codeToCountry.get(csvAirport.getIso_country());
+
+            if (csvAirport.getMunicipality() != null && !Objects.equals(csvAirport.getMunicipality(), "") && Objects.equals(csvAirport.scheduled_service, "yes")) {
+                City city = new City().setName(csvAirport.getMunicipality()).setCountry(country);
+                em.persist(city);
+                airport.setCity(city);
+            }
+            airport
+                    .setLatitude(csvAirport.getLatitude_deg())
+                    .setLongitude(csvAirport.getLongitude_deg())
+                    .setCountry(country)
+                    .setName(csvAirport.getName())
+                    .setType(csvAirport.getType());
+            ;
+
+            airport.setLocation(geometryFactory.createPoint(new Coordinate(airport.getLatitude(), airport.getLongitude())));
+            em.persist(airport);
+
+            int nAirports = numAirports.getAndIncrement();
+            if (nAirports % 500 == 0)
+                logger.info("" + nAirports + " airports loaded.");
+        });
+
+        em.flush();
+
+        logger.info("Done loading airports, cities and countries : " + airportRepository.count() +  " airports loaded.");
+
+        return airportRepository.findAll();
+    }
+
     @GetMapping("/test/load-test-sample")
     @ResponseBody
     @Transactional
     public String loadTestSample(HttpServletResponse response) {
+        logger.info("Loading test sample...");
+
         Faker faker = new Faker();
         var name = faker.name();
         response.setContentType("text/plain");
@@ -94,10 +179,10 @@ public class TestController {
 
         User airlineUser = userRepository.findByUsername("airline");
 
-        if (airlineUser == null)
+        if (airlineUser == null) {
             airlineUser = userRepository.save(new User("airline", passwordEncoder.encode("1234"), "AIRLINE"));
-
-        toPersist.add(airlineUser);
+            toPersist.add(airlineUser);
+        }
 
 
         // Aircrafts
@@ -113,65 +198,43 @@ public class TestController {
         toPersist.add(ac2);
 
 
-        // Country
-        Country france = new Country("france");
-        Country cameroon = new Country("cameroon");
-
-        toPersist.add(france);
-        toPersist.add(cameroon);
-
-        // City
-        City yaounde = new City("yaoundé")
-                .setCountry(cameroon);
-
-        City paris = new City("paris")
-                .setCountry(france);
-
-        toPersist.add(yaounde);
-        toPersist.add(paris);
+        // Airport, Country, City
+        Iterator<Airport> airportIterator = loadAirportsAndCities().iterator();
+        Airport airport1 = airportIterator.next();
+        Airport airport2 = airportIterator.next();
 
 
-        // Airport
-        Airport nsimalen = new Airport()
-                .setName("nsimalen")
-                .setCity(yaounde);
-
-
-        Airport parisRoissy = new Airport()
-                .setName("Paris Roissy")
-                .setCity(paris);
-
-        toPersist.add(nsimalen);
-        toPersist.add(parisRoissy);
+        toPersist.add(airport1);
+        toPersist.add(airport2);
 
 
         // Airline
-        Airline nsimalenParisRoissy = new Airline()
-                .setDeparture(nsimalen)
-                .setArrival(parisRoissy);
+        Airline airline1 = new Airline()
+                .setDeparture(airport1)
+                .setArrival(airport2);
 
-        Airline parisRoissyNsimalen = new Airline()
-                .setDeparture(parisRoissy)
-                .setArrival(nsimalen);
+        Airline airline2 = new Airline()
+                .setDeparture(airport2)
+                .setArrival(airport1);
 
-        toPersist.add(nsimalenParisRoissy);
-        toPersist.add(parisRoissyNsimalen);
+        toPersist.add(airline1);
+        toPersist.add(airline2);
 
         // Flights
         Flight flight1 = new Flight()
                 .setAircraft(ac1)
                 .setTime(LocalDateTime.of(2022, 11, 28, 17, 30))
-                .setAirline(parisRoissyNsimalen);
+                .setAirline(airline2);
 
         Flight flight2 = new Flight()
                 .setAircraft(ac1)
                 .setTime(LocalDateTime.of(2022, 11, 30, 17, 30))
-                .setAirline(parisRoissyNsimalen);
+                .setAirline(airline2);
 
         Flight flight3 = new Flight()
                 .setAircraft(ac2)
                 .setTime(LocalDateTime.of(2022, 11, 30, 10, 0))
-                .setAirline(nsimalenParisRoissy);
+                .setAirline(airline1);
 
         toPersist.addAll(Arrays.asList(flight1, flight2, flight3));
 
@@ -209,10 +272,9 @@ public class TestController {
         // Airline Company
         AirlineCompany comp = new AirlineCompany()
                 .addAircrafts(ac1, ac2)
-                .addAirlines(nsimalenParisRoissy, parisRoissyNsimalen)
+                .addAirlines(airline1, airline2)
                 .setName("Air Cameroun")
-                .setUser(airlineUser)
-        ;
+                .setUser(airlineUser);
 //                .addEmployees(employee2);
 
         toPersist.add(comp);
@@ -246,6 +308,8 @@ public class TestController {
 
 
         toPersist.forEach((o) -> em.persist(o));
+
+        logger.info("Loading complete");
 
         return "Yay.";
     }

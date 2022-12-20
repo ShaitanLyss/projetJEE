@@ -8,10 +8,25 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js" integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
         <script src="build/pgia.js" defer></script>
-        <script>/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute('data-pg-ia-disabled')) { window.pgia_small_mq=typeof pgia_small_mq=='string'?pgia_small_mq:'(max-width:767px)';window.pgia_large_mq=typeof pgia_large_mq=='string'?pgia_large_mq:'(min-width:768px)';var style = document.createElement('style');var pgcss='html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}';if(document.documentElement.hasAttribute('data-pg-id') && document.documentElement.hasAttribute('data-pg-mobile')) {pgia_small_mq='(min-width:0)';pgia_large_mq='(min-width:99999px)'} pgcss+='@media ' + pgia_small_mq + '{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}';pgcss+='@media ' + pgia_large_mq + '{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}';style.innerHTML=pgcss;document.querySelector('head').appendChild(style);}}catch(e){console&&console.log(e);}})()</script>         
-        <meta name="description" content="Pinegrow Web Editor - Directory TailwindCSS Template" data-pgc-field="page_descr"/> 
-    </head>     
-    <body class="text-gray-500"> 
+
+        <!--/*@thymesVar id="encore" type="fr.cyu.airportmadness.view.thymeleaf.EncoreHelpers"*/-->
+        <script th:each="url : ${encore.entryScriptUrls()}" th:src="${url}" defer></script>
+
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLg9omiv8MglTQ9Y8Q1UFfuzBhUQpj-Ag&libraries=places&callback=initAutocomplete"
+                async=""
+                defer
+        ></script>
+        <script>/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute('data-pg-ia-disabled')) { window.pgia_small_mq=typeof pgia_small_mq=='string'?pgia_small_mq:'(max-width:767px)';window.pgia_large_mq=typeof pgia_large_mq=='string'?pgia_large_mq:'(min-width:768px)';var style = document.createElement('style');var pgcss='html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}';if(document.documentElement.hasAttribute('data-pg-id') && document.documentElement.hasAttribute('data-pg-mobile')) {pgia_small_mq='(min-width:0)';pgia_large_mq='(min-width:99999px)'} pgcss+='@media ' + pgia_small_mq + '{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}';pgcss+='@media ' + pgia_large_mq + '{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}';style.innerHTML=pgcss;document.querySelector('head').appendChild(style);}}catch(e){console&&console.log(e);}})()</script>
+        <meta name="description" content="Pinegrow Web Editor - Directory TailwindCSS Template" data-pgc-field="page_descr"/>
+        <script>
+            const $ = jQuery
+            $.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.712784,-74.005941&radius=50000&type=airport&key=AIzaSyBLg9omiv8MglTQ9Y8Q1UFfuzBhUQpj-Ag", null, (response) => {
+                console.log(response)
+            })
+        </script>
+    </head>
+    <body class="text-gray-500">
         <header class="bg-opacity-60 bg-white border-b fixed inset-x-0 top-0 w-full z-50"> 
             <nav class="container flex flex-wrap items-center mx-auto px-4 py-2 lg:py-0"> <a href="#" class="font-bold hover:text-gray-700 mr-3 text-gray-900 text-xl">AIR Nomads</a> 
                 <div class="flex flex-row items-center ml-auto px-2 space-x-2 lg:order-2"> <a href="#" class="bg-gray-700 hidden hover:bg-gray-900 px-6 py-2 rounded-full text-center text-white sm:inline-flex sm:items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="mr-2"> 
@@ -57,13 +72,44 @@
             <div class="container mx-auto px-4 py-48 relative"> 
                 <div class="flex flex-wrap -mx-4"> 
                     <div class="px-4 w-full lg:w-6/12 xl:w-5/12"> 
-                        <h1 class="font-normal leading-tight mb-2 text-7xl">Discover Great Places Always</h1> 
-                        <p class="mb-12 text-xl">Find out the perfect places that your are looking for.</p> 
-                        <form> 
-                            <div class="-mx-1 flex flex-wrap items-center space-y-4 sm:space-y-0"> 
-                                <div class="px-1 w-full sm:flex-1"> 
-                                    <input class="appearance-none leading-tight px-5 py-3 rounded-full text-gray-600 text-xl w-full" type="email" required placeholder="What are you looking for?"/> 
-                                </div>                                 
+                        <h1 class="font-normal leading-tight mb-2 text-7xl">
+                            Découvrir de nouveaux horizons
+                        </h1>
+                        <p class="mb-12 text-xl">
+                            Trouvez votre destination de rêve.
+                        </p>
+                        <form method="get" th:action="@{/booking}">
+
+                            <div class="-mx-1 flex flex-wrap items-center space-y-4 sm:space-y-0">
+                                <div
+                                        class="px-1 w-full sm:flex-1"
+                                        data-controller="places"
+                                        data-action="google-maps-callback@window->places#initAutocomplete"
+                                >
+                                    <!--                                    data-places-country-value='["fr"]'-->
+                                    <input
+                                            class="appearance-none leading-tight px-5 py-3 rounded-full text-gray-600 text-xl w-full"
+                                            type="text"
+                                            data-action="keydown->places#preventSubmit"
+                                            data-places-target="address"
+                                            placeholder="Où voulez-vous aller ?"
+                                            required
+                                    />
+
+                                    <input type="hidden" name="city" data-places-target="city" />
+                                    <input type="hidden" data-places-target="streetNumber" />
+                                    <input type="hidden" data-places-target="route" />
+                                    <input type="hidden" data-places-target="county" />
+                                    <input type="hidden" data-places-target="state" />
+                                    <input type="hidden" data-places-target="postalCode" />
+                                    <input type="hidden" name="country" data-places-target="country" />
+
+                                    <input type="hidden" name="lat" data-places-target="latitude" />
+                                    <input type="hidden"  name="lon" data-places-target="longitude" />
+                                </div>
+<!--                                <div class="px-1 w-full sm:flex-1"> -->
+<!--                                    <input class="appearance-none leading-tight px-5 py-3 rounded-full text-gray-600 text-xl w-full" type="email" required placeholder="What are you looking for?"/> -->
+<!--                                </div>                                 -->
                                 <div class="px-1 text-right w-full sm:flex-initial sm:w-auto"> 
                                     <button class="bg-red-600 hover:bg-red-700 inline-flex items-center leading-none px-6 py-3 rounded-full text-center text-white text-xl" type="submit"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="mr-1"> 
@@ -71,7 +117,7 @@
                                                 <path fill="none" d="M0 0h24v24H0z"></path>                                                 
                                                 <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"></path>                                                 
                                             </g>                                             
-                                        </svg>                                         <span>Search</span> 
+                                        </svg>                                         <span>Rechercher</span>
                                     </button>                                     
                                 </div>                                 
                             </div>                             
