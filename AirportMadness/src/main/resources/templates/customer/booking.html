@@ -3,8 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <title>Booking</title>
+    <!--/*@thymesVar id="encore" type="fr.cyu.airportmadness.view.thymeleaf.EncoreHelpers"*/-->
+    <script th:each="url : ${encore.entryScriptUrls()}" th:src="${url}" defer></script>
+    <link th:each="url :${encore.entryLinkUrls()}" th:href="${url}" rel="stylesheet">
+
 </head>
 <body>
+<header th:replace="~{fragments/_header}"></header>
+<main class="container tw-mt-32">
+    <!-- Select location and destination -->
+    <div class="row justify-content-center mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Chercher un trajet</h2>
+                <form method="get" th:action="@{/booking}">
+                    <div class="tw-mx-1 tw-flex tw-flex-wrap tw-items-center tw-space-y-4 sm:tw-space-y-0">
+                        <div
+                                class="tw-px-1 tw-w-full sm:tw-flex-1"
+                                data-controller="places"
+                                data-action="google-maps-callback@window->places#initAutocomplete"
+                        >
+                            <!--                                    data-places-country-value='["fr"]'-->
+                            <input
+                                    class="tw-appearance-none tw-leading-tight tw-px-5 tw-py-3 tw-rounded-full tw-text-gray-600 tw-text-xl tw-w-full"
+                                    type="text"
+                                    data-action="keydown->places#preventSubmit"
+                                    data-places-target="address"
+                                    placeholder="D'où partez-vous ?"
+                                    name="q"
+                                    th:value="${param.q}"
+                                    required
+                            />
 
+                            <input type="hidden" name="lat" th:value="${param.lat}" data-places-target="latitude"/>
+                            <input type="hidden" name="lon" th:value="${param.lon}" data-places-target="longitude"/>
+                        </div>
+                        <div
+                                class="tw-px-1 tw-w-full sm:tw-flex-1"
+                                data-controller="places"
+                                data-action="google-maps-callback@window->places#initAutocomplete"
+                        >
+                            <!--                                    data-places-country-value='["fr"]'-->
+                            <input
+                                    class="tw-appearance-none tw-leading-tight tw-px-5 tw-py-3 tw-rounded-full tw-text-gray-600 tw-text-xl tw-w-full"
+                                    type="text"
+                                    data-action="keydown->places#preventSubmit"
+                                    data-places-target="address"
+                                    placeholder="Où voulez-vous aller ?"
+                                    th:name="tq"
+                                    th:value="${param.tq}"
+                                    required
+                            />
+                            <input type="hidden" name="tlat" th:value="${param.tlat}" data-places-target="latitude"/>
+                            <input type="hidden" name="tlon" th:value="${param.tlon}" data-places-target="longitude"/>
+                        </div>
+                        <!--                                <div class="px-1 w-full sm:flex-1"> -->
+                        <!--                                    <input class="appearance-none leading-tight px-5 py-3 rounded-full text-gray-600 text-xl w-full" type="email" required placeholder="What are you looking for?"/> -->
+                        <!--                                </div>                                 -->
+                        <div class="tw-px-1 tw-text-right tw-w-full sm:tw-flex-initial sm:tw-w-auto">
+                            <button class="tw-bg-red-600 hover:tw-bg-red-700 tw-inline-flex tw-items-center tw-leading-none tw-px-6 tw-py-3 tw-rounded-full tw-text-center tw-text-white tw-text-xl"
+                                    type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                     width="1.25em" height="1.25em" class="tw-mr-1">
+                                    <g>
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"></path>
+                                    </g>
+                                </svg>
+                                <span>Rechercher</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${airline}" class="row justify-content-center mb-4">
+        <div class="card">
+            <div class="card-body text-center">
+
+                <h2 class="card-title mb-3">Meilleure correspondance </h2>
+                <div class="row text-center align-items-center">
+                    <div class="col card">
+                        <div class="card-body">
+                            <i class="fa-solid fa-plane-departure mt-2 mb-3 text-secondary"></i>
+                            <h5  th:text="${airline.departure.name}"></h5>
+                        </div>
+                    </div>
+                    <div class="col text-secondary">
+                        <i class="fa-solid fa-minus"></i>
+                        <i class="fa-solid fa-minus"></i>
+                        <i class="fa-solid fa-minus"></i>
+                        <i class="fa-solid fa-plane"></i>
+                        <i class="fa-solid fa-minus"></i>
+                        <i class="fa-solid fa-minus"></i>
+                        <i class="fa-solid fa-minus"></i>
+
+                    </div>
+
+                    <div class="col card">
+                        <div class="card-body">
+                            <i class="fa-solid fa-plane-arrival mt-2 mb-3 text-secondary"></i>
+                            <h5  th:text="${airline.arrival.name}"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${booking}" class="row justify-content-center">
+        <div class="col-sm col-md-8 col-lg-6 col-xl-4 card text-center">
+            <div class="card-body">
+                <h2 class="card-title">Réserver</h2>
+
+
+                <!--/*@thymesVar id="booking" type="fr.cyu.airportmadness.entity.booking.Booking"*/-->
+                <form action="#" class="" th:action="@{/booking}" th:object="${booking}"
+                      method="post">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" th:field="*{flight}">
+                            <!--/*@thymesVar id="flight" type="fr.cyu.airportmadness.entity.flight.Flight"*/-->
+                            <option th:each="flight : ${airline.flights}" th:value="${flight.id}" th:text="${flight.getTime()}"></option>
+                        </select>
+                        <label class="form-label">Vol</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <!--        <input type="text" th:field="*{price}">-->
+                        <input class="form-control" type="number" min="0" th:field="*{numLuggages}">
+                        <label class="form-label">Bagages</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <!--        <input type="text" th:field="*{price}">-->
+                        <input class="form-control" type="number" min="0" th:field="*{price}" disabled>
+                        <label class="form-label">Prix</label>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-primary" type="submit" value="Submit">Créer</button>
+                        <button class="btn btn-secondary" type="reset">Remise à zéro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

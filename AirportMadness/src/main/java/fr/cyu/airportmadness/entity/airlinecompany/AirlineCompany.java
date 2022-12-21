@@ -17,6 +17,13 @@ import java.util.Set;
 @Entity
 @Table(name = "airline_company")
 public class AirlineCompany {
+    @Override
+    public String toString() {
+        return "AirlineCompany{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
