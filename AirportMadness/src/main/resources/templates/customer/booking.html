@@ -89,6 +89,7 @@
                         <div class="card-body">
                             <i class="fa-solid fa-plane-departure mt-2 mb-3 text-secondary"></i>
                             <h5  th:text="${airline.departure.name}"></h5>
+                            <small th:if="${airline.departure.city}" class="text-muted" th:text="${airline.departure.city.name}"></small>
                         </div>
                     </div>
                     <div class="col text-secondary">
@@ -106,6 +107,7 @@
                         <div class="card-body">
                             <i class="fa-solid fa-plane-arrival mt-2 mb-3 text-secondary"></i>
                             <h5  th:text="${airline.arrival.name}"></h5>
+                            <small th:if="${airline.arrival.city}" class="text-muted" th:text="${airline.arrival.city.name}"></small>
                         </div>
                     </div>
                 </div>
