@@ -106,24 +106,6 @@
         </div>
     </nav>
 </header>
-<div class="container fixed-top tw-pt-4">
-    <div th:if="${message}" th:class="${'mx-auto toast alert show ' + alertClass}" class="toast" role="alert"
-         aria-live="assertive"
-         aria-atomic="true">
-        <div class="toast-header">
-            <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#ff7a00"></rect>
-            </svg>
-            <strong class="me-auto">AIR Nomads</strong>
-            <!--        <small>11 mins ago</small>-->
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body" th:text="${message}">
-            Success
-        </div>
-    </div>
-</div>
 <main data-controller="airline" class="container tw-mt-32">
     <div class="row">
         <!-- Création de ligne aérienne -->
