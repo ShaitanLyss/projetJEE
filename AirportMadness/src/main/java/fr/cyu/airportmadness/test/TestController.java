@@ -321,7 +321,7 @@ public class TestController {
 
         toPersist.forEach((o) -> em.persist(o));
 
-        logger.info("Loading complete");
+        logger.info("Loading complete.");
 
         return "Yay.";
     }
