@@ -100,6 +100,10 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
+    // .addExternals({
+    //     mapsApi: "global@https://maps.googleapis.com/maps/api/js?key=AIzaSyBLg9omiv8MglTQ9Y8Q1UFfuzBhUQpj-Ag&libraries=places&callback=initAutocomplete"
+    // })
+
 
 
     // .addPlugin(new webpack.ProvidePlugin({
@@ -138,6 +142,17 @@ const config = Encore.getWebpackConfig();
 //     parser: {
 //         amd: false
 //     }
+// })
+// config.externalsType = 'script'
+// config.externals = {
+//     mapsApi: "global@https://maps.googleapis.com/maps/api/js?key=AIzaSyBLg9omiv8MglTQ9Y8Q1UFfuzBhUQpj-Ag&libraries=places&callback=initAutocomplete"
+// }
+// console.log(config)
+// config.module.externals.unshift({
+//
+// })
+// .addExternals({
+//     mapsApi: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBLg9omiv8MglTQ9Y8Q1UFfuzBhUQpj-Ag&libraries=places&callback=initAutocomplete"
 // })
 // console.log(config)
 module.exports = config;
