@@ -7,7 +7,9 @@ import fr.cyu.airportmadness.datasets.CsvUtils;
 import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 import fr.cyu.airportmadness.entity.aircraft.AircraftRepository;
 import fr.cyu.airportmadness.entity.airline.Airline;
+import fr.cyu.airportmadness.entity.airline.AirlineRepository;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
+import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompanyRepository;
 import fr.cyu.airportmadness.entity.airport.Airport;
 import fr.cyu.airportmadness.entity.airport.AirportRepository;
 import fr.cyu.airportmadness.entity.booking.Booking;
@@ -20,6 +22,7 @@ import fr.cyu.airportmadness.entity.person.employee.Employee;
 import fr.cyu.airportmadness.entity.person.passenger.PaperType;
 import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
+import fr.cyu.airportmadness.entity.person.passenger.customer.CustomerRepository;
 import fr.cyu.airportmadness.security.MyUserDetails;
 import fr.cyu.airportmadness.security.User;
 import fr.cyu.airportmadness.security.UserRepository;
@@ -52,9 +55,14 @@ public class TestController {
 
     private final GeometricShapeFactory geometricShapeFactory = new GeometricShapeFactory();
 
+    private final GeometryFactory geometryFactory = new GeometryFactory();
+
     @Autowired
     private AirportRepository airportRepository;
     private final BookingRepository bookingRepository;
+
+    @Autowired
+    private AirlineRepository airlineRepository;
 
     private final Logger logger = LoggerFactory.getLogger(TestController.class);
     @PersistenceContext
@@ -65,24 +73,40 @@ public class TestController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private final CustomerRepository customerRepository;
+    private final AirlineCompanyRepository airlineCompanyRepository;
 
-    public TestController(AircraftRepository aircraftRepository, BookingRepository bookingRepository) {
+    public TestController(AircraftRepository aircraftRepository, BookingRepository bookingRepository,
+                          CustomerRepository customerRepository,
+                          AirlineCompanyRepository airlineCompanyRepository) {
         this.aircraftRepository = aircraftRepository;
         this.bookingRepository = bookingRepository;
+        this.customerRepository = customerRepository;
+        this.airlineCompanyRepository = airlineCompanyRepository;
     }
 
     @GetMapping("/test")
     @ResponseBody
-    public String test(@RequestParam(name = "lat") double lat, @RequestParam(name = "lon") double lon) {
+    public String test(
+            @RequestParam(name = "lat") double lat, @RequestParam(name = "lon") double lon,
+            @RequestParam(name = "tlat") double tlat, @RequestParam("tlon") double tlon
+    ) {
 //        return Arrays.toString(airportRepository.findAirportWithin(createCircle(lat, lon, radius)).toArray());
-        var it = airportRepository.findNearestAirports(lat, lon).iterator();
-        List<Airport> airports = new ArrayList<>(10);
-        for (int i = 0; i < 10 && it.hasNext(); i++) {
-            airports.add(it.next());
-        }
-
-        return Arrays.toString(airports.toArray());
+//        var it = airportRepository.findNearestAirports(lat, lon).iterator();
+//        List<Airport> airports = new ArrayList<>(10);
+//        for (int i = 0; i < 10 && it.hasNext(); i++) {
+//            airports.add(it.next());
+//        }
+//
+//        return Arrays.toString(airports.toArray());
 //        return "";
+
+        var it = airlineRepository.findNearestAirline(
+                geometryFactory.createPoint(new Coordinate(lat, lon)),
+                geometryFactory.createPoint(new Coordinate(tlat, tlon))
+                );
+
+        return it.iterator().next().toString();
     }
 
     private Geometry createCircle(Double latitude, Double longitude, Integer radius) {
@@ -197,102 +221,105 @@ public class TestController {
         toPersist.add(ac1);
         toPersist.add(ac2);
 
-
+//
         // Airport, Country, City
         Iterator<Airport> airportIterator = loadAirportsAndCities().iterator();
-        Airport airport1 = airportIterator.next();
-        Airport airport2 = airportIterator.next();
 
+        Airport paris = airportRepository.findByCity_NameContainsAndNameContains("paris", "international").get(0);
+        Airport nsimalen = airportRepository.findByCity_NameContainsAndNameContains("yaoundé", "international").get(0);
 
-        toPersist.add(airport1);
-        toPersist.add(airport2);
 
 
         // Airline
         Airline airline1 = new Airline()
-                .setDeparture(airport1)
-                .setArrival(airport2);
+                .setDeparture(paris)
+                .setArrival(nsimalen);
 
         Airline airline2 = new Airline()
-                .setDeparture(airport2)
-                .setArrival(airport1);
+                .setDeparture(nsimalen)
+                .setArrival(paris);
+
 
         toPersist.add(airline1);
         toPersist.add(airline2);
-
-        // Flights
-        Flight flight1 = new Flight()
-                .setAircraft(ac1)
-                .setTime(LocalDateTime.of(2022, 11, 28, 17, 30))
-                .setAirline(airline2);
-
-        Flight flight2 = new Flight()
-                .setAircraft(ac1)
-                .setTime(LocalDateTime.of(2022, 11, 30, 17, 30))
-                .setAirline(airline2);
-
-        Flight flight3 = new Flight()
-                .setAircraft(ac2)
-                .setTime(LocalDateTime.of(2022, 11, 30, 10, 0))
-                .setAirline(airline1);
-
-        toPersist.addAll(Arrays.asList(flight1, flight2, flight3));
-
-        // Customer
-        Customer sylvie = new Customer(
-                "Sylvie", "Delprat", LocalDate.of(1980, 7, 3),
-                Gender.Female, "française", "FR12456987", PaperType.IdentityCard,
-                "0611223344", "sylvie@sylvie.fr"
-        );
-
-        toPersist.add(sylvie);
-
-        // Passenger
-        Passenger florian = new Passenger(
-                "Florian", "Delprat", LocalDate.of(2000, 9, 30),
-                Gender.Male, "française", "FR987654321", PaperType.Passport);
-        Passenger marine = new Passenger(
-                "Marine", "Delprat", LocalDate.of(2004, 8, 17),
-                Gender.Female, "française", "FR987654321", PaperType.ResidenceDocument);
-
-        toPersist.add(florian);
-        toPersist.add(marine);
-
-        // Bookings
-        Booking booking = new Booking()
-                .setCustomer(sylvie)
-                .setPrice(BigDecimal.valueOf(140))
-                .setFlight(flight2)
-                .setNumLuggages(4)
-                .addPassengers(sylvie, florian, marine);
-
-        toPersist.add(booking);
-
-
+//
+//        // Flights
+////        Flight flight1 = new Flight()
+////                .setAircraft(ac1)
+////                .setTime(LocalDateTime.of(2022, 11, 28, 17, 30))
+////                .setAirline(airline2);
+////
+////        Flight flight2 = new Flight()
+////                .setAircraft(ac1)
+////                .setTime(LocalDateTime.of(2022, 11, 30, 17, 30))
+////                .setAirline(airline2);
+////
+////        Flight flight3 = new Flight()
+////                .setAircraft(ac2)
+////                .setTime(LocalDateTime.of(2022, 11, 30, 10, 0))
+////                .setAirline(airline1);
+////
+////        toPersist.addAll(Arrays.asList(flight1, flight2, flight3));
+//
+//        if (bookingRepository.count() == 0) {
+//            // Customer
+//            Customer sylvie = new Customer(
+//                    "Sylvie", "Delprat", LocalDate.of(1980, 7, 3),
+//                    Gender.Female, "française", "FR12456987", PaperType.IdentityCard,
+//                    "0611223344", "sylvie@sylvie.fr"
+//            );
+//
+//            toPersist.add(sylvie);
+//
+//            // Passenger
+//            Passenger florian = new Passenger(
+//                    "Florian", "Delprat", LocalDate.of(2000, 9, 30),
+//                    Gender.Male, "française", "FR987654321", PaperType.Passport);
+//            Passenger marine = new Passenger(
+//                    "Marine", "Delprat", LocalDate.of(2004, 8, 17),
+//                    Gender.Female, "française", "FR987654321", PaperType.ResidenceDocument);
+//
+//            toPersist.add(florian);
+//            toPersist.add(marine);
+//
+//            // Bookings
+//            Booking booking = new Booking()
+//                    .setCustomer(sylvie)
+//                    .setPrice(BigDecimal.valueOf(140))
+////                    .setFlight(flight2)
+//                    .setNumLuggages(4)
+//                    .addPassengers(sylvie, florian, marine);
+//
+//            toPersist.add(booking);
+//        }
+//
+//
         // Airline Company
         AirlineCompany comp = new AirlineCompany()
                 .addAircrafts(ac1, ac2)
                 .addAirlines(airline1, airline2)
-                .setName("Air Cameroun")
-                .setUser(airlineUser);
+                .setName("Air Cameroun " + airlineCompanyRepository.count() + 1);
+
+        if (airlineUser.getAirlineCompany() == null)
+                comp.setUser(airlineUser);
 //                .addEmployees(employee2);
 
         toPersist.add(comp);
 
         // Employees
-        for (int i = 0; i < 100; i++) {
-            Employee employee1 = new Employee();
-            employee1
-                    .setAirlineCompany(comp)
-                    .setGender(Math.random() > 0.5 ? Gender.Male : Gender.Female)
-                    .setFirstName(name.firstName())
-                    .setLastName(name.lastName())
-                    .setBirthdate(faker.date().birthday(10, 90).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
-                    .setNationality(faker.nation().nationality())
-
-            ;
-            toPersist.add(employee1);
-        }
+//        for (int i = 0; i < 100; i++) {
+//            Employee employee1 = new Employee();
+//            employee1
+//                    .setAirlineCompany(comp)
+//                    .setGender(Math.random() > 0.5 ? Gender.Male : Gender.Female)
+//                    .setFirstName(name.firstName())
+//                    .setLastName(name.lastName())
+//                    .setBirthdate(faker.date().birthday(10, 90).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+//                    .setNationality(faker.nation().nationality())
+//
+//            ;
+//            toPersist.add(employee1);
+//        }
 
 
 //        Employee employee2 = new Employee();

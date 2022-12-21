@@ -77,4 +77,12 @@ public class Airline {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Airline{" +
+                "departure=" + departure +
+                ", arrival=" + arrival +
+                ", airlineCompany=" + airlineCompany +
+                '}';
+    }
 }
