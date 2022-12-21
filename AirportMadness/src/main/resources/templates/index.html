@@ -12,19 +12,9 @@
         <!--/*@thymesVar id="encore" type="fr.cyu.airportmadness.view.thymeleaf.EncoreHelpers"*/-->
         <script th:each="url : ${encore.entryScriptUrls()}" th:src="${url}" defer></script>
 
-        <script
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLg9omiv8MglTQ9Y8Q1UFfuzBhUQpj-Ag&libraries=places&callback=initAutocomplete"
-                async=""
-                defer
-        ></script>
+
         <script>/* Pinegrow Interactions, do not remove */ (function(){try{if(!document.documentElement.hasAttribute('data-pg-ia-disabled')) { window.pgia_small_mq=typeof pgia_small_mq=='string'?pgia_small_mq:'(max-width:767px)';window.pgia_large_mq=typeof pgia_large_mq=='string'?pgia_large_mq:'(min-width:768px)';var style = document.createElement('style');var pgcss='html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}';if(document.documentElement.hasAttribute('data-pg-id') && document.documentElement.hasAttribute('data-pg-mobile')) {pgia_small_mq='(min-width:0)';pgia_large_mq='(min-width:99999px)'} pgcss+='@media ' + pgia_small_mq + '{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}';pgcss+='@media ' + pgia_large_mq + '{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}';style.innerHTML=pgcss;document.querySelector('head').appendChild(style);}}catch(e){console&&console.log(e);}})()</script>
         <meta name="description" content="Pinegrow Web Editor - Directory TailwindCSS Template" data-pgc-field="page_descr"/>
-        <script>
-            const $ = jQuery
-            $.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.712784,-74.005941&radius=50000&type=airport&key=AIzaSyBLg9omiv8MglTQ9Y8Q1UFfuzBhUQpj-Ag", null, (response) => {
-                console.log(response)
-            })
-        </script>
     </head>
     <body class="text-gray-500">
         <header class="bg-opacity-60 bg-white border-b fixed inset-x-0 top-0 w-full z-50"> 
@@ -93,6 +83,7 @@
                                             data-action="keydown->places#preventSubmit"
                                             data-places-target="address"
                                             placeholder="Où voulez-vous aller ?"
+                                            name="tq"
                                             required
                                     />
 
@@ -104,8 +95,8 @@
                                     <input type="hidden" data-places-target="postalCode" />
                                     <input type="hidden" name="country" data-places-target="country" />
 
-                                    <input type="hidden" name="lat" data-places-target="latitude" />
-                                    <input type="hidden"  name="lon" data-places-target="longitude" />
+                                    <input type="hidden" name="tlat" data-places-target="latitude" />
+                                    <input type="hidden"  name="tlon" data-places-target="longitude" />
                                 </div>
 <!--                                <div class="px-1 w-full sm:flex-1"> -->
 <!--                                    <input class="appearance-none leading-tight px-5 py-3 rounded-full text-gray-600 text-xl w-full" type="email" required placeholder="What are you looking for?"/> -->
