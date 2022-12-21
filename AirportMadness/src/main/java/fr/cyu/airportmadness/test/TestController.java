@@ -221,9 +221,8 @@ public class TestController {
         toPersist.add(ac1);
         toPersist.add(ac2);
 
-//
         // Airport, Country, City
-        Iterator<Airport> airportIterator = loadAirportsAndCities().iterator();
+        loadAirportsAndCities();
 
         Airport paris = airportRepository.findByCity_NameContainsAndNameContains("paris", "international").get(0);
         Airport nsimalen = airportRepository.findByCity_NameContainsAndNameContains("yaoundé", "international").get(0);
@@ -242,58 +241,57 @@ public class TestController {
 
         toPersist.add(airline1);
         toPersist.add(airline2);
-//
-//        // Flights
-////        Flight flight1 = new Flight()
-////                .setAircraft(ac1)
-////                .setTime(LocalDateTime.of(2022, 11, 28, 17, 30))
-////                .setAirline(airline2);
-////
-////        Flight flight2 = new Flight()
-////                .setAircraft(ac1)
-////                .setTime(LocalDateTime.of(2022, 11, 30, 17, 30))
-////                .setAirline(airline2);
-////
-////        Flight flight3 = new Flight()
-////                .setAircraft(ac2)
-////                .setTime(LocalDateTime.of(2022, 11, 30, 10, 0))
-////                .setAirline(airline1);
-////
-////        toPersist.addAll(Arrays.asList(flight1, flight2, flight3));
-//
-//        if (bookingRepository.count() == 0) {
-//            // Customer
-//            Customer sylvie = new Customer(
-//                    "Sylvie", "Delprat", LocalDate.of(1980, 7, 3),
-//                    Gender.Female, "française", "FR12456987", PaperType.IdentityCard,
-//                    "0611223344", "sylvie@sylvie.fr"
-//            );
-//
-//            toPersist.add(sylvie);
-//
-//            // Passenger
-//            Passenger florian = new Passenger(
-//                    "Florian", "Delprat", LocalDate.of(2000, 9, 30),
-//                    Gender.Male, "française", "FR987654321", PaperType.Passport);
-//            Passenger marine = new Passenger(
-//                    "Marine", "Delprat", LocalDate.of(2004, 8, 17),
-//                    Gender.Female, "française", "FR987654321", PaperType.ResidenceDocument);
-//
-//            toPersist.add(florian);
-//            toPersist.add(marine);
-//
-//            // Bookings
-//            Booking booking = new Booking()
-//                    .setCustomer(sylvie)
-//                    .setPrice(BigDecimal.valueOf(140))
-////                    .setFlight(flight2)
-//                    .setNumLuggages(4)
-//                    .addPassengers(sylvie, florian, marine);
-//
-//            toPersist.add(booking);
-//        }
-//
-//
+
+        // Flights
+        Flight flight1 = new Flight()
+                .setAircraft(ac1)
+                .setTime(LocalDateTime.of(2022, 11, 28, 17, 30))
+                .setAirline(airline2);
+
+        Flight flight2 = new Flight()
+                .setAircraft(ac1)
+                .setTime(LocalDateTime.of(2022, 11, 30, 17, 30))
+                .setAirline(airline2);
+
+        Flight flight3 = new Flight()
+                .setAircraft(ac2)
+                .setTime(LocalDateTime.of(2022, 11, 30, 10, 0))
+                .setAirline(airline1);
+
+        toPersist.addAll(Arrays.asList(flight1, flight2, flight3));
+
+        if (bookingRepository.count() == 0) {
+            // Customer
+            Customer sylvie = new Customer(
+                    "Sylvie", "Delprat", LocalDate.of(1980, 7, 3),
+                    Gender.Female, "française", "FR12456987", PaperType.IdentityCard,
+                    "0611223344", "sylvie@sylvie.fr"
+            );
+
+            toPersist.add(sylvie);
+
+            // Passenger
+            Passenger florian = new Passenger(
+                    "Florian", "Delprat", LocalDate.of(2000, 9, 30),
+                    Gender.Male, "française", "FR987654321", PaperType.Passport);
+            Passenger marine = new Passenger(
+                    "Marine", "Delprat", LocalDate.of(2004, 8, 17),
+                    Gender.Female, "française", "FR987654321", PaperType.ResidenceDocument);
+
+            toPersist.add(florian);
+            toPersist.add(marine);
+
+            // Bookings
+            Booking booking = new Booking()
+                    .setCustomer(sylvie)
+                    .setPrice(BigDecimal.valueOf(140))
+                    .setFlight(flight2)
+                    .setNumLuggages(4)
+                    .addPassengers(sylvie, florian, marine);
+
+            toPersist.add(booking);
+        }
+
         // Airline Company
         AirlineCompany comp = new AirlineCompany()
                 .addAircrafts(ac1, ac2)
@@ -302,36 +300,23 @@ public class TestController {
 
         if (airlineUser.getAirlineCompany() == null)
                 comp.setUser(airlineUser);
-//                .addEmployees(employee2);
 
         toPersist.add(comp);
 
         // Employees
-//        for (int i = 0; i < 100; i++) {
-//            Employee employee1 = new Employee();
-//            employee1
-//                    .setAirlineCompany(comp)
-//                    .setGender(Math.random() > 0.5 ? Gender.Male : Gender.Female)
-//                    .setFirstName(name.firstName())
-//                    .setLastName(name.lastName())
-//                    .setBirthdate(faker.date().birthday(10, 90).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
-//                    .setNationality(faker.nation().nationality())
-//
-//            ;
-//            toPersist.add(employee1);
-//        }
+        for (int i = 0; i < 100; i++) {
+            Employee employee = new Employee();
+            employee
+                    .setAirlineCompany(comp)
+                    .setGender(Math.random() > 0.5 ? Gender.Male : Gender.Female)
+                    .setFirstName(name.firstName())
+                    .setLastName(name.lastName())
+                    .setBirthdate(faker.date().birthday(10, 90).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                    .setNationality(faker.nation().nationality())
 
-
-//        Employee employee2 = new Employee();
-//        employee2
-//                .setGender(Gender.female)
-//                .setFirstName("Alice")
-//                .setLastName("Windmill")
-//                .setBirthdate(LocalDate.parse("1997-05-23"))
-//                .setNationality("Cameroonian");
-//
-//
-//        toPersist.add(employee2);
+            ;
+            toPersist.add(employee);
+        }
 
 
         toPersist.forEach((o) -> em.persist(o));
