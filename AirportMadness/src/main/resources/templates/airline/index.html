@@ -130,14 +130,24 @@
         <div class="col-xl col-12 col-sm-6 text-center mb-4">
             <h2>Créer ligne aérienne</h2>
             <form>
-                <label class="form-label">
-                    Sélectionner aircraft
-                    <select class="form-select" data-airline-target="select2">
-                        <!--/*@thymesVar id="aircraft" type="fr.cyu.airportmadness.entity.aircraft.Aircraft"*/-->
-                        <option th:each="aircraft : ${airlineCompany.aircrafts}" th:value="${aircraft.getId()}"
-                                th:text="${aircraft.getRegistration()}"></option>
-                    </select>
+                <label class="form-label" for="flight-select-departure">
+                    Sélectionner la ville de départ
                 </label>
+                    <select id="flight-select-departure" class="form-select" data-airline-target="select2">
+                        <!--/*@thymesVar id="aircraft" type="fr.cyu.airportmadness.entity.aircraft.Aircraft"*/-->
+                        <option th:each="city : ${towns}" th:value="${city.getId()}"
+                                th:text="${#strings.capitalizeWords(city.getName())}"></option>
+                    </select>
+                <label class="form-label" for="flight-select-arrival">
+                    Sélectionner la ville d'arrivée
+                </label>
+                <select id="flight-select-arrival" class="form-select" data-airline-target="select2">
+                    <!--/*@thymesVar id="aircraft" type="fr.cyu.airportmadness.entity.aircraft.Aircraft"*/-->
+                    <option th:each="city : ${towns2}" th:value="${city.getId()}"
+                            th:text="${#strings.capitalizeWords(city.getName())}"></option>
+                </select>
+                <div>&nbsp;</div>
+                <p><input type="submit" value="Créer"/> <input type="reset"></p>
             </form>
         </div>
 
@@ -162,11 +172,23 @@
                     <div class="form-floating mb-4">
                         <select id="flight-select-airline" class="form-select" data-airline-target="select2">
                             <!--/*@thymesVar id="airline" type="fr.cyu.airportmadness.entity.airline.Airline"*/-->
-                            <option th:each="airline : ${airlineCompany.airlines}" th:value="${airline.getId()}"
-                                    th:text="${#strings.capitalizeWords(airline.getDeparture().getName()) + ' - ' + #strings.capitalizeWords(airline.getArrival().getName())}"></option>
+                            <option th:each="airline : ${airlineCompany.airlines}" th:value="${airline}"
+                                    th:text="${#strings.capitalizeWords(airline.getDeparture().getName()) + ' - ' + #strings.capitalizeWords(airline.getArrival().getName())}"
+                            th:field="*{airline}"></option>
                         </select>
                         <label for="flight-select-airline">
                             Ligne aérienne
+                        </label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <select name="flight-select-aircraft" id="flight-select-aircraft" class="form-select" data-airline-target="select2">
+                            <!--/*@thymesVar id="airline" type="fr.cyu.airportmadness.entity.airline.Airline"*/-->
+                            <option th:each="aircraft : ${airlineCompany.aircrafts}" th:value="${aircraft.getId()}"
+                                    th:text="${aircraft.getRegistration()}"></option>
+                        </select>
+                        <label for="flight-select-aircraft">
+                            l'avion concerné
                         </label>
                     </div>
 
