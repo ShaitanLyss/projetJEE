@@ -68,8 +68,10 @@ public class CustomerController {
             @RequestParam(value = "tlat", required = false) Double tlat,
             @RequestParam(value = "tlon", required = false) Double tlon,
             @RequestParam(value = "tq", required = false) String tq,
-            Authentication authentication
+            Authentication authentication, HttpServletRequest request
             ) {
+
+        model.addAttribute("redirectUrl", request.getRequestURI() + "?" + request.getQueryString());
         List<Object> params = Arrays.asList(new Object[]{lat, lon, tlat, tlon});
 
         if (params.stream().allMatch(Objects::nonNull)) {
@@ -97,12 +99,12 @@ public class CustomerController {
     }
 
     @PostMapping("/booking")
-    public String bookingSubmit(@ModelAttribute Booking booking, Authentication auth, RedirectAttributes redirectAttributes) {
+    public String bookingSubmit(@ModelAttribute Booking booking, @ModelAttribute("redirectUrl") String redirectUrl, Authentication auth, RedirectAttributes redirectAttributes) {
         Optional<Customer> opt_customer = getCustomer(auth);
 
         if (opt_customer.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Échec. L'utilisateur n'est pas connecté avec un compte client");
-            return "redirect:/booking";
+            return "redirect:" + redirectUrl;
         }
 
         Customer customer = opt_customer.get();
@@ -115,7 +117,7 @@ public class CustomerController {
 
         if (opt_customer.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Échec. Problème d'accès à la base de données.");
-            return "redirect:/booking";
+            return "redirect:" + redirectUrl;
         }
         customer = opt_customer.get();
         redirectAttributes.addFlashAttribute("message", "Succès. Vous avez maintenant : " + customer.getBookings().size() + " réservations.");
@@ -123,13 +125,13 @@ public class CustomerController {
         return "redirect:/booking";
     }
 
-
     @Autowired
     private AuthenticationManager authenticationManager;
     private final BookingRepository bookingRepository;
 
     @PostMapping("/booking/create-customer")
-    public String createCustomer(HttpServletRequest req, @ModelAttribute Customer customer, @ModelAttribute User user) {
+    public String createCustomer(HttpServletRequest req, @ModelAttribute("redirectUrl") String redirectUrl, @ModelAttribute Customer customer, @ModelAttribute User user) {
+
         Dotenv dotenv = Dotenv.load();
         customerRepository.save(customer);
 
@@ -150,9 +152,7 @@ public class CustomerController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
 
 
-
-
-        return "redirect:/booking";
+        return "redirect:" + redirectUrl;
     }
 
     @GetMapping(name = "welcome-page", value = "/")

@@ -152,6 +152,7 @@
                 <div class="card-body">
                     <h2 class="card-title">Compte client</h2>
                     <form th:action="@{/booking/create-customer}" method="post">
+                        <input type="hidden" name="redirectUrl" th:value="${redirectUrl}">
                         <div th:if="${user}" class="card-group" th:object="${user}">
                             <!--                        <h3 class="card-title">Paramètres utilisateurs</h3>-->
 
@@ -265,6 +266,7 @@
                     <!--/*@thymesVar id="booking" type="fr.cyu.airportmadness.entity.booking.Booking"*/-->
                     <form action="#" class="" th:action="@{/booking}" th:object="${booking}"
                           method="post">
+                        <input type="hidden" name="redirectUrl" th:value="${redirectUrl}">
                         <div class="form-floating mb-3">
                             <select class="form-select" th:field="*{flight}">
                                 <!--/*@thymesVar id="flight" type="fr.cyu.airportmadness.entity.flight.Flight"*/-->
