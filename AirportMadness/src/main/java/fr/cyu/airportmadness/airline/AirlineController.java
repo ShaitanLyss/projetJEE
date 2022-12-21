@@ -4,9 +4,13 @@ import fr.cyu.airportmadness.entity.aircraft.Aircraft;
 import fr.cyu.airportmadness.entity.aircraft.AircraftRepository;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompanyRepository;
+import fr.cyu.airportmadness.entity.city.City;
+import fr.cyu.airportmadness.entity.city.CityRepository;
 import fr.cyu.airportmadness.entity.flight.Flight;
 import fr.cyu.airportmadness.entity.flight.FlightRepository;
 import fr.cyu.airportmadness.security.MyUserDetails;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +23,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+
+import static java.lang.Integer.parseInt;
 
 @Controller
 public class AirlineController {
@@ -33,6 +38,8 @@ public class AirlineController {
     private AirlineCompanyRepository airlineCompanyRepository;
     @Autowired
     private FlightRepository flightRepository;
+    @Autowired
+    private CityRepository cityRepository;
 
 
     private Optional<AirlineCompany> getAirlineCompany(Authentication authentication) {
@@ -57,10 +64,14 @@ public class AirlineController {
         }
 
         AirlineCompany airlineCompany = opt_airlineCompany.get();
+        Iterator<City> towns =  cityRepository.findAll().iterator();
+        Iterator<City> towns2 =  cityRepository.findAll().iterator();
 
         model
                 .addAttribute("aircraft", new Aircraft())
                 .addAttribute("flight", new Flight())
+                .addAttribute("towns", towns)
+                .addAttribute("towns2", towns2)
                 .addAttribute("airlineCompany", airlineCompany)
         ;
         return "airline/index";
@@ -93,9 +104,13 @@ public class AirlineController {
     }
 
     @PostMapping(name = "creation-flight", value = "/airline/create_flight")
-    public String saveFlight(@ModelAttribute Flight flight, RedirectAttributes redirectAttributes) {
-
+    public String saveFlight(@ModelAttribute Flight flight, RedirectAttributes redirectAttributes, HttpServletRequest request) throws ServletException, IOException {
+       Optional<Aircraft> avion = aircraftRepository.findById(Long.valueOf(request.getParameter("flight-select-aircraft")));
+       System.out.println("le parametre recuperer : "+ request.getParameter("flight-select-aircraft"));
+        Aircraft sky_fly = avion.get();
+        sky_fly.getFlights().add(flight);
         flightRepository.save(flight);
+        aircraftRepository.save(sky_fly);
         redirectAttributes.addFlashAttribute("message", "Success");
 
 
