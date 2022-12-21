@@ -3,6 +3,37 @@
 @tailwind utilities;
 
 
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1.6s cubic-bezier(0.5, 0, 0, 1);
+    transition-property: opacity, transform;
+}
+
+a.reveal {
+
+    /*transform: scale(0);*/
+    /*display: none;*/
+}
+
+a.reveal > svg{
+    /*transition-duration: 0.4s;*/
+    font-size: 0;
+    transition: 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: none;
+}
+
+a.reveal.in > svg {
+    /*height: inherit;*/
+    /*transform:none;*/
+    font-size: calc(1.425rem + 2.1vw);
+}
+
+
 
 /*@layer components {*/
 /*    .btn-primary {*/

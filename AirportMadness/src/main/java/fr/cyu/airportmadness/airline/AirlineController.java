@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,6 +77,7 @@ public class AirlineController {
         ;
         return "airline/index";
     }
+
 
     @PostMapping(name = "creation-aircraft", value = "/airline/create_aircraft")
     public String saveAircraft(@ModelAttribute Aircraft aircraft, Authentication authentication, RedirectAttributes redirectAttributes) {

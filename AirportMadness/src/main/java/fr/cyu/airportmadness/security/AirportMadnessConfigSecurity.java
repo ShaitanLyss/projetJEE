@@ -6,7 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -42,6 +44,12 @@ public class AirportMadnessConfigSecurity {
         return authProvider;
     }
 
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .build();
+    }
+
 //
 //
     @Bean
@@ -52,7 +60,7 @@ public class AirportMadnessConfigSecurity {
                 .requestMatchers("/airline/**").hasRole("AIRLINE")
                 .requestMatchers("/user").hasRole("USER")
                 .requestMatchers("/api/**").permitAll()
-                .requestMatchers("/", "/booking" , "/error").permitAll()
+                .requestMatchers("/", "/booking/**" , "/error").permitAll()
                 .requestMatchers("/test/**", "/saveUser", "/save-user").permitAll()
 //                .requestMatchers("/assets/**").permitAll()
                 .requestMatchers("/build/**", "/error/**").permitAll()

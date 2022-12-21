@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Booking</title>
@@ -10,18 +10,25 @@
 </head>
 <body>
 <header th:replace="~{fragments/_header}"></header>
-<main class="container tw-mt-32">
+<img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwyMDkyMnwwfDF8c2VhcmNofDY2fHxtdXN0YW5nJTIwbmVwYWx8ZW58MHx8fA&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080"
+     class="tw-absolute tw-h-full tw-inset-0 tw-object-center tw-object-cover tw-w-full" alt="Hero image" width="1080"
+     height="720">
+<main class="container tw-mt-32" data-controller="scroll-reveal">
     <!-- Select location and destination -->
-    <div class="row justify-content-center mb-4">
-        <div class="card">
+    <div class="row justify-content-center tw-mb-28 text-white">
+        <div class="card bg-transparent tw-border-transparent">
             <div class="card-body">
-                <h2 class="card-title">Chercher un trajet</h2>
+                <h1 class="text-center display-2 mt-3 mb-5">Un beau trajet en perspective</h1>
                 <form method="get" th:action="@{/booking}">
-                    <div class="tw-mx-1 tw-flex tw-flex-wrap tw-items-center tw-space-y-4 sm:tw-space-y-0">
+                    <div
+                            class="tw-mx-1 tw-flex tw-flex-wrap tw-items-center tw-space-y-4 sm:tw-space-y-0"
+                            data-controller="switch"
+                    >
                         <div
                                 class="tw-px-1 tw-w-full sm:tw-flex-1"
                                 data-controller="places"
                                 data-action="google-maps-callback@window->places#initAutocomplete"
+                                data-switch-target="source"
                         >
                             <!--                                    data-places-country-value='["fr"]'-->
                             <input
@@ -32,16 +39,24 @@
                                     placeholder="D'où partez-vous ?"
                                     name="q"
                                     th:value="${param.q}"
+                                    data-switch-input="q"
                                     required
                             />
 
-                            <input type="hidden" name="lat" th:value="${param.lat}" data-places-target="latitude"/>
-                            <input type="hidden" name="lon" th:value="${param.lon}" data-places-target="longitude"/>
+                            <input type="hidden" name="lat" th:value="${param.lat}" data-switch-input="lat"
+                                   data-places-target="latitude"/>
+                            <input type="hidden" name="lon" th:value="${param.lon}" data-switch-input="lon"
+                                   data-places-target="longitude"/>
                         </div>
+                        <button type="button" class="bg-transparent btn text-white hover:tw-opacity-70"
+                                data-action="click->switch#switchInputs">
+                            <i class="fa-solid fa-repeat"></i>
+                        </button>
                         <div
                                 class="tw-px-1 tw-w-full sm:tw-flex-1"
                                 data-controller="places"
                                 data-action="google-maps-callback@window->places#initAutocomplete"
+                                data-switch-target="dest"
                         >
                             <!--                                    data-places-country-value='["fr"]'-->
                             <input
@@ -52,10 +67,13 @@
                                     placeholder="Où voulez-vous aller ?"
                                     th:name="tq"
                                     th:value="${param.tq}"
+                                    data-switch-input="q"
                                     required
                             />
-                            <input type="hidden" name="tlat" th:value="${param.tlat}" data-places-target="latitude"/>
-                            <input type="hidden" name="tlon" th:value="${param.tlon}" data-places-target="longitude"/>
+                            <input type="hidden" name="tlat" data-switch-input="lat" th:value="${param.tlat}"
+                                   data-places-target="latitude"/>
+                            <input type="hidden" name="tlon" th:value="${param.tlon}" data-switch-input="lon"
+                                   data-places-target="longitude"/>
                         </div>
                         <!--                                <div class="px-1 w-full sm:flex-1"> -->
                         <!--                                    <input class="appearance-none leading-tight px-5 py-3 rounded-full text-gray-600 text-xl w-full" type="email" required placeholder="What are you looking for?"/> -->
@@ -79,20 +97,27 @@
         </div>
     </div>
 
-    <div th:if="${airline}" class="row justify-content-center mb-4">
-        <div class="card">
+    <div id="airlineTag" th:if="${airline}" class="row justify-content-center tw-mb-52">
+        <a href="#airlineTag" data-controller="scroll-to"
+           class="d-none" data-action="DOMContentLoaded@window->scroll-to#scroll"
+           data-scroll-to-offset-value="120">
+        </a>
+        <div class="card bg-transparent tw-border-transparent">
             <div class="card-body text-center">
 
-                <h2 class="card-title mb-3">Meilleure correspondance </h2>
+                <h2 data-scroll-reveal-target="item" class=" reveal card-title display-3 mt-3 mb-5 text-white">Meilleure
+                    correspondance </h2>
                 <div class="row text-center align-items-center">
-                    <div class="col card">
+                    <div data-scroll-reveal-target="item" class="reveal col card">
                         <div class="card-body">
                             <i class="fa-solid fa-plane-departure mt-2 mb-3 text-secondary"></i>
-                            <h5  th:text="${airline.departure.name}"></h5>
-                            <small th:if="${airline.departure.city}" class="text-muted" th:text="${airline.departure.city.name}"></small>
+                            <h5 th:text="${airline.departure.name}"></h5>
+                            <small th:if="${airline.departure.city}" class="text-muted"
+                                   th:text="${airline.departure.city.name}"></small>
                         </div>
                     </div>
-                    <div class="col text-secondary">
+                    <div data-scroll-reveal-target="item" data-delay="100ms" class="reveal col"
+                         style="color: rgba(255,255,255, 0.6) !important;">
                         <i class="fa-solid fa-minus"></i>
                         <i class="fa-solid fa-minus"></i>
                         <i class="fa-solid fa-minus"></i>
@@ -103,48 +128,170 @@
 
                     </div>
 
-                    <div class="col card">
+                    <div data-scroll-reveal-target="item" data-delay="200ms" class="reveal col card">
                         <div class="card-body">
                             <i class="fa-solid fa-plane-arrival mt-2 mb-3 text-secondary"></i>
-                            <h5  th:text="${airline.arrival.name}"></h5>
-                            <small th:if="${airline.arrival.city}" class="text-muted" th:text="${airline.arrival.city.name}"></small>
+                            <h5 th:text="${airline.arrival.name}"></h5>
+                            <small th:if="${airline.arrival.city}" class="text-muted"
+                                   th:text="${airline.arrival.city.name}"></small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div th:if="${booking}" class="row justify-content-center">
-        <div class="col-sm col-md-8 col-lg-6 col-xl-4 card text-center">
-            <div class="card-body">
-                <h2 class="card-title">Réserver</h2>
+    <div th:if="${booking}" class="text-center">
+        <h2 data-scroll-reveal-target="item" data-delay="250ms" class="reveal display-4 tw-mb-14 text-center">Une
+            dernière étape</h2>
+        <div  data-reveal-hidden-class="in" data-scroll-reveal-target="item" data-delay="350ms" class="reveal">
+            <a href="#bookingArea" class="reveal in" data-action="click->reveal#toggle" data-reveal-target="item" data-controller="scroll-to" ><i class=" display-5 fa-solid fa-arrow-down tw-mb-14"></i></a>
+        </div>
+        <div id="bookingArea" class="row justify-content-around tw-mb-60 align-items-baseline">
+            <div data-scroll-reveal-target="item"
+                 class="reveal col-sm col-md-8 col-lg-6 col-xl-4 card text-center">
+                <div class="card-body">
+                    <h2 class="card-title">Compte client</h2>
+                    <form th:action="@{/booking/create-customer}" method="post">
+                        <div th:if="${user}" class="card-group" th:object="${user}">
+                            <!--                        <h3 class="card-title">Paramètres utilisateurs</h3>-->
+
+                            <div class="form-floating mb-3 col-12">
+                                <input class="form-control" type="text" placeholder="Nom d'utilisateur"
+                                       th:field="*{username}" autocomplete="off">
+                                <label class="form-label">Nom d'utilisateur</label>
+                            </div>
+                            <div class="form-floating mb-3 col-12">
+                                <input class="form-control" type="password" placeholder="Mot de passe"
+                                       th:field="*{password}">
+                                <label class="form-label">Mot de passe</label>
+                            </div>
+
+                        </div>
+                        <div th:if="${user}" data-read-more-target="full" class="card-group" th:object="${customer}">
+
+                            <div class="form-floating mb-3 col-lg-6 col-12">
+                                <input type="text" class="form-control" th:disabled="${user == null}"
+                                       placeholder="Prénom" th:field="*{firstName}">
+                                <label class="form-label">Prénom</label>
+                            </div>
+                            <div class="form-floating mb-3 col-lg-6 col-12">
+                                <input type="text" class="form-control" th:disabled="${user == null}"
+                                       placeholder="Nom de famille" th:field="*{lastName}">
+                                <label class="form-label">Nom de famille</label>
+                            </div>
+
+                            <div class="form-floating mb-3 col-12">
+                                <input type="email" class="form-control" th:disabled="${user == null}"
+                                       placeholder="Email" th:field="*{email}">
+                                <label class="form-label">Email</label>
+                            </div>
+                            <div class="form-floating mb-3 col-lg-6 col-12">
+                                <input type="text" class="form-control" placeholder="N° téléphone"
+                                       th:field="*{phoneNumber}" th:disabled="${user == null}">
+                                <label class="form-label">N° téléphone</label>
+                            </div>
+                            <div class="form-floating mb-3 col-lg-6 col-12">
+                                <input th:type="${user == null ? 'text' : 'date'}" type="date" class="form-control"
+                                       placeholder="Date de naissance"
+                                       th:field="*{birthdate}" th:disabled="${user == null}">
+                                <label class="form-label">Date de naissance</label>
+                            </div>
+                        </div>
+                        <div th:unless="${user}" th:data-controller="read-more"
+                             data-read-more-more-text-value="Lire plus"
+                             data-read-more-less-text-value="Lire moins">
+                            <div data-read-more-target="content" class="card-group" th:object="${customer}">
+
+                                <div class="form-floating mb-3 col-lg-6 col-12">
+                                    <input type="text" class="form-control" th:disabled="${user == null}"
+                                           placeholder="Prénom" th:field="*{firstName}">
+                                    <label class="form-label">Prénom</label>
+                                </div>
+
+                                <div class="form-floating mb-3 col-lg-6 col-12">
+                                    <input type="text" class="form-control" th:disabled="${user == null}"
+                                           placeholder="Nom de famille" th:field="*{lastName}">
+                                    <label class="form-label">Nom de famille</label>
+                                </div>
+
+                            </div>
+                            <a type="button" class="nav-link text-primary" data-action="read-more#toggle">Lire plus</a>
+
+                            <template data-read-more-target="full" class="card-group" th:object="${customer}">
+
+                                <div class="form-floating mb-3 col-lg-6 col-12">
+                                    <input type="text" class="form-control" th:disabled="${user == null}"
+                                           placeholder="Prénom" th:field="*{firstName}">
+                                    <label class="form-label">Prénom</label>
+                                </div>
+                                <div class="form-floating mb-3 col-lg-6 col-12">
+                                    <input type="text" class="form-control" th:disabled="${user == null}"
+                                           placeholder="Nom de famille" th:field="*{lastName}">
+                                    <label class="form-label">Nom de famille</label>
+                                </div>
+
+                                <div class="form-floating mb-3 col-12">
+                                    <input type="email" class="form-control" th:disabled="${user == null}"
+                                           placeholder="Email" th:field="*{email}">
+                                    <label class="form-label">Email</label>
+                                </div>
+                                <div class="form-floating mb-3 col-lg-6 col-12">
+                                    <input type="text" class="form-control" placeholder="N° téléphone"
+                                           th:field="*{phoneNumber}" th:disabled="${user == null}">
+                                    <label class="form-label">N° téléphone</label>
+                                </div>
+                                <div class="form-floating mb-3 col-lg-6 col-12">
+                                    <input th:type="${user == null ? 'text' : 'date'}" type="date" class="form-control"
+                                           placeholder="Date de naissance"
+                                           th:field="*{birthdate}" th:disabled="${user == null}">
+                                    <label class="form-label">Date de naissance</label>
+                                </div>
+                            </template>
+
+                        </div>
+                        <div th:if="${user}" class="mt-4">
+                            <button class="btn btn-primary" type="submit" value="Submit">S'enregistrer</button>
+                            <button class="btn btn-secondary" type="reset">Remise à zéro</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div data-scroll-reveal-target="item" data-delay="100ms"
+                 class="reveal col-sm col-md-8 col-lg-6 col-xl-4 card text-center">
+                <div class="card-body">
+                    <h2 class="card-title">Réserver</h2>
 
 
-                <!--/*@thymesVar id="booking" type="fr.cyu.airportmadness.entity.booking.Booking"*/-->
-                <form action="#" class="" th:action="@{/booking}" th:object="${booking}"
-                      method="post">
-                    <div class="form-floating mb-3">
-                        <select class="form-select" th:field="*{flight}">
-                            <!--/*@thymesVar id="flight" type="fr.cyu.airportmadness.entity.flight.Flight"*/-->
-                            <option th:each="flight : ${airline.flights}" th:value="${flight.id}" th:text="${flight.getTime()}"></option>
-                        </select>
-                        <label class="form-label">Vol</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <!--        <input type="text" th:field="*{price}">-->
-                        <input class="form-control" type="number" min="0" th:field="*{numLuggages}">
-                        <label class="form-label">Bagages</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <!--        <input type="text" th:field="*{price}">-->
-                        <input class="form-control" type="number" min="0" th:field="*{price}" disabled>
-                        <label class="form-label">Prix</label>
-                    </div>
-                    <div class="mt-4">
-                        <button class="btn btn-primary" type="submit" value="Submit">Créer</button>
-                        <button class="btn btn-secondary" type="reset">Remise à zéro</button>
-                    </div>
-                </form>
+                    <!--/*@thymesVar id="booking" type="fr.cyu.airportmadness.entity.booking.Booking"*/-->
+                    <form action="#" class="" th:action="@{/booking}" th:object="${booking}"
+                          method="post">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" th:field="*{flight}">
+                                <!--/*@thymesVar id="flight" type="fr.cyu.airportmadness.entity.flight.Flight"*/-->
+                                <option th:each="flight : ${airline.flights}" th:value="${flight.id}"
+                                        th:text="${flight.getTime()}"></option>
+                            </select>
+                            <label class="form-label">Vol</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <!--        <input type="text" th:field="*{price}">-->
+                            <input class="form-control" type="number" min="0" th:field="*{numLuggages}">
+                            <label class="form-label">Bagages</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <!--        <input type="text" th:field="*{price}">-->
+                            <input class="form-control" type="number" min="0" th:field="*{price}" disabled>
+                            <label class="form-label">Prix</label>
+                        </div>
+                        <div th:if="${user}">
+                            <small class="small text-danger">Un compte client est nécessaire pour réserver.</small>
+                        </div>
+                        <div th:unless="${user}" class="mt-4">
+                            <button class="btn btn-primary" type="submit" value="Submit">Créer</button>
+                            <button class="btn btn-secondary" type="reset">Remise à zéro</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -4400,6 +4400,26 @@ stimulus-places-autocomplete@^0.5.0:
   resolved "https://registry.yarnpkg.com/stimulus-places-autocomplete/-/stimulus-places-autocomplete-0.5.0.tgz#a18603ee629ec0944c4adae6b76b3fed515e1e1a"
   integrity sha512-9cVHWDXlkewELruJlbkNjLm4izybkOnLKQLUX/5F18ht5Dev+4/p+venaTfcHOkX9lyVj1qDz/SAiAjZnLx7tQ==
 
+stimulus-read-more@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-read-more/-/stimulus-read-more-3.0.0.tgz#fc39394b58ee6981ee5e3236972939a0043cfe36"
+  integrity sha512-g2Xxyn6MlxpljhBNsq1aGRnSs/Mc+DtFmJ2hJ2HNuycG8PYfuLojKesfX8Qj+LgYrVu0WwkGC0KAbwgfzmc0PA==
+
+stimulus-reveal-controller@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-reveal-controller/-/stimulus-reveal-controller-4.0.0.tgz#61579baf536d0015e618be1a54bc6aa6cb0d0e22"
+  integrity sha512-LyzASoA5tl3yid+yzzZ3dF+560dGffma+c6ph+Eq3ylG4gn9SK/SPMbajRrFsPDpiFuAa49K3dlHTW6nMg9aFg==
+
+stimulus-scroll-reveal@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-scroll-reveal/-/stimulus-scroll-reveal-3.0.0.tgz#0081591b0e4fc03963f7ae33d653ac4aeb73c4fc"
+  integrity sha512-WRW8pwuTU3IX7jziHMSI1XxktBL2yqtwj5aJs+C6sFZ+M27+b+3df2nIYxo1O5pn+RV97exoecpUHVlDa6ALxQ==
+
+stimulus-scroll-to@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-scroll-to/-/stimulus-scroll-to-4.0.0.tgz#433a726d37c76762d80b2e30a619bff116408608"
+  integrity sha512-/2qWiC/F2D0l1+FnOL1spTH9H6g/P5e1j/N7Ei2sgZ2/621l+t1qLzrWfHhrHDdmKAq3HlFFxNY6YEMC1jpVRw==
+
 string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"

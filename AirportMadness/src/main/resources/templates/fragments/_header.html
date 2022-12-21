@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div class="container fixed-top tw-pt-4">
-    <div th:if="${message}" th:class="${'mx-auto toast alert show ' + alertClass}" class="toast" role="alert"
+<div class="container fixed-top tw-pt-20">
+    <div th:if="${message}" th:class="${'p-0 mx-auto toast alert show ' + alertClass}" class="toast" role="alert"
          aria-live="assertive"
          aria-atomic="true">
         <div class="toast-header">
@@ -80,18 +80,18 @@
                                             th:href="${#mvc.url('welcome-page').build()}" href="#">
                         Voyager
                     </a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                    <li  class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
                                             th:href="${#mvc.url('airline-dashboard').build()}" href="#">
                         Compagnie aérienne
                     </a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
+                    <li  class="nav-item"><a class="nav-link px-lg-3 py-lg-4 text-dark"
                                             th:href="${#mvc.url('admin-dashboard').build()}" href="#">
                         Administrateur
                     </a></li>
                 </ul>
                 <ul class="align-items-lg-center ms-auto navbar-nav">
                     <!--/*@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"*/-->
-                    <li th:if="${#authentication.principal}" class="nav-item px-lg-3 py-lg-4 me-2">
+                    <li th:if="${#authentication.isAuthenticated() && #authentication.principal != 'anonymousUser'}" class="nav-item px-lg-3 py-lg-4 me-2">
                         <a th:href="@{/logout}" class="text-secondary" href="#" style="text-decoration: none">
                             <!--              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em"-->
                             <!--                   height="1.25em" class="me-2" >-->
@@ -105,7 +105,7 @@
                             <i class="text-center py-auto fa-solid fa-right-from-bracket" style="opacity: 0.8"></i>
                         </a>
                     </li>
-                    <li th:unless="${#authentication.principal}" class="nav-item"><a
+                    <li th:unless="${#authentication.isAuthenticated() && #authentication.principal != 'anonymousUser'}" class="nav-item"><a
                             class="nav-link px-lg-3 py-lg-4 text-dark" style="text-decoration: none" th:href="@{/login}"
                             href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em"

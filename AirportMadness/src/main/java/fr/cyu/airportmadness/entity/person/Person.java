@@ -21,25 +21,25 @@ public class Person {
     @OneToMany(mappedBy = "person", orphanRemoval = true)
     private Set<User> users = new LinkedHashSet<>();
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     @NotNull(message = "Entrer son nom")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     @NotNull(message = "Entrer son prénom")
     private String lastName;
-    @Column(name = "birthdate", nullable = false)
+    @Column(name = "birthdate")
     @NotNull(message = "Entrer sa date de naissance")
     private LocalDate birthdate;
 
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
-    @NotNull(message = "Entrer son genre")
+    @Column(name = "gender")
+//    @NotNull(message = "Entrer son genre")
     private Gender gender;
 
-    @Column(name = "nationality", nullable = false)
-    @NotNull(message = "Entrer sa nationalité")
+    @Column(name = "nationality")
+//    @NotNull(message = "Entrer sa nationalité")
     private String nationality;
 
 
