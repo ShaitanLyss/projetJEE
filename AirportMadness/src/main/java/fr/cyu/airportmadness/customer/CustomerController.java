@@ -5,6 +5,7 @@ import fr.cyu.airportmadness.entity.airline.AirlineRepository;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.booking.Booking;
 import fr.cyu.airportmadness.entity.booking.BookingRepository;
+import fr.cyu.airportmadness.entity.person.passenger.PassengerRepository;
 import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
 import fr.cyu.airportmadness.entity.person.passenger.customer.CustomerRepository;
 import fr.cyu.airportmadness.security.MyUserDetails;
@@ -52,11 +53,13 @@ public class CustomerController {
     public CustomerController(AirlineRepository airlineRepository,
                               CustomerRepository customerRepository,
                               UserRepository userRepository,
-                              BookingRepository bookingRepository) {
+                              BookingRepository bookingRepository,
+                              PassengerRepository passengerRepository) {
         this.airlineRepository = airlineRepository;
         this.customerRepository = customerRepository;
         this.userRepository = userRepository;
         this.bookingRepository = bookingRepository;
+        this.passengerRepository = passengerRepository;
     }
 
     @GetMapping("/booking")
@@ -128,6 +131,7 @@ public class CustomerController {
     @Autowired
     private AuthenticationManager authenticationManager;
     private final BookingRepository bookingRepository;
+    private final PassengerRepository passengerRepository;
 
     @PostMapping("/booking/create-customer")
     public String createCustomer(HttpServletRequest req, @ModelAttribute("redirectUrl") String redirectUrl, @ModelAttribute Customer customer, @ModelAttribute User user) {
@@ -166,6 +170,39 @@ public class CustomerController {
 
         return "index";
     }
+
+    @RequestMapping("/bookings")
+    public String displayBookings(Authentication auth, Model model) {
+        Optional<Customer> customer = getCustomer(auth);
+        customer.ifPresent(value -> model.addAttribute("customer", value));
+
+        return "customer/bookings";
+    }
+
+    @DeleteMapping("/bookings/{id}")
+    public String deleteBooking(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+        Optional<Booking> opt_booking = bookingRepository.findById(id);
+
+        if (opt_booking.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Échec suppression. Réservation non trouvée.");
+            return "redirect:/bookings";
+        }
+        Booking booking = opt_booking.get();
+
+        booking.getPassengers().forEach((p) -> {
+            p.removeBooking(booking);
+            passengerRepository.save(p);
+        });
+        Customer customer = booking.getCustomer();
+        customer.removeCreatedBooking(booking);
+        customerRepository.save(customer);
+
+//        bookingRepository.deleteById(id);
+        redirectAttributes.addFlashAttribute("message", "Succès. Une réservation supprimée.");
+
+        return "redirect:/bookings";
+    }
+
 
     private Optional<Customer> getCustomer(Authentication authentication) {
         if (authentication == null)

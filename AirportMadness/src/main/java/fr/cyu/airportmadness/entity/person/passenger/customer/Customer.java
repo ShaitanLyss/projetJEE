@@ -55,4 +55,8 @@ public class Customer extends Passenger {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public void removeCreatedBooking(Booking booking) {
+        createdBookings.remove(booking);
+    }
 }

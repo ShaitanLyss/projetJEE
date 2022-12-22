@@ -27,13 +27,13 @@ public class Booking {
     @Size(min = 1, message = "Au moins un passager doit être sélectionné")
     private final Set<Passenger> passengers = new LinkedHashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "customer_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "flight_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, optional = false)
+    @JoinColumn(name = "flight_id", nullable = false)
     @NotNull(message = "Un vol doit être sélectionné")
     private Flight flight;
 
@@ -54,6 +54,21 @@ public class Booking {
         return this;
     }
 
+
+    public Booking setPrice(Long l) {
+        this.price = BigDecimal.valueOf(l);
+        return this;
+    }
+
+    public Booking setPrice(Double d) {
+        this.price = BigDecimal.valueOf(d);
+        return this;
+    }
+
+    public Booking setPrice(int d) {
+        this.price = BigDecimal.valueOf(d);
+        return this;
+    }
 
 
     public Set<Passenger> getPassengers() {

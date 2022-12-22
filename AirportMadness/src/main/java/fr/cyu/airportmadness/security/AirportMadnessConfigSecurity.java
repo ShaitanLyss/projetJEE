@@ -60,7 +60,7 @@ public class AirportMadnessConfigSecurity {
                 .requestMatchers("/airline/**").hasRole("AIRLINE")
                 .requestMatchers("/user").hasRole("USER")
                 .requestMatchers("/api/**").permitAll()
-                .requestMatchers("/", "/booking/**" , "/error").permitAll()
+                .requestMatchers("/", "/booking/**" , "/bookings/**", "/error").permitAll()
                 .requestMatchers("/test/**", "/saveUser", "/save-user").permitAll()
 //                .requestMatchers("/assets/**").permitAll()
                 .requestMatchers("/build/**", "/error/**").permitAll()

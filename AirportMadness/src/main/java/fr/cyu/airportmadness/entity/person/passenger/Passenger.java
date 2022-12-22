@@ -58,4 +58,8 @@ public class Passenger extends Person {
     public void setNumIdentityCard(String numIdentityCard) {
         this.numIdentityCard = numIdentityCard;
     }
+
+    public void removeBooking(Booking booking) {
+        bookings.remove(booking);
+    }
 }

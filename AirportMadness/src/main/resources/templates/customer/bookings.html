@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+    <!--/*@thymesVar id="encore" type="fr.cyu.airportmadness.view.thymeleaf.EncoreHelpers"*/-->
+    <script th:each="url : ${encore.entryScriptUrls()}" th:src="${url}" defer></script>
+    <link th:each="url :${encore.entryLinkUrls()}" th:href="${url}" rel="stylesheet">
+
+</head>
+<body>
+<header th:replace="~{fragments/_header}"></header>
+<img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MXwyMDkyMnwwfDF8c2VhcmNofDY2fHxtdXN0YW5nJTIwbmVwYWx8ZW58MHx8fA&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080"
+     class="tw-absolute tw-h-full tw-inset-0 tw-object-center tw-object-cover tw-w-full" alt="Hero image" width="1080"
+     height="720">
+<main class="container tw-mt-32" data-controller="scroll-reveal">
+    <!-- Select location and destination -->
+    <div class="row justify-content-center tw-mb-28 text-white">
+        <div class="card bg-transparent tw-border-transparent">
+            <div class="card-body">
+                <h1 class="text-center display-2 mt-3 mb-5">On a hâte de vous rencontrer</h1>
+                <!--/*@thymesVar id="booking" type="fr.cyu.airportmadness.entity.booking.Booking"*/-->
+                <div class="container">
+                    <div th:each="booking : ${customer.bookings}" class="row card mb-5 text-black align-items-center">
+                        <div class="card-body row">
+                            <div class="col">
+                            De <em   class="text-info mx-3" th:text="${booking.flight.airline.departure.name}"></em>
+                            à <em    class="text-info mx-3"    th:text="${booking.flight.airline.arrival.name}"></em>
+                            le <em   class="text-info mx-3"    th:text="${booking.flight.time}"></em>
+                            avec <em class="text-info mx-3"   th:text="${booking.numLuggages}"></em>
+                            bagages
+                            </div>
+                            <form class="col-auto" th:method="DELETE" th:action="${'/bookings/' + booking.getId()}">
+                                <button style="background: none" class="btn bg-transparent text-danger "><i class="fa-solid fa-trash"></i></button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
