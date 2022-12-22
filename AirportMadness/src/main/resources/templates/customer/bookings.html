@@ -20,18 +20,36 @@
             <div class="card-body">
                 <h1 class="text-center display-2 mt-3 mb-5">On a hâte de vous rencontrer</h1>
                 <!--/*@thymesVar id="booking" type="fr.cyu.airportmadness.entity.booking.Booking"*/-->
-                <div class="container">
-                    <div th:each="booking : ${customer.bookings}" class="row card mb-5 text-black align-items-center">
-                        <div class="card-body row">
+                <div th:if="${customer}" class="container">
+                    <div th:each="booking : ${customer.createdBookings}" class="row card mb-5 text-black align-items-center">
+                        <div class="card-body row align-items-center">
                             <div class="col">
-                            De <em   class="text-info mx-3" th:text="${booking.flight.airline.departure.name}"></em>
-                            à <em    class="text-info mx-3"    th:text="${booking.flight.airline.arrival.name}"></em>
-                            le <em   class="text-info mx-3"    th:text="${booking.flight.time}"></em>
-                            avec <em class="text-info mx-3"   th:text="${booking.numLuggages}"></em>
-                            bagages
+                                <form class="row" th:method="PUT" th:action="${'/bookings/' + booking.getId()}">
+                                    <div class="col">
+                                        <span class="me-3"> De </span> <em class="text-info me-3"
+                                                                          th:text="${booking.flight.airline.departure.name}"></em>
+                                        <span class="me-3"> à </span> <em class="text-info me-3"
+                                              th:text="${booking.flight.airline.arrival.name}"></em>
+                                        <span class="me-3"> le </span> <em class="me-3">
+                                            <select class="text-info" name="flightId">
+                                                <option th:each="flight : ${booking.flight.airline.flights}" th:selected="${flight.id == booking.flight.id}" th:value="${flight.id}" th:text="${flight.time}"></option>
+                                            </select>
+                                    </em>
+                                        <span class="me-3"> avec </span> <em class="me-3"><input name="numLuggages" class="text-info tw-w-12" type="number" min="0"
+                                                                     th:value="${booking.numLuggages}"></em>
+                                        bagages
+                                    </div>
+
+                                    <button style="background: none" class=" col-auto btn bg-transparent text-warning ">
+                                        <i
+                                                class="fa-solid fa-pen"></i></button>
+
+                                </form>
                             </div>
+
                             <form class="col-auto" th:method="DELETE" th:action="${'/bookings/' + booking.getId()}">
-                                <button style="background: none" class="btn bg-transparent text-danger "><i class="fa-solid fa-trash"></i></button>
+                                <button style="background: none" class="btn bg-transparent text-danger "><i
+                                        class="fa-solid fa-trash"></i></button>
                             </form>
 
                         </div>

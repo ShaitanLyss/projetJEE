@@ -5,6 +5,8 @@ import fr.cyu.airportmadness.entity.airline.AirlineRepository;
 import fr.cyu.airportmadness.entity.airlinecompany.AirlineCompany;
 import fr.cyu.airportmadness.entity.booking.Booking;
 import fr.cyu.airportmadness.entity.booking.BookingRepository;
+import fr.cyu.airportmadness.entity.flight.Flight;
+import fr.cyu.airportmadness.entity.flight.FlightRepository;
 import fr.cyu.airportmadness.entity.person.passenger.PassengerRepository;
 import fr.cyu.airportmadness.entity.person.passenger.customer.Customer;
 import fr.cyu.airportmadness.entity.person.passenger.customer.CustomerRepository;
@@ -49,17 +51,36 @@ public class CustomerController {
     private final UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    private final BookingRepository bookingRepository;
+    private final PassengerRepository passengerRepository;
+    private final FlightRepository flightRepository;
 
     public CustomerController(AirlineRepository airlineRepository,
                               CustomerRepository customerRepository,
                               UserRepository userRepository,
                               BookingRepository bookingRepository,
-                              PassengerRepository passengerRepository) {
+                              PassengerRepository passengerRepository,
+                              FlightRepository flightRepository) {
         this.airlineRepository = airlineRepository;
         this.customerRepository = customerRepository;
         this.userRepository = userRepository;
         this.bookingRepository = bookingRepository;
         this.passengerRepository = passengerRepository;
+        this.flightRepository = flightRepository;
+    }
+
+    @GetMapping(name = "welcome-page", value = "/")
+    public String welcomePage(Authentication authentication, Model model) {
+
+        if(authentication != null){
+            MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+            model.addAttribute("user", userDetails);
+        }
+
+
+        return "index";
     }
 
     @GetMapping("/booking")
@@ -101,6 +122,33 @@ public class CustomerController {
         return "customer/booking";
     }
 
+    @PostMapping("/booking/create-customer")
+    public String createCustomer(HttpServletRequest req, @ModelAttribute("redirectUrl") String redirectUrl, @ModelAttribute Customer customer, @ModelAttribute User user) {
+
+        Dotenv dotenv = Dotenv.load();
+        customerRepository.save(customer);
+
+        String password = user.getPassword();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("USER");
+        user.setPerson(customer);
+        userRepository.save(user);
+        UserDetails userDetails = new MyUserDetails(user);
+        Authentication authReq = new UsernamePasswordAuthenticationToken(user.getUsername(), password, userDetails.getAuthorities());
+        Authentication auth = authenticationManager.authenticate(authReq);
+        SecurityContextHolder.setContext(new SecurityContextImpl(auth));
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(auth);
+        HttpSession session = req.getSession(true);
+        session.getAttributeNames().asIterator().forEachRemaining(System.out::println);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
+
+
+        return "redirect:" + redirectUrl;
+    }
+
+
     @PostMapping("/booking")
     public String bookingSubmit(@ModelAttribute Booking booking, @ModelAttribute("redirectUrl") String redirectUrl, Authentication auth, RedirectAttributes redirectAttributes) {
         Optional<Customer> opt_customer = getCustomer(auth);
@@ -128,50 +176,7 @@ public class CustomerController {
         return "redirect:/booking";
     }
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    private final BookingRepository bookingRepository;
-    private final PassengerRepository passengerRepository;
-
-    @PostMapping("/booking/create-customer")
-    public String createCustomer(HttpServletRequest req, @ModelAttribute("redirectUrl") String redirectUrl, @ModelAttribute Customer customer, @ModelAttribute User user) {
-
-        Dotenv dotenv = Dotenv.load();
-        customerRepository.save(customer);
-
-        String password = user.getPassword();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("USER");
-        user.setPerson(customer);
-        userRepository.save(user);
-        UserDetails userDetails = new MyUserDetails(user);
-        Authentication authReq = new UsernamePasswordAuthenticationToken(user.getUsername(), password, userDetails.getAuthorities());
-        Authentication auth = authenticationManager.authenticate(authReq);
-        SecurityContextHolder.setContext(new SecurityContextImpl(auth));
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        SecurityContext sc = SecurityContextHolder.getContext();
-        sc.setAuthentication(auth);
-        HttpSession session = req.getSession(true);
-        session.getAttributeNames().asIterator().forEachRemaining(System.out::println);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
-
-
-        return "redirect:" + redirectUrl;
-    }
-
-    @GetMapping(name = "welcome-page", value = "/")
-    public String welcomePage(Authentication authentication, Model model) {
-
-        if(authentication != null){
-            MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-            model.addAttribute("user", userDetails);
-        }
-
-
-        return "index";
-    }
-
-    @RequestMapping("/bookings")
+    @GetMapping("/bookings")
     public String displayBookings(Authentication auth, Model model) {
         Optional<Customer> customer = getCustomer(auth);
         customer.ifPresent(value -> model.addAttribute("customer", value));
@@ -199,6 +204,39 @@ public class CustomerController {
 
 //        bookingRepository.deleteById(id);
         redirectAttributes.addFlashAttribute("message", "Succès. Une réservation supprimée.");
+
+        return "redirect:/bookings";
+    }
+
+    @PutMapping("/bookings/{id}")
+    public String putBooking(
+            @PathVariable("id") Long id,
+            @ModelAttribute("numLuggages") int numLuggages,
+            @ModelAttribute("flightId") Long flightId,
+            RedirectAttributes redirectAttributes
+    ){
+        Optional<Booking> opt_booking = bookingRepository.findById(id);
+        Optional<Flight> opt_flight = flightRepository.findById(flightId);
+
+        if (opt_booking.isEmpty() || opt_flight.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Échec mise à jour. Réservation ou vol non trouvée.");
+            return "redirect:/bookings";
+        }
+        Booking booking = opt_booking.get();
+        Flight flight = opt_flight.get();
+        booking.setNumLuggages(numLuggages);
+        booking.setFlight(flight);
+        bookingRepository.save(booking);
+//        booking.getPassengers().forEach((p) -> {
+//            p.removeBooking(booking);
+//            passengerRepository.save(p);
+//        });
+//        Customer customer = booking.getCustomer();
+//        customer.removeCreatedBooking(booking);
+//        customerRepository.save(customer);
+
+//        bookingRepository.deleteById(id);
+        redirectAttributes.addFlashAttribute("message", "Succès. Réservation mise à jour.");
 
         return "redirect:/bookings";
     }

@@ -8,7 +8,9 @@ import fr.cyu.airportmadness.entity.person.passenger.Passenger;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.SortComparator;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -24,6 +26,7 @@ public class Customer extends Passenger {
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("id")
     private final Set<Booking> createdBookings = new java.util.LinkedHashSet<>();
 
     public Set<Booking> getCreatedBookings() {
