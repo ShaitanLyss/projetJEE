@@ -123,7 +123,12 @@ public class CustomerController {
     }
 
     @PostMapping("/booking/create-customer")
-    public String createCustomer(HttpServletRequest req, @ModelAttribute("redirectUrl") String redirectUrl, @ModelAttribute Customer customer, @ModelAttribute User user) {
+    public String createCustomer(
+            @ModelAttribute("redirectUrl") String redirectUrl,
+            @ModelAttribute Customer customer,
+            @ModelAttribute User user,
+            HttpServletRequest req) {
+
 
         Dotenv dotenv = Dotenv.load();
         customerRepository.save(customer);
@@ -150,7 +155,10 @@ public class CustomerController {
 
 
     @PostMapping("/booking")
-    public String bookingSubmit(@ModelAttribute Booking booking, @ModelAttribute("redirectUrl") String redirectUrl, Authentication auth, RedirectAttributes redirectAttributes) {
+    public String bookingSubmit(
+            @ModelAttribute Booking booking,
+            @ModelAttribute("redirectUrl") String redirectUrl,
+            Authentication auth, RedirectAttributes redirectAttributes) {
         Optional<Customer> opt_customer = getCustomer(auth);
 
         if (opt_customer.isEmpty()) {
@@ -185,7 +193,9 @@ public class CustomerController {
     }
 
     @DeleteMapping("/bookings/{id}")
-    public String deleteBooking(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
+    public String deleteBooking(
+            @PathVariable("id") Long id,
+            RedirectAttributes redirectAttributes){
         Optional<Booking> opt_booking = bookingRepository.findById(id);
 
         if (opt_booking.isEmpty()) {
