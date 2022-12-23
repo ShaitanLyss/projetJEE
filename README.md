@@ -25,12 +25,12 @@ expérimenter les différents aspects de l'application :
 - admin, mot de passe : 1234
   - page `Adminstration`
 
-Sur `Voyager`, vous pourrez rechercher une destination puis
+Sur `Voyager`, vous pouvez rechercher une destination puis
 choisir un point de départ. La ligne aérienne idéale vous
 sera alors proposée et il vous sera possible de créer un
 compte client et de réserver un vol.
 
-Sur `Réservations`, vous pourrez consulter vos réservations,
+Sur `Réservations`, vous pouvez consulter vos réservations,
 les modifier ou les supprimer.
 
 Enfin, vous pouvez vous connecter ou vous déconnecter. En
