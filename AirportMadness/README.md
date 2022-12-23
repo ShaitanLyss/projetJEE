@@ -1,15 +1,16 @@
-# Prérequis
-1) Tomcat installé
-
 # Installation
 1) Utiliser maven pour installer les dépendances.
-2) Utiliser yarn ou npm pour exécuter le script build
-   - `npm run build`
-   - `yarn build`
+2) Utiliser yarn ou npm pour installer dépendances
+    - `yarn`
+    - `npm install`
+3) Utiliser yarn ou npm pour compiler JS et CSS 
+    - `yarn encore`
+    - `npm run encore`
 
 
 # Configuration
 1) Créer à la racine un fichier nommé `.env` avec vos infos à partir de l'exemple `.env.example`.
+
 # Utilisation
 Exécuter la classe AirportMadnessApplication pour lancer
 le serveur web.
