@@ -19,6 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -75,12 +76,8 @@ public class AirlineController {
         AirlineCompany airlineCompany = opt_airlineCompany.get();
         Iterator<City> towns =  cityRepository.findAll().iterator();
         Iterator<City> towns2 =  cityRepository.findAll().iterator();
-        Iterator<Airport> airports =  airportRepository.findAll().iterator();
+        Iterable<Airport> airports =  airportRepository.findAllSorted();
 
-        List<Airport> resAirports = new ArrayList<>(10);
-        for (int i = 0; i < 10 && airports.hasNext(); i++) {
-            resAirports.add(airports.next());
-        }
 
         model
                 .addAttribute("aircraft", new Aircraft())
@@ -88,7 +85,7 @@ public class AirlineController {
                 .addAttribute("airline", new Airline())
                 .addAttribute("towns", towns)
                 .addAttribute("towns2", towns2)
-                .addAttribute("airports", resAirports)
+                .addAttribute("airports", airports)
                 .addAttribute("airlineCompany", airlineCompany)
         ;
         return "airline/index";
