@@ -5,9 +5,9 @@ AIR Nomads est une plateforme à destination des voyageurs
 et des compagnies aériennes. Elle permet tout autant de
 trouver le vol idéal que de gérer sa compagnie aérienne.
 
-## Rapport JEE
-Le rapport présentant les changements (il y en a beaucoup) est
-présent dans le dossier `Document`. 
+## Rapport
+Le rapport présentant les changements depuis la soutenance
+(il y en a beaucoup) est présent dans le dossier `Document`. 
 https://github.com/ShaitanLyss/projetJEE/blob/main/Documents/Rapport%20JEE.pdf
 
 ## Utilisation
