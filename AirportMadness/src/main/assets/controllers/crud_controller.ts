@@ -89,13 +89,18 @@ export default class CrudController extends Controller {
                     ajax: {
                         url: url,
                         dataSrc: function (data) {
+                            let res
                             // merge all groups of entities into one array (needed in case of inheritance)
-                            let res = Object.entries(data._embedded).reduce(
-                                (accu, [k, v]) => {
-                                    return accu.concat(v)
-                                },
-                                []
-                            )
+                            if ('_embedded' in data) {
+                                res = Object.entries(data._embedded).reduce(
+                                    (accu, [k, v]) => {
+                                        return accu.concat(v)
+                                    },
+                                    []
+                                )
+                            } else {
+                                res = [data]
+                            }
 
                             // add linked entities columns
                             res = res.map((e) => {
@@ -124,18 +129,18 @@ export default class CrudController extends Controller {
                                     this.invoker.goForth()
                             }
                         },
-                        {
-                            text: 'Supprimer',
-                            action: (e, dt, node, config) =>
-                                $.ajax({
-                                    url: '/api',
-                                    type: 'GET',
-                                    success: function (result) {
-                                        console.log(result)
-                                        // Do something with the result
-                                    }
-                                })
-                        }
+                        // {
+                        //     text: 'Supprimer',
+                        //     action: (e, dt, node, config) =>
+                        //         $.ajax({
+                        //             url: '/api',
+                        //             type: 'GET',
+                        //             success: function (result) {
+                        //                 console.log(result)
+                        //                 // Do something with the result
+                        //             }
+                        //         })
+                        // }
                     ],
                     deferRender: true,
                     select: true
