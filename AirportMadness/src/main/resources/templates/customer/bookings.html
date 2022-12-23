@@ -32,7 +32,7 @@
                                               th:text="${booking.flight.airline.arrival.name}"></em>
                                         <span class="me-3"> le </span> <em class="me-3">
                                             <select class="text-info" name="flightId">
-                                                <option th:each="flight : ${booking.flight.airline.flights}" th:selected="${flight.id == booking.flight.id}" th:value="${flight.id}" th:text="${flight.time}"></option>
+                                                <option th:each="flight : ${booking.flight.airline.flights}" th:selected="${flight.id == booking.flight.id}" th:value="${flight.id}" th:text="${flight.time.format(dateFormatter)}"></option>
                                             </select>
                                     </em>
                                         <span class="me-3"> avec </span> <em class="me-3"><input name="numLuggages" class="text-info tw-w-12" type="number" min="0"

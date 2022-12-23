@@ -113,7 +113,7 @@
                             <i class="fa-solid fa-plane-departure mt-2 mb-3 text-secondary"></i>
                             <h5 th:text="${airline.departure.name}"></h5>
                             <small th:if="${airline.departure.city}" class="text-muted"
-                                   th:text="${airline.departure.city.name}"></small>
+                                   th:text="${airline.departure.city.name + ', ' + airline.departure.country.name}"></small>
                         </div>
                     </div>
                     <div data-scroll-reveal-target="item" data-delay="100ms" class="reveal col"
@@ -133,7 +133,7 @@
                             <i class="fa-solid fa-plane-arrival mt-2 mb-3 text-secondary"></i>
                             <h5 th:text="${airline.arrival.name}"></h5>
                             <small th:if="${airline.arrival.city}" class="text-muted"
-                                   th:text="${airline.arrival.city.name}"></small>
+                                   th:text="${airline.arrival.city.name + ', ' + airline.arrival.country.name}"></small>
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,7 @@
                         </div>
                         <div th:unless="${user}" th:data-controller="read-more"
                              data-read-more-more-text-value="Lire plus"
-                             data-read-more-less-text-value="Lire moins">
+                             data-read-more-less-text-value="Lire moins" class="tw-pt-12">
                             <div data-read-more-target="content" class="card-group" th:object="${customer}">
 
                                 <div class="form-floating mb-3 col-lg-6 col-12">
@@ -271,7 +271,7 @@
                             <select class="form-select" th:field="*{flight}">
                                 <!--/*@thymesVar id="flight" type="fr.cyu.airportmadness.entity.flight.Flight"*/-->
                                 <option th:each="flight : ${airline.flights}" th:value="${flight.id}"
-                                        th:text="${flight.getTime()}"></option>
+                                        th:text="${'Le ' + flight.getTime().format(dateFormatter)}"></option>
                             </select>
                             <label class="form-label">Vol</label>
                         </div>
