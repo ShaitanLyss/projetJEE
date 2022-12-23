@@ -19,7 +19,7 @@ public class Flight {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, optional = false)
     @JoinColumn(name = "airline_id", nullable = false)
     @NotNull(message = "Selectionner la ligne de vol")
     private Airline airline;
@@ -31,7 +31,7 @@ public class Flight {
     @Column(name = "time")
     private LocalDateTime time;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "aircraft_id")
     private Aircraft aircraft;
 

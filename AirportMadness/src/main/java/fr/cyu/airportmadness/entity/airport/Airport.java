@@ -1,5 +1,8 @@
 package fr.cyu.airportmadness.entity.airport;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import fr.cyu.airportmadness.entity.airline.Airline;
 import fr.cyu.airportmadness.entity.city.City;
 
@@ -12,6 +15,7 @@ import org.hibernate.type.SqlTypes;
 import org.locationtech.jts.geom.Point;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -54,7 +58,10 @@ public class Airport {
 
     @SuppressWarnings("com.haulmont.jpb.UnsupportedTypeWithoutConverterInspection")
     @Column(name = "location")
-    @JdbcTypeCode(SqlTypes.GEOGRAPHY)
+//    @JdbcTypeCode(SqlTypes.GEOGRAPHY)
+//    @JsonIgnoreProperties
+    @JsonIgnore
+//    @JsonBackReference
     private Point location;
 
     public Point getLocation() {
@@ -142,5 +149,17 @@ public class Airport {
                 "name='" + name + '\'' +
                 ", city=" + city +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Airport airport)) return false;
+        return Objects.equals(name, airport.name) && Objects.equals(type, airport.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
     }
 }

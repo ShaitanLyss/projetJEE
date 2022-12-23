@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -73,8 +74,7 @@ public class AirlineCompany {
     }
 
     public AirlineCompany addAircrafts(Aircraft... aircrafts) {
-        this.aircrafts.addAll(List.of(aircrafts));
-        this.aircrafts.forEach(aircraft -> aircraft.setOwningAirlineCompany(this));
+        addAircrafts(List.of(aircrafts));
         return this;
     }
 
@@ -106,4 +106,21 @@ public class AirlineCompany {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AirlineCompany that)) return false;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public AirlineCompany addAircrafts(List<Aircraft> aircrafts) {
+        this.aircrafts.addAll(aircrafts);
+        this.aircrafts.forEach(aircraft -> aircraft.setOwningAirlineCompany(this));
+        return this;
+    }
 }

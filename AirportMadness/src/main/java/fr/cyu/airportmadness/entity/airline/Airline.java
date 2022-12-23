@@ -7,6 +7,7 @@ import fr.cyu.airportmadness.entity.flight.Flight;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,17 +18,17 @@ public class Airline {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "departure_id")
     @NotNull(message = "l'aéroport de départ doit être selectionné")
     private Airport departure;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "arrival_id")
     @NotNull(message = "l'aéroport d'arrivée doit être selectionné")
     private Airport arrival;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "airline_company_id")
     @NotNull(message = "la compagnie doit être selectionnée")
     private AirlineCompany airlineCompany;
@@ -84,5 +85,24 @@ public class Airline {
                 ", arrival=" + arrival +
                 ", airlineCompany=" + airlineCompany +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Airline airline)) return false;
+        return Objects.equals(departure, airline.departure) && Objects.equals(arrival, airline.arrival) && Objects.equals(airlineCompany, airline.airlineCompany);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(departure, arrival, airlineCompany);
+    }
+
+    public Airline addFlight(Flight flight) {
+        flights.add(flight);
+        flight.setAirline(this);
+
+        return this;
     }
 }
