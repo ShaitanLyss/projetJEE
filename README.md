@@ -9,7 +9,7 @@ trouver le vol idéal que de gérer sa compagnie aérienne.
 1) Télécharger le dossier `Release`
 2) Modifier le fichier `.env` avec vos informations
 3) Exécutez le jar avec java
-   - `java -jar airportmadness-1.0.0.jar`
+   - `java -jar .\airportmadness-1.0.0.jar`
 4) Vous pouvez accéder au site sur http://localhost:8080
 
 Des utilisateurs précréés sont disponibles pour pouvoir 
