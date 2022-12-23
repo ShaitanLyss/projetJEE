@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -116,10 +117,15 @@ public class CustomerController {
             model.addAttribute(
                     "customer", customer.orElseGet(Customer::new)
             );
+            addDateFormatterAttribute(model);
             if (customer.isEmpty())
                 model.addAttribute("user", new User());
         }
         return "customer/booking";
+    }
+
+    private static void addDateFormatterAttribute(Model model) {
+        model.addAttribute("dateFormatter", DateTimeFormatter.ofPattern("dd/MM/yy à HH:mm"));
     }
 
     @PostMapping("/booking/create-customer")
@@ -188,6 +194,7 @@ public class CustomerController {
     public String displayBookings(Authentication auth, Model model) {
         Optional<Customer> customer = getCustomer(auth);
         customer.ifPresent(value -> model.addAttribute("customer", value));
+        addDateFormatterAttribute(model);
 
         return "customer/bookings";
     }
