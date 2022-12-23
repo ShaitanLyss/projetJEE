@@ -330,8 +330,10 @@ public class TestController {
         );
 
         logger.info("Creating Air World aircrafts and company...");
-        List<Aircraft> airWorldAircrafts = generateAircrafts(numAircrafts, 30, "W00");
+        List<Aircraft> airWorldAircrafts = generateAircrafts(numAircrafts, 30, "W");
         AirlineCompany airWorldAirlineCompany = new AirlineCompany().setName("Air World").addAircrafts(airWorldAircrafts);
+        airlineUser.setAirlineCompany(airWorldAirlineCompany);
+        em.persist(airlineUser);
         em.persist(airWorldAirlineCompany);
         em.flush();
         logger.info("Done.");
@@ -436,8 +438,8 @@ public class TestController {
                 .addAirlines(airline1, airline2)
                 .setName("Air Cameroun " + airlineCompanyRepository.count() + 1);
 
-        if (airlineUser.getAirlineCompany() == null)
-            comp.setUser(airlineUser);
+//        if (airlineUser.getAirlineCompany() == null)
+//            comp.setUser(airlineUser);
 
         toPersist.add(comp);
 
@@ -493,7 +495,9 @@ public class TestController {
         List<Aircraft> randomAircrafts;
         randomAircrafts = new ArrayList<>(nAircrafts);
         for (int i = 0; i < nAircrafts; i++) {
-            randomAircrafts.add(new Aircraft().setRegistration(prefix + (numAircrafts + i)));
+            String number = String.valueOf(numAircrafts + i);
+            number = "0".repeat(4 - number.length()) + number;
+            randomAircrafts.add(new Aircraft().setRegistration(prefix + number));
         }
         return randomAircrafts;
     }
