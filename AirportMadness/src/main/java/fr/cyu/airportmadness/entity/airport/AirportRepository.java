@@ -4,6 +4,7 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface AirportRepository extends CrudRepository<Airport, Long> {
 
     List<Airport> findByNameContains(String name);
 
-    
+
 //    @Query("SELECT r FROM Airport r WHERE within(r.location, :filter) = true")
 //    List<Airport> findAirportWithin(@Param("filter") Geometry filter);
 //
@@ -26,4 +27,9 @@ public interface AirportRepository extends CrudRepository<Airport, Long> {
 
     @Query("SELECT a from Airport a order by rand()")
     List<Airport> findAllInRandomOrder();
+
+    @Query("select a from Airport a order by a.name")
+    List<Airport> findAllSorted();
+
+
 }

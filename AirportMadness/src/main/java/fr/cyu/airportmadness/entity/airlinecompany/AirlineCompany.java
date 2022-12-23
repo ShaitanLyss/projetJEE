@@ -43,6 +43,7 @@ public class AirlineCompany {
 
     @OneToMany(mappedBy = "owningAirlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
     @NotNull
+    @OrderBy("registration asc")
     private final Set<Aircraft> aircrafts = new LinkedHashSet<>();
 
     @OneToOne(mappedBy = "airlineCompany", cascade = CascadeType.ALL, orphanRemoval = true)
